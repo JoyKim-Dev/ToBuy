@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35B09C142C1C2B4400D0AF20 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B09C132C1C2B4400D0AF20 /* LineView.swift */; };
+		35B09C162C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B09C152C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift */; };
 		35D6D61E2C1AD6AC008207A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D61D2C1AD6AC008207A4 /* AppDelegate.swift */; };
 		35D6D6202C1AD6AC008207A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D61F2C1AD6AC008207A4 /* SceneDelegate.swift */; };
 		35D6D6222C1AD6AC008207A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D6212C1AD6AC008207A4 /* ViewController.swift */; };
@@ -41,6 +43,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35B09C132C1C2B4400D0AF20 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		35B09C152C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCameraBtnDelegate.swift; sourceTree = "<group>"; };
 		35D6D61A2C1AD6AC008207A4 /* ToBuy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToBuy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D6D61D2C1AD6AC008207A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35D6D61F2C1AD6AC008207A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 			children = (
 				35D6D6532C1AF68D008207A4 /* ReuseIdentifierProtocol.swift */,
 				35D6D6752C1B1E4F008207A4 /* ConfigureBasicSettingProtocol.swift */,
+				35B09C152C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 				35D6D6732C1B19E6008207A4 /* OnboardingButton.swift */,
 				35D6D6772C1B20AE008207A4 /* NicknameTextField.swift */,
 				35D6D6792C1B2382008207A4 /* NavBackBtnChevron.swift */,
+				35B09C132C1C2B4400D0AF20 /* LineView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -298,6 +304,8 @@
 				35D6D64C2C1ADBF5008207A4 /* EditProfileImageVC.swift in Sources */,
 				35D6D63F2C1ADA9F008207A4 /* SearchItemDetailVC.swift in Sources */,
 				35D6D61E2C1AD6AC008207A4 /* AppDelegate.swift in Sources */,
+				35B09C142C1C2B4400D0AF20 /* LineView.swift in Sources */,
+				35B09C162C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift in Sources */,
 				35D6D6612C1B0241008207A4 /* ProfileImageView.swift in Sources */,
 				35D6D6462C1ADB6B008207A4 /* ProfileImageSettingVC.swift in Sources */,
 				35D6D6202C1AD6AC008207A4 /* SceneDelegate.swift in Sources */,

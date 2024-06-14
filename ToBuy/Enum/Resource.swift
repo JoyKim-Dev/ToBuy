@@ -31,9 +31,28 @@ enum Color {
     static let white = UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 1.00)
 }
 
-enum BorderWidth {
-    static let selected = 3
-    static let unSelect = 1
+enum ImageBorderWidth: CGFloat {
+    case isSelected = 3
+    case unSelected = 1
+}
+
+enum ImageAlpha: CGFloat {
+    case isSelected = 1
+    case unSelected = 0.5
+}
+
+enum ImageBorderColor {
+    case isSelected
+    case unSelected
+    
+    var value: CGColor {
+        switch self {
+        case .isSelected:
+            return Color.orange.cgColor
+        case.unSelected:
+            return Color.unselectedGray.cgColor
+        }
+    }
 }
 
 enum Font {
@@ -47,8 +66,10 @@ enum Font {
 }
 
 enum Image {
-    
     static let mainImage = UIImage(named: "launch")
 }
+
+
+
 
     

@@ -14,23 +14,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     
-        var isUserData = UserDefaults.standard.bool(forKey: "isUser")
-        var hasSearchHistoryData = UserDefaults.standard.bool(forKey: "hasSearchHistory")
         
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
         
         // 로그인되어 있다면 메인화면 -> 한번 더 분기처리 필요. 근데 탭바에서 한번 더 들어가야됨, 뷰컨으로.
-        if isUserData {
+        if UserDefaultManager.nickname.isEmpty {
             
-            let rootViewController = UINavigationController(rootViewController: TabBarController())
+            let rootViewController = UINavigationController(rootViewController: OnboardingVC())
             window?.rootViewController = rootViewController
    
         //로그인 정보 없으면
         }  else {
             
-            let rootViewController = UINavigationController(rootViewController: OnboardingVC())
+            let rootViewController = UINavigationController(rootViewController: TabBarController() )
             window?.rootViewController = rootViewController
         }
         

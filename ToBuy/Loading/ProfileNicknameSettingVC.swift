@@ -18,7 +18,7 @@ class ProfileNicknameSettingVC: UIViewController {
     let lineView = LineView()
     let nicknameStatusLabel = UILabel()
     
-    let submitBtn = OnboardingButton(btnTitle: "완료")
+    let submitBtn = OnboardingButton(btnTitle: "완료", target: self, action: #selector(submitBtnTapped))
     
     
 
@@ -89,6 +89,18 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         
     }
     
+    @objc func submitBtnTapped() {
+        
+        UserDefaultManager.nickname = nicknameTextField.text ?? UserDefaultManager.nickname
+        print("저장됨")
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        let rootViewController = UINavigationController(rootViewController: SearchMainVC())
+        sceneDelegate?.window?.rootViewController = rootViewController
+        sceneDelegate?.window?.makeKeyAndVisible()
+        print("루트뷰 바뀜")
+        
+    }
     
 }
 

@@ -6,24 +6,42 @@
 //
 
 import UIKit
+import SnapKit
 
 class SearchMainVC: UIViewController {
 
+  let searchBar = SearchBar()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+               
+        configHierarchy()
+        configLayout()
+        configUI()
     }
     
 
-    /*
-    // MARK: - Navigation
+ 
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+
+extension SearchMainVC: ConfigureBasicSettingProtocol {
+    func configHierarchy() {
+        view.addSubview(searchBar)
     }
-    */
-
+    
+    func configLayout() {
+        searchBar.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+        }
+    }
+    
+    func configUI() {
+        let nickname = UserDefaultManager.nickname
+        configureView("\(nickname)'s ToBuyBag")
+    }
+    
+    
+    
+    
 }

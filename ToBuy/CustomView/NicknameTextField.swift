@@ -16,8 +16,8 @@ class NicknameTextField:UITextField {
         borderStyle = .none
         let border = CALayer()
         border.frame = CGRect(x: 0, y: frame.size.height-1, width: frame.width, height: 1)
-        border.backgroundColor = Color.mediumGray.cgColor
-        layer.addSublayer((border))
+//        border.backgroundColor = Color.mediumGray.cgColor
+//        layer.addSublayer((border))
         textAlignment = .left
         attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : Color.mediumGray])
         

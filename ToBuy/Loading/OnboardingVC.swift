@@ -15,17 +15,15 @@ class OnboardingVC: UIViewController {
 
     let appTitleLabel = AppTitleLabel()
     let appMainImage = UIImageView()
-    let appStartBtn = OnboardingButton(btnTitle: "시작하기")
+    let appStartBtn = OnboardingButton(btnTitle: "시작하기", target: self, action: #selector(startBtnTapped))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configHierarchy()
         configLayout()
         configUI()
-        
     }
-
 }
 
 extension OnboardingVC:ConfigureBasicSettingProtocol {
@@ -58,7 +56,7 @@ extension OnboardingVC:ConfigureBasicSettingProtocol {
     func configUI() {
         view.backgroundColor = Color.white
         appMainImage.image = Image.mainImage
-        appStartBtn.addTarget(self, action: #selector(startBtnTapped), for: .touchUpInside)
+       // appStartBtn.addTarget(self, action: #selector(startBtnTapped), for: .touchUpInside)
         
     }
     

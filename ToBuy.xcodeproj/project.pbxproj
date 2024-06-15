@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		35644BBC2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35644BBB2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift */; };
-		35644BBE2C1D63AC0037F8B7 /* ToggleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35644BBD2C1D63AC0037F8B7 /* ToggleColor.swift */; };
 		35644BC02C1DE1FA0037F8B7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35644BBF2C1DE1FA0037F8B7 /* UserDefaultsManager.swift */; };
+		35644BC22C1DE8690037F8B7 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35644BC12C1DE8690037F8B7 /* SearchBar.swift */; };
 		35B09C142C1C2B4400D0AF20 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B09C132C1C2B4400D0AF20 /* LineView.swift */; };
 		35B09C162C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B09C152C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift */; };
 		35D6D61E2C1AD6AC008207A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D61D2C1AD6AC008207A4 /* AppDelegate.swift */; };
@@ -18,7 +18,6 @@
 		35D6D6272C1AD6AD008207A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35D6D6262C1AD6AD008207A4 /* Assets.xcassets */; };
 		35D6D62A2C1AD6AD008207A4 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 35D6D6292C1AD6AD008207A4 /* Base */; };
 		35D6D6392C1ADA2B008207A4 /* SearchMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D6382C1ADA2B008207A4 /* SearchMainVC.swift */; };
-		35D6D63D2C1ADA7B008207A4 /* SearchResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D63C2C1ADA7B008207A4 /* SearchResultVC.swift */; };
 		35D6D63F2C1ADA9F008207A4 /* SearchItemDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D63E2C1ADA9F008207A4 /* SearchItemDetailVC.swift */; };
 		35D6D6422C1ADB00008207A4 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D6412C1ADB00008207A4 /* OnboardingVC.swift */; };
 		35D6D6442C1ADB44008207A4 /* ProfileNicknameSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D6432C1ADB44008207A4 /* ProfileNicknameSettingVC.swift */; };
@@ -47,8 +46,8 @@
 
 /* Begin PBXFileReference section */
 		35644BBB2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCollectionViewCell.swift; sourceTree = "<group>"; };
-		35644BBD2C1D63AC0037F8B7 /* ToggleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleColor.swift; sourceTree = "<group>"; };
 		35644BBF2C1DE1FA0037F8B7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		35644BC12C1DE8690037F8B7 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		35B09C132C1C2B4400D0AF20 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		35B09C152C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCameraBtnDelegate.swift; sourceTree = "<group>"; };
 		35D6D61A2C1AD6AC008207A4 /* ToBuy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToBuy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,7 +58,6 @@
 		35D6D6292C1AD6AD008207A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35D6D62B2C1AD6AD008207A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35D6D6382C1ADA2B008207A4 /* SearchMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMainVC.swift; sourceTree = "<group>"; };
-		35D6D63C2C1ADA7B008207A4 /* SearchResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultVC.swift; sourceTree = "<group>"; };
 		35D6D63E2C1ADA9F008207A4 /* SearchItemDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemDetailVC.swift; sourceTree = "<group>"; };
 		35D6D6412C1ADB00008207A4 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		35D6D6432C1ADB44008207A4 /* ProfileNicknameSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameSettingVC.swift; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 		35D6D6332C1AD7D6008207A4 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				35D6D63C2C1ADA7B008207A4 /* SearchResultVC.swift */,
 				35D6D63E2C1ADA9F008207A4 /* SearchItemDetailVC.swift */,
 			);
 			path = Search;
@@ -212,7 +209,7 @@
 				35D6D6772C1B20AE008207A4 /* NicknameTextField.swift */,
 				35D6D6792C1B2382008207A4 /* NavBackBtnChevron.swift */,
 				35B09C132C1C2B4400D0AF20 /* LineView.swift */,
-				35644BBD2C1D63AC0037F8B7 /* ToggleColor.swift */,
+				35644BC12C1DE8690037F8B7 /* SearchBar.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -305,7 +302,6 @@
 				35D6D64A2C1ADBE1008207A4 /* EditProfileNicknameVC.swift in Sources */,
 				35D6D6442C1ADB44008207A4 /* ProfileNicknameSettingVC.swift in Sources */,
 				35D6D6222C1AD6AC008207A4 /* ViewController.swift in Sources */,
-				35644BBE2C1D63AC0037F8B7 /* ToggleColor.swift in Sources */,
 				35D6D6482C1ADBB8008207A4 /* SettingMainVC.swift in Sources */,
 				35D6D6422C1ADB00008207A4 /* OnboardingVC.swift in Sources */,
 				35D6D6592C1AF726008207A4 /* TabBarController.swift in Sources */,
@@ -317,11 +313,11 @@
 				35B09C142C1C2B4400D0AF20 /* LineView.swift in Sources */,
 				35B09C162C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift in Sources */,
 				35D6D6612C1B0241008207A4 /* ProfileImageView.swift in Sources */,
+				35644BC22C1DE8690037F8B7 /* SearchBar.swift in Sources */,
 				35D6D6462C1ADB6B008207A4 /* ProfileImageSettingVC.swift in Sources */,
 				35D6D6202C1AD6AC008207A4 /* SceneDelegate.swift in Sources */,
 				35644BBC2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift in Sources */,
 				35D6D6782C1B20AE008207A4 /* NicknameTextField.swift in Sources */,
-				35D6D63D2C1ADA7B008207A4 /* SearchResultVC.swift in Sources */,
 				35D6D6392C1ADA2B008207A4 /* SearchMainVC.swift in Sources */,
 				35644BC02C1DE1FA0037F8B7 /* UserDefaultsManager.swift in Sources */,
 				35D6D6742C1B19E6008207A4 /* OnboardingButton.swift in Sources */,

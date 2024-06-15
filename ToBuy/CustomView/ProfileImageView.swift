@@ -24,9 +24,9 @@ enum ButtonHidden: String {
 
 class ProfileImageView: UIView {
     
-    let image = UIImageView()
-    let button = UIButton()
-    var delegate: ProfileCameraBtnDelegate?
+    var profileImage = UIImageView()
+    let profileButton = UIButton()
+    var profileDelegate: ProfileCameraBtnDelegate?
     
     init(profileImageNum: Int, imageBorderWidth: ImageBorderWidth, imageBorderColor: ImageBorderColor, imageAlpha: ImageAlpha, cameraBtnMode: ButtonHidden) {
         super.init(frame: .zero)
@@ -35,11 +35,6 @@ class ProfileImageView: UIView {
         configLayout()
         configUI(profileImageNum: profileImageNum, imageBorderWidth: imageBorderWidth, imageBorderColor: imageBorderColor, imageAlpha: imageAlpha, cameraBtnMode: cameraBtnMode)
         
-        
-//        image.image = UIImage(named: "profile_\(profileImageNum)")
-//        image.alpha = imageAlpha.rawValue
-//        image.layer.borderWidth = imageBorderWidth.rawValue
-//        image.layer.borderColor = Color.orange.cgColor
         
     }
     
@@ -50,45 +45,50 @@ class ProfileImageView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        image.layer.cornerRadius = image.frame.width / 2
-        image.clipsToBounds = true
-        
-        button.layer.cornerRadius = button.frame.width / 2
-        button.clipsToBounds = true
+        makeRectToCircle()
     }
      
     func configHierarchy() {
-        addSubview(image)
-        addSubview(button)
+        addSubview(profileImage)
+        addSubview(profileButton)
     }
      
     func configLayout() {
-        image.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(30)
+        profileImage.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
-        button.snp.makeConstraints { make in
-            make.width.height.equalTo(30)
-            make.bottom.equalTo(image.snp.bottom).inset(5)
-            make.trailing.equalTo(image.snp.trailing).inset(5)
+        profileButton.snp.makeConstraints { make in
+            make.width.height.equalTo(profileImage).multipliedBy(0.25)
+            make.bottom.equalTo(profileImage.snp.bottom).inset(5)
+            make.trailing.equalTo(profileImage.snp.trailing).inset(5)
         }
     }
     
     func configUI(profileImageNum: Int, imageBorderWidth: ImageBorderWidth, imageBorderColor: ImageBorderColor, imageAlpha: ImageAlpha, cameraBtnMode: ButtonHidden) {
-        image.image = UIImage(named: "profile_\(profileImageNum)")
-        image.alpha = imageAlpha.rawValue
-        image.layer.borderWidth = imageBorderWidth.rawValue
-        image.layer.borderColor = imageBorderColor.value
-        
-        button.setImage(Icon.cameraFill, for: .normal)
-        button.tintColor = Color.white
-        button.backgroundColor = Color.orange
-        button.isHidden = cameraBtnMode.value
-        button.addTarget(self, action: #selector(cameraBtnTapped), for: .touchUpInside)
+        profileImage.image = UIImage(named: "profile_\(profileImageNum)")
+        profileImage.alpha = imageAlpha.rawValue
+        profileImage.layer.borderWidth = imageBorderWidth.rawValue
+        profileImage.layer.borderColor = imageBorderColor.value
+    
+        profileButton.setImage(Icon.cameraFill, for: .normal)
+        profileButton.tintColor = Color.white
+        profileButton.backgroundColor = Color.orange
+        profileButton.isHidden = cameraBtnMode.value
+        profileButton.addTarget(self, action: #selector(cameraBtnTapped), for: .touchUpInside)
     }
     
+    
     @objc func cameraBtnTapped() {
-        delegate?.cameraButtonTapped()
+        profileDelegate?.cameraButtonTapped()
         
     }
+    
+    func makeRectToCircle() {
+           profileImage.layer.cornerRadius = profileImage.frame.width / 2
+           profileImage.clipsToBounds = true
+           
+           profileButton.layer.cornerRadius = profileButton.frame.width / 2
+           profileButton.clipsToBounds = true
+       }
 }

@@ -34,23 +34,51 @@ enum Color {
 enum ImageBorderWidth: CGFloat {
     case isSelected = 3
     case unSelected = 1
+    
+    mutating func toggle() {
+        switch self {
+        case.isSelected:
+            self = .unSelected
+        case.unSelected:
+            self = .isSelected
+        }
+    }
 }
 
 enum ImageAlpha: CGFloat {
     case isSelected = 1
     case unSelected = 0.5
+    
+    mutating func toggle() {
+        switch self {
+        case.isSelected:
+            self = .unSelected
+        case.unSelected:
+            self = .isSelected
+        }
+    }
 }
 
 enum ImageBorderColor {
     case isSelected
     case unSelected
     
+   
     var value: CGColor {
         switch self {
         case .isSelected:
             return Color.orange.cgColor
         case.unSelected:
             return Color.unselectedGray.cgColor
+        }
+    }
+    
+    mutating func toggle() {
+        switch self {
+        case.isSelected:
+            self = .unSelected
+        case.unSelected:
+            self = .isSelected
         }
     }
 }

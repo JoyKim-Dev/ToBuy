@@ -10,7 +10,9 @@ import SnapKit
 
 class ProfileNicknameSettingVC: UIViewController {
 
-    let mainImageView = ProfileImageView(profileImageNum: Int.random(in: 0...11), imageBorderWidth: .isSelected, imageBorderColor: .isSelected, imageAlpha: .isSelected, cameraBtnMode: .isShowing)
+    lazy var mainImageView = ProfileImageView(profileImageNum: selectedProfileImageNum, imageBorderWidth: .isSelected, imageBorderColor: .isSelected, imageAlpha: .isSelected, cameraBtnMode: .isShowing)
+    
+    var selectedProfileImageNum = Int.random(in: 0...11)
     
     let nicknameTextField = NicknameTextField(placeholder: "닉네임을 입력해주세요 :)")
     let lineView = LineView()
@@ -44,7 +46,7 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         mainImageView.snp.makeConstraints { make in
             make.centerX.equalTo(view)
             make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
-            make.height.width.equalTo(180)
+            make.height.width.equalTo(125)
         }
         
         nicknameTextField.snp.makeConstraints { make in
@@ -76,9 +78,9 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
     
     func configUI() {
         configureView("PROFILE SETTING")
-        navigationItem.leftBarButtonItem = NavBackBtnChevron()
+        navigationItem.leftBarButtonItem = NavBackBtnChevron(previousVC: self)
         
-        mainImageView.delegate = self
+        mainImageView.profileDelegate = self
         
         nicknameTextField.delegate = self
         nicknameStatusLabel.textColor = Color.orange
@@ -118,9 +120,7 @@ extension ProfileNicknameSettingVC: ProfileCameraBtnDelegate {
     
     func cameraButtonTapped() {
         let vc = ProfileImageSettingVC()
+        vc.imageDataFromPreviousPage = selectedProfileImageNum
         navigationController?.pushViewController(vc, animated: true)
-//        let nav = UINavigationController(rootViewController: vc)
-//        present(nav, animated: true
-//        )
     }
 }

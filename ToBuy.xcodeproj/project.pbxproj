@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35644BBC2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35644BBB2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift */; };
+		35644BBE2C1D63AC0037F8B7 /* ToggleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35644BBD2C1D63AC0037F8B7 /* ToggleColor.swift */; };
+		35644BC02C1DE1FA0037F8B7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35644BBF2C1DE1FA0037F8B7 /* UserDefaultsManager.swift */; };
 		35B09C142C1C2B4400D0AF20 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B09C132C1C2B4400D0AF20 /* LineView.swift */; };
 		35B09C162C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B09C152C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift */; };
 		35D6D61E2C1AD6AC008207A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D61D2C1AD6AC008207A4 /* AppDelegate.swift */; };
@@ -43,6 +46,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35644BBB2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		35644BBD2C1D63AC0037F8B7 /* ToggleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleColor.swift; sourceTree = "<group>"; };
+		35644BBF2C1DE1FA0037F8B7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		35B09C132C1C2B4400D0AF20 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		35B09C152C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCameraBtnDelegate.swift; sourceTree = "<group>"; };
 		35D6D61A2C1AD6AC008207A4 /* ToBuy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToBuy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +133,7 @@
 				35D6D6262C1AD6AD008207A4 /* Assets.xcassets */,
 				35D6D62B2C1AD6AD008207A4 /* Info.plist */,
 				35D6D65A2C1AF76B008207A4 /* APIKey.swift */,
+				35644BBF2C1DE1FA0037F8B7 /* UserDefaultsManager.swift */,
 			);
 			path = ToBuy;
 			sourceTree = "<group>";
@@ -164,6 +171,7 @@
 				35D6D6412C1ADB00008207A4 /* OnboardingVC.swift */,
 				35D6D6432C1ADB44008207A4 /* ProfileNicknameSettingVC.swift */,
 				35D6D6452C1ADB6B008207A4 /* ProfileImageSettingVC.swift */,
+				35644BBB2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift */,
 			);
 			path = Loading;
 			sourceTree = "<group>";
@@ -204,6 +212,7 @@
 				35D6D6772C1B20AE008207A4 /* NicknameTextField.swift */,
 				35D6D6792C1B2382008207A4 /* NavBackBtnChevron.swift */,
 				35B09C132C1C2B4400D0AF20 /* LineView.swift */,
+				35644BBD2C1D63AC0037F8B7 /* ToggleColor.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -296,6 +305,7 @@
 				35D6D64A2C1ADBE1008207A4 /* EditProfileNicknameVC.swift in Sources */,
 				35D6D6442C1ADB44008207A4 /* ProfileNicknameSettingVC.swift in Sources */,
 				35D6D6222C1AD6AC008207A4 /* ViewController.swift in Sources */,
+				35644BBE2C1D63AC0037F8B7 /* ToggleColor.swift in Sources */,
 				35D6D6482C1ADBB8008207A4 /* SettingMainVC.swift in Sources */,
 				35D6D6422C1ADB00008207A4 /* OnboardingVC.swift in Sources */,
 				35D6D6592C1AF726008207A4 /* TabBarController.swift in Sources */,
@@ -309,9 +319,11 @@
 				35D6D6612C1B0241008207A4 /* ProfileImageView.swift in Sources */,
 				35D6D6462C1ADB6B008207A4 /* ProfileImageSettingVC.swift in Sources */,
 				35D6D6202C1AD6AC008207A4 /* SceneDelegate.swift in Sources */,
+				35644BBC2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift in Sources */,
 				35D6D6782C1B20AE008207A4 /* NicknameTextField.swift in Sources */,
 				35D6D63D2C1ADA7B008207A4 /* SearchResultVC.swift in Sources */,
 				35D6D6392C1ADA2B008207A4 /* SearchMainVC.swift in Sources */,
+				35644BC02C1DE1FA0037F8B7 /* UserDefaultsManager.swift in Sources */,
 				35D6D6742C1B19E6008207A4 /* OnboardingButton.swift in Sources */,
 				35D6D65B2C1AF76B008207A4 /* APIKey.swift in Sources */,
 				35D6D6722C1B1488008207A4 /* AppTitleLabel.swift in Sources */,
@@ -463,6 +475,8 @@
 				DEVELOPMENT_TEAM = F3724U2GB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ToBuy/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ToBuyBag;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -495,6 +509,8 @@
 				DEVELOPMENT_TEAM = F3724U2GB3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ToBuy/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ToBuyBag;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

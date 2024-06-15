@@ -11,11 +11,29 @@ class EditProfileImageVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configHierarchy()
+        configLayout()
+        configUI()
+        
+       
     }
     
 
-   
+}
 
+extension EditProfileImageVC: ConfigureBasicSettingProtocol {
+    func configHierarchy() {
+        //
+    }
+    
+    func configLayout() {
+        //
+    }
+    
+    func configUI() {
+        //
+    }
+    
+    
+    
 }

@@ -11,6 +11,13 @@ class NavBackBtnChevron:UIBarButtonItem {
     
     var returnToVC: UIViewController?
     
+    override init() {
+        super.init()
+        image = Icon.chevronLeft
+        style = .plain
+        tintColor = .black
+    }
+    
     init(previousVC: UIViewController) {
          super.init()
         

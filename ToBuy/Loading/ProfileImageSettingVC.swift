@@ -13,6 +13,8 @@ class ProfileImageSettingVC: UIViewController {
     lazy var selectedImageView = ProfileImageView(profileImageNum: imageDataFromPreviousPage , imageBorderWidth: .isSelected, imageBorderColor: .isSelected, imageAlpha: .isSelected, cameraBtnMode: .isShowing)
     lazy var profileCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
+    let backBarBtn = NavBackBtnChevron()
+    
     var imageDataFromPreviousPage:Int = 0
     var selectedIndexPath: IndexPath?
     
@@ -54,7 +56,16 @@ extension ProfileImageSettingVC: ConfigureBasicSettingProtocol {
         profileCollectionView.delegate = self
         profileCollectionView.dataSource = self
         profileCollectionView.register(ProfileImageCollectionViewCell.self, forCellWithReuseIdentifier: ProfileImageCollectionViewCell.identifier)
-        navigationItem.leftBarButtonItem = NavBackBtnChevron(previousVC: self)
+        navigationItem.leftBarButtonItem = backBarBtn
+        backBarBtn.action = #selector(backBarBtnTapped)
+        
+        
+    }
+    
+    @objc func backBarBtnTapped() {
+        print("Back button tapped")
+        navigationController?.popViewController(animated: true)
+        
         
     }
     
@@ -107,6 +118,7 @@ extension ProfileImageSettingVC: UICollectionViewDelegate, UICollectionViewDataS
        
         selectedIndexPath = indexPath
         let cell = collectionView.cellForItem(at: indexPath) as! ProfileImageCollectionViewCell
+        UserDefaultManager.profileImage = indexPath.item
         cell.imageView.layer.borderColor = ImageBorderColor.isSelected.value
         cell.imageView.profileImage.alpha = ImageAlpha.isSelected.rawValue
         cell.imageView.layer.borderWidth = ImageBorderWidth.isSelected.rawValue

@@ -12,13 +12,24 @@ class ProfileNicknameSettingVC: UIViewController {
 
     lazy var mainImageView = ProfileImageView(profileImageNum: selectedProfileImageNum, imageBorderWidth: .isSelected, imageBorderColor: .isSelected, imageAlpha: .isSelected, cameraBtnMode: .isShowing)
     
-    var selectedProfileImageNum = Int.random(in: 0...11)
+    var selectedProfileImageNum = {
+        
+        if UserDefaultManager.nickname.isEmpty {
+            Int.random(in: 0...11)
+        } else {
+            UserDefaultManager.profileImage
+        }
+    }()
+        
+        
     
-    let nicknameTextField = NicknameTextField(placeholder: "닉네임을 입력해주세요 :)")
+   lazy var nicknameTextField = NicknameTextField(placeholder: nicknameTextFieldPlaceholder)
     let lineView = LineView()
     let nicknameStatusLabel = UILabel()
     
     let submitBtn = OnboardingButton(btnTitle: "완료", target: self, action: #selector(submitBtnTapped))
+    
+    var nicknameTextFieldPlaceholder = "닉네임을 입력해주세요 :)"
     
     
 
@@ -81,8 +92,16 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         navigationItem.leftBarButtonItem = NavBackBtnChevron(previousVC: self)
         
         mainImageView.profileDelegate = self
-        
         nicknameTextField.delegate = self
+        
+        nicknameTextField.text = {
+            if UserDefaultManager.nickname.isEmpty {
+                return ""
+            } else {
+                return UserDefaultManager.nickname
+            }
+        }()
+        
         nicknameStatusLabel.textColor = Color.orange
         nicknameStatusLabel.font = Font.semiBold13
         nicknameStatusLabel.text = "닉네임에 @는 포함할 수 없어요"
@@ -90,15 +109,23 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
     }
     
     @objc func submitBtnTapped() {
+        if nicknameStatusLabel.text != "사용할 수 있는 닉네임이에요" {
+            return
+    } else if UserDefaultManager.nickname.isEmpty {
+            UserDefaultManager.nickname = nicknameTextField.text ?? UserDefaultManager.nickname
+            print("저장됨")
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            let sceneDelegate = windowScene?.delegate as? SceneDelegate
+            let rootViewController = UINavigationController(rootViewController: TabBarController())
+            sceneDelegate?.window?.rootViewController = rootViewController
+            sceneDelegate?.window?.makeKeyAndVisible()
+            print("루트뷰 바뀜")
+        } else {
+            UserDefaultManager.nickname = nicknameTextField.text ?? UserDefaultManager.nickname
+            print("바뀜")
+            navigationController?.popViewController(animated: true)
+        }
         
-        UserDefaultManager.nickname = nicknameTextField.text ?? UserDefaultManager.nickname
-        print("저장됨")
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        let rootViewController = UINavigationController(rootViewController: SearchMainVC())
-        sceneDelegate?.window?.rootViewController = rootViewController
-        sceneDelegate?.window?.makeKeyAndVisible()
-        print("루트뷰 바뀜")
         
     }
     

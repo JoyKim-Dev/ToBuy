@@ -10,6 +10,7 @@
 		35644BBC2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35644BBB2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift */; };
 		35644BC02C1DE1FA0037F8B7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35644BBF2C1DE1FA0037F8B7 /* UserDefaultsManager.swift */; };
 		35644BC22C1DE8690037F8B7 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35644BC12C1DE8690037F8B7 /* SearchBar.swift */; };
+		35644BC42C1E05A20037F8B7 /* SearchListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35644BC32C1E05A20037F8B7 /* SearchListTableViewCell.swift */; };
 		35B09C142C1C2B4400D0AF20 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B09C132C1C2B4400D0AF20 /* LineView.swift */; };
 		35B09C162C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B09C152C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift */; };
 		35D6D61E2C1AD6AC008207A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D61D2C1AD6AC008207A4 /* AppDelegate.swift */; };
@@ -23,8 +24,6 @@
 		35D6D6442C1ADB44008207A4 /* ProfileNicknameSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D6432C1ADB44008207A4 /* ProfileNicknameSettingVC.swift */; };
 		35D6D6462C1ADB6B008207A4 /* ProfileImageSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D6452C1ADB6B008207A4 /* ProfileImageSettingVC.swift */; };
 		35D6D6482C1ADBB8008207A4 /* SettingMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D6472C1ADBB8008207A4 /* SettingMainVC.swift */; };
-		35D6D64A2C1ADBE1008207A4 /* EditProfileNicknameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D6492C1ADBE1008207A4 /* EditProfileNicknameVC.swift */; };
-		35D6D64C2C1ADBF5008207A4 /* EditProfileImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D64B2C1ADBF5008207A4 /* EditProfileImageVC.swift */; };
 		35D6D6502C1AF311008207A4 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 35D6D64F2C1AF311008207A4 /* .gitignore */; };
 		35D6D6542C1AF68D008207A4 /* ReuseIdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D6532C1AF68D008207A4 /* ReuseIdentifierProtocol.swift */; };
 		35D6D6562C1AF6B1008207A4 /* VC + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D6D6552C1AF6B1008207A4 /* VC + Extension.swift */; };
@@ -48,6 +47,7 @@
 		35644BBB2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		35644BBF2C1DE1FA0037F8B7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		35644BC12C1DE8690037F8B7 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		35644BC32C1E05A20037F8B7 /* SearchListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListTableViewCell.swift; sourceTree = "<group>"; };
 		35B09C132C1C2B4400D0AF20 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		35B09C152C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCameraBtnDelegate.swift; sourceTree = "<group>"; };
 		35D6D61A2C1AD6AC008207A4 /* ToBuy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToBuy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,8 +63,6 @@
 		35D6D6432C1ADB44008207A4 /* ProfileNicknameSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameSettingVC.swift; sourceTree = "<group>"; };
 		35D6D6452C1ADB6B008207A4 /* ProfileImageSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSettingVC.swift; sourceTree = "<group>"; };
 		35D6D6472C1ADBB8008207A4 /* SettingMainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMainVC.swift; sourceTree = "<group>"; };
-		35D6D6492C1ADBE1008207A4 /* EditProfileNicknameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileNicknameVC.swift; sourceTree = "<group>"; };
-		35D6D64B2C1ADBF5008207A4 /* EditProfileImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileImageVC.swift; sourceTree = "<group>"; };
 		35D6D64F2C1AF311008207A4 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		35D6D6532C1AF68D008207A4 /* ReuseIdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifierProtocol.swift; sourceTree = "<group>"; };
 		35D6D6552C1AF6B1008207A4 /* VC + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VC + Extension.swift"; sourceTree = "<group>"; };
@@ -140,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				35D6D6382C1ADA2B008207A4 /* SearchMainVC.swift */,
+				35644BC32C1E05A20037F8B7 /* SearchListTableViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -156,8 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				35D6D6472C1ADBB8008207A4 /* SettingMainVC.swift */,
-				35D6D6492C1ADBE1008207A4 /* EditProfileNicknameVC.swift */,
-				35D6D64B2C1ADBF5008207A4 /* EditProfileImageVC.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -299,7 +296,6 @@
 			files = (
 				35D6D6762C1B1E4F008207A4 /* ConfigureBasicSettingProtocol.swift in Sources */,
 				35D6D6562C1AF6B1008207A4 /* VC + Extension.swift in Sources */,
-				35D6D64A2C1ADBE1008207A4 /* EditProfileNicknameVC.swift in Sources */,
 				35D6D6442C1ADB44008207A4 /* ProfileNicknameSettingVC.swift in Sources */,
 				35D6D6222C1AD6AC008207A4 /* ViewController.swift in Sources */,
 				35D6D6482C1ADBB8008207A4 /* SettingMainVC.swift in Sources */,
@@ -307,10 +303,10 @@
 				35D6D6592C1AF726008207A4 /* TabBarController.swift in Sources */,
 				35D6D6542C1AF68D008207A4 /* ReuseIdentifierProtocol.swift in Sources */,
 				35D6D67A2C1B2382008207A4 /* NavBackBtnChevron.swift in Sources */,
-				35D6D64C2C1ADBF5008207A4 /* EditProfileImageVC.swift in Sources */,
 				35D6D63F2C1ADA9F008207A4 /* SearchItemDetailVC.swift in Sources */,
 				35D6D61E2C1AD6AC008207A4 /* AppDelegate.swift in Sources */,
 				35B09C142C1C2B4400D0AF20 /* LineView.swift in Sources */,
+				35644BC42C1E05A20037F8B7 /* SearchListTableViewCell.swift in Sources */,
 				35B09C162C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift in Sources */,
 				35D6D6612C1B0241008207A4 /* ProfileImageView.swift in Sources */,
 				35644BC22C1DE8690037F8B7 /* SearchBar.swift in Sources */,

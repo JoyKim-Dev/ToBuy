@@ -12,8 +12,13 @@ class SearchBar:UISearchBar {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        backgroundColor = Color.lightGray
         placeholder = "브랜드, 상품 등을 입력하세요."
+        
+        // 위아래 구분선 삭제
+        searchBarStyle = .minimal
+        layer.borderColor = UIColor.black.cgColor
+        
+        
     }
  
     required init?(coder: NSCoder) {

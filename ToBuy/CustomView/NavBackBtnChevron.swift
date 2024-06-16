@@ -9,7 +9,7 @@ import UIKit
 
 class NavBackBtnChevron:UIBarButtonItem {
     
-    var returnToVC: UIViewController?
+    var popVC: UIViewController?
     
     override init() {
         super.init()
@@ -18,10 +18,10 @@ class NavBackBtnChevron:UIBarButtonItem {
         tintColor = .black
     }
     
-    init(previousVC: UIViewController) {
+    init(currentVC: UIViewController) {
          super.init()
         
-         returnToVC = previousVC
+         popVC = currentVC
          image = Icon.chevronLeft
          style = .plain
          target = self
@@ -36,6 +36,6 @@ class NavBackBtnChevron:UIBarButtonItem {
      @objc private func leftBarBtnTapped() {
          // 여기에 원하는 동작을 구현하세요.
          print("Back button tapped")
-            returnToVC?.navigationController?.popViewController(animated: true)
+            popVC?.navigationController?.popViewController(animated: true)
      }
  }

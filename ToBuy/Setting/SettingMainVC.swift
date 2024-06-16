@@ -81,6 +81,8 @@ extension SettingMainVC:ConfigureBasicSettingProtocol {
         navigationController?.navigationBar.shadowImage = nil
         
         profileNameLabel.text = UserDefaultManager.nickname
+        profileNameLabel.font = Font.heavy30
+        
         joinedDateLabel.text = "2024.06.15 가입"
         toEditProfileBtn.setImage(Icon.chevronRight, for: .normal)
         toEditProfileBtn.addTarget(self, action: #selector(rightBarBtnTapped), for: .touchUpInside)

@@ -14,7 +14,7 @@ class SearchListTableViewCell: UITableViewCell {
     
     let leftIconImageView = UIImageView()
     let searchWordLabel = UILabel()
-    let deleteBtn = UIButton()
+    let deleteBtn = LikeBtn()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

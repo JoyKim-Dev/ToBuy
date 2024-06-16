@@ -89,7 +89,7 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
     
     func configUI() {
         configureView("PROFILE SETTING")
-        navigationItem.leftBarButtonItem = NavBackBtnChevron(previousVC: self)
+        navigationItem.leftBarButtonItem = NavBackBtnChevron(currentVC: self)
         
         mainImageView.profileDelegate = self
         nicknameTextField.delegate = self

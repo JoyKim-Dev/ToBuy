@@ -86,7 +86,7 @@ extension SearchMainVC: ConfigureBasicSettingProtocol {
     func configUI() {
         configureView("\(nickname)'s ToBuyBag")
         
-
+        
         listTableView.delegate = self
         listTableView.dataSource = self
         listTableView.register(SearchListTableViewCell.self, forCellReuseIdentifier: SearchListTableViewCell.identifier)
@@ -186,11 +186,11 @@ extension SearchMainVC: UISearchBarDelegate {
 
         UserDefaultManager.searchKeyword.insert(searchBar.text!, at: 0)
         searchBar.text = ""
-        //reloadSearchView()
         print("검색 결과 vc로 이동")
         
         let vc = SearchItemDetailVC()
         vc.searchWordFromPreviousPage = UserDefaultManager.searchKeyword[0]
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     

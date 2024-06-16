@@ -33,9 +33,9 @@ class UserDefaultManager {
     }
     
     
-    static var searchKeyword: [Any] {
+    static var searchKeyword: [String] {
         get {
-            return UserDefaults.standard.array(forKey: "searchKeyword") ?? []
+            return UserDefaults.standard.array(forKey: "searchKeyword") as? [String] ?? []
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "searchKeyword")

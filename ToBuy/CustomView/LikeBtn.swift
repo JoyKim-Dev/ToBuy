@@ -13,8 +13,10 @@ class LikeBtn: UIButton {
         super.init(frame: .zero)
         
        
-        layer.cornerRadius = 10
+        layer.cornerRadius = 3
         clipsToBounds = true
+        imageEdgeInsets = UIEdgeInsets(top: 1, left: 2, bottom: 1, right: 2)
+        
         
         backgroundColor = Color.lightGray
         setImage(Icon.likeUnSelected, for: .normal)

@@ -60,6 +60,7 @@ extension SearchListTableViewCell {
     }
     
     func configUI(searchKeywordRow: Int) {
+        
 
         leftIconImageView.image = Icon.clock
         leftIconImageView.tintColor = Color.black
@@ -69,6 +70,7 @@ extension SearchListTableViewCell {
         
         deleteBtn.setImage(Icon.xMark, for: .normal)
         deleteBtn.tintColor = Color.black
+        deleteBtn.backgroundColor = .white
        
         
         

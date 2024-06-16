@@ -13,9 +13,11 @@ extension UIViewController {
     func configureView(_ navTitle: String) {
         view.backgroundColor = .white
         navigationItem.title = navTitle
+
         
     }
 }
+
 
 
 

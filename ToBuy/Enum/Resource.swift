@@ -91,7 +91,7 @@ enum Font {
     static let semiBold16 = UIFont.systemFont(ofSize: 16, weight: .semibold)
     
     static let heavy15 = UIFont.systemFont(ofSize: 15, weight: .heavy)
-    static let heavy30 = UIFont.systemFont(ofSize: 30, weight: .heavy)
+    static let heavy20 = UIFont.systemFont(ofSize: 20, weight: .heavy)
     
     static let appTitleFont = UIFont.systemFont(ofSize: 50, weight: .black)
     

@@ -15,7 +15,7 @@ class UserDefaultManager {
     static var nickname: String {
         
         get {
-            return UserDefaults.standard.string(forKey: "nickname") ?? "미정"
+            return UserDefaults.standard.string(forKey: "nickname") ?? ""
         }
         
         set {
@@ -23,9 +23,9 @@ class UserDefaultManager {
         }
     }
     
-    static var profileImage: Int {
+    static var profileImage: [Int] {
         get{
-            return UserDefaults.standard.integer(forKey: "profileImage")
+            return UserDefaults.standard.array(forKey: "profileImage") as? [Int] ?? [0]
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: "profileImage")

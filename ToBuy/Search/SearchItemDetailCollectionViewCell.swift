@@ -13,11 +13,12 @@ import Kingfisher
 class SearchItemDetailCollectionViewCell: UICollectionViewCell {
     
     let productImageView = UIImageView()
-    let likeBtn = UIButton()
+    let likeBtn = LikeBtn()
     
     let storeNameLabel = UILabel()
     let productNameLabel = UILabel()
     let productPriceLabel = UILabel()
+
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -54,7 +55,7 @@ extension SearchItemDetailCollectionViewCell {
         
         likeBtn.snp.makeConstraints { make in
             make.height.equalTo(30)
-            make.width.equalTo(20)
+            make.width.equalTo(25)
             make.bottom.trailing.equalTo(productImageView).inset(15)
         }
         
@@ -79,23 +80,32 @@ extension SearchItemDetailCollectionViewCell {
         
     }
     
-    func configUI() {
+    func configUI(data: ItemResult) {
+        
+        //print(data)
+        
         contentView.backgroundColor = Color.white
         productImageView.layer.cornerRadius = 10
         productImageView.layer.masksToBounds = true
-        productImageView.image = Image.mainImage
+        
+        let url = URL(string: data.image)
+        productImageView.kf.setImage(with: url)
         productImageView.backgroundColor = .gray
         
-        storeNameLabel.text = "mallName"
+        storeNameLabel.text = data.mallName
         storeNameLabel.font = Font.semiBold13
         storeNameLabel.textColor = Color.lightGray
         
-        productNameLabel.text = "title여따써라잉아랐지아아아아아아아아아아아아아두줄로 가능하게에에"
+        // 특정 문자열 여러개 제거!
+        productNameLabel.text = data.title.replacingOccurrences(of: "[<b></b>]", with: "", options: .regularExpression)
         productNameLabel.lineBreakMode = .byCharWrapping
         productNameLabel.font = Font.semiBold14
         productNameLabel.numberOfLines = 2
         
-        productPriceLabel.text  = "lprice정보"
+       
+        let price = data.lprice
+        let priceInt = Int(price)!.formatted()
+        productPriceLabel.text  = String(priceInt)
         productPriceLabel.font = Font.heavy15
     }
     

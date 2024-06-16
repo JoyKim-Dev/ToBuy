@@ -18,7 +18,7 @@ class SettingMainVC: UIViewController {
     let joinedDateLabel = UILabel()
 
     let toEditProfileBtn = UIButton()
-    var profileImageNumData = UserDefaultManager.profileImage
+    var profileImageNumData = UserDefaultManager.profileImage[0] 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +81,7 @@ extension SettingMainVC:ConfigureBasicSettingProtocol {
         navigationController?.navigationBar.shadowImage = nil
         
         profileNameLabel.text = UserDefaultManager.nickname
-        profileNameLabel.font = Font.heavy30
+        profileNameLabel.font = Font.heavy20
         
         joinedDateLabel.text = "2024.06.15 가입"
         toEditProfileBtn.setImage(Icon.chevronRight, for: .normal)

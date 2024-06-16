@@ -28,12 +28,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //로그인 정보 없으면
         }  else {
             
-            let rootViewController = UINavigationController(rootViewController: TabBarController() )
+            let rootViewController = TabBarController()
             window?.rootViewController = rootViewController
         }
         
         window?.makeKeyAndVisible()
     }
+    
+
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

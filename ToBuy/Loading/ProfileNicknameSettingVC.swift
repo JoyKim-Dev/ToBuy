@@ -14,10 +14,10 @@ class ProfileNicknameSettingVC: UIViewController {
     
     var selectedProfileImageNum = {
         
-        if UserDefaultManager.nickname.isEmpty {
+        if UserDefaultManager.profileImage.count == 0 {
             Int.random(in: 0...11)
         } else {
-            UserDefaultManager.profileImage
+            UserDefaultManager.profileImage[0]
         }
     }()
         
@@ -41,7 +41,14 @@ class ProfileNicknameSettingVC: UIViewController {
         configUI()
         
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        mainImageView.profileImage.image = UIImage(named: "profile_\(UserDefaultManager.profileImage[0])")
+ 
+    }
+    
 }
 
 extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {

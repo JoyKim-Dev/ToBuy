@@ -56,7 +56,7 @@ extension OnboardingVC:ConfigureBasicSettingProtocol {
     func configUI() {
         view.backgroundColor = Color.white
         appMainImage.image = Image.mainImage
-       // appStartBtn.addTarget(self, action: #selector(startBtnTapped), for: .touchUpInside)
+
         
     }
     

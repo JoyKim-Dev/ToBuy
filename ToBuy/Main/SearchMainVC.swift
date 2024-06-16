@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 
+
 class SearchMainVC: UIViewController {
     
     let searchBar = SearchBar()
@@ -19,6 +20,7 @@ class SearchMainVC: UIViewController {
     let headerDeleteAllBtn = UIButton()
     
     var nickname = UserDefaultManager.nickname
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,6 +110,8 @@ extension SearchMainVC: ConfigureBasicSettingProtocol {
         
     }
     
+   
+    
     @objc func deleteBtnTapped(_ sender: UIButton) {
         
         UserDefaultManager.searchKeyword.remove(at: sender.tag)
@@ -184,9 +188,10 @@ extension SearchMainVC: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 
+        print("검색 결과 \(searchBar.text!) vc로 이동")
         UserDefaultManager.searchKeyword.insert(searchBar.text!, at: 0)
         searchBar.text = ""
-        print("검색 결과 vc로 이동")
+        
         
         let vc = SearchItemDetailVC()
         vc.searchWordFromPreviousPage = UserDefaultManager.searchKeyword[0]

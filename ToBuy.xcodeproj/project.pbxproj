@@ -44,6 +44,8 @@
 		35EA4CD52C1EC30200248ECB /* FilterBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EA4CD42C1EC30200248ECB /* FilterBtn.swift */; };
 		35EA4CD72C1EC9AC00248ECB /* SearchItemDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EA4CD62C1EC9AC00248ECB /* SearchItemDetailCollectionViewCell.swift */; };
 		35EA4CD92C1ED06400248ECB /* LikeBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EA4CD82C1ED06400248ECB /* LikeBtn.swift */; };
+		35EA4CDB2C1F0B8B00248ECB /* NaverProductSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EA4CDA2C1F0B8B00248ECB /* NaverProductSearch.swift */; };
+		35EA4CDD2C1F333100248ECB /* SearchResultWebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EA4CDC2C1F333100248ECB /* SearchResultWebViewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +84,8 @@
 		35EA4CD42C1EC30200248ECB /* FilterBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBtn.swift; sourceTree = "<group>"; };
 		35EA4CD62C1EC9AC00248ECB /* SearchItemDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		35EA4CD82C1ED06400248ECB /* LikeBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeBtn.swift; sourceTree = "<group>"; };
+		35EA4CDA2C1F0B8B00248ECB /* NaverProductSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverProductSearch.swift; sourceTree = "<group>"; };
+		35EA4CDC2C1F333100248ECB /* SearchResultWebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultWebViewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,7 @@
 		35D6D6322C1AD7CF008207A4 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				35EA4CDA2C1F0B8B00248ECB /* NaverProductSearch.swift */,
 				35D6D6382C1ADA2B008207A4 /* SearchMainVC.swift */,
 				35644BC32C1E05A20037F8B7 /* SearchListTableViewCell.swift */,
 			);
@@ -154,6 +159,7 @@
 			children = (
 				35D6D63E2C1ADA9F008207A4 /* SearchItemDetailVC.swift */,
 				35EA4CD62C1EC9AC00248ECB /* SearchItemDetailCollectionViewCell.swift */,
+				35EA4CDC2C1F333100248ECB /* SearchResultWebViewViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -314,9 +320,11 @@
 				35D6D6542C1AF68D008207A4 /* ReuseIdentifierProtocol.swift in Sources */,
 				35EA4CD92C1ED06400248ECB /* LikeBtn.swift in Sources */,
 				35D6D67A2C1B2382008207A4 /* NavBackBtnChevron.swift in Sources */,
+				35EA4CDB2C1F0B8B00248ECB /* NaverProductSearch.swift in Sources */,
 				35EA4CD72C1EC9AC00248ECB /* SearchItemDetailCollectionViewCell.swift in Sources */,
 				35D6D63F2C1ADA9F008207A4 /* SearchItemDetailVC.swift in Sources */,
 				35D6D61E2C1AD6AC008207A4 /* AppDelegate.swift in Sources */,
+				35EA4CDD2C1F333100248ECB /* SearchResultWebViewViewController.swift in Sources */,
 				35B09C142C1C2B4400D0AF20 /* LineView.swift in Sources */,
 				35644BC42C1E05A20037F8B7 /* SearchListTableViewCell.swift in Sources */,
 				35B09C162C1C335300D0AF20 /* ProfileCameraBtnDelegate.swift in Sources */,

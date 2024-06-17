@@ -8,7 +8,7 @@
 import UIKit
 
 class UserDefaultManager {
-    
+    static let shared = UserDefaultManager()
     static var nickname: String {
         
         get {
@@ -48,5 +48,64 @@ class UserDefaultManager {
         }
     }
     
+    static var totalLikeCount: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: "totalLike")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "totalLike")
+        }
+    }
+    
+    static var joinedDate: Date {
+        get{
+            return UserDefaults.standard.object(forKey: "joinedDate") as? Date ?? Date()
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "joinedDate")
+        }
+    }
+    
+    static var keyHistoryArray: [String] {
+        get {
+            return UserDefaults.standard.array(forKey: "totalKey") as? [String] ?? []
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "totalKey")
+        }
+    }
+    
+    
+    
 }
 
+extension UserDefaultManager {
+    
+    func countLikedItems() -> Int {
+         var likedCount = 0
+         
+             let keyArray = UserDefaultManager.keyHistoryArray
+        
+        for key in keyArray{
+             let liked = UserDefaults.standard.bool(forKey: key)
+             if liked {
+                 likedCount += 1
+             }
+         }
+         print(likedCount)
+         return likedCount
+     }
+    
+   func clearUserDefaults() {
+        
+       
+        var keys = ["nickname", "profileImage", "searchKeyword", "totalLike", "joinedDate"]
+        keys.append(contentsOf: UserDefaultManager.keyHistoryArray)
+       
+        for i in keys {
+            UserDefaults.standard.removeObject(forKey: i)
+        }
+
+           UserDefaults.standard.synchronize()
+       }
+}

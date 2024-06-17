@@ -68,13 +68,24 @@ extension SearchResultWebViewViewController:ConfigureBasicSettingProtocol {
     
     @objc func navLikeBtnTapped() {
         
+        guard let key = searchDataFromPreviousPage?.productId else {
+            print("키없음")
+            return
+        }
         if navLikeBtn.image == Icon.likeUnSelected {
             navLikeBtn.image = Icon.likeSelected.withRenderingMode(.alwaysOriginal)
-            UserDefaults.standard.setValue(true, forKey: searchDataFromPreviousPage?.productId ?? "미정")
+            UserDefaults.standard.setValue(true, forKey: key)
+            UserDefaultManager.keyHistoryArray.append(key)
+            let totalLikes = UserDefaultManager.shared.countLikedItems()
+            UserDefaultManager.totalLikeCount = totalLikes
             UserDefaultManager.storedDataisChanged = true
         } else {
             navLikeBtn.image = Icon.likeUnSelected.withRenderingMode(.alwaysOriginal)
-            UserDefaults.standard.setValue(false, forKey: searchDataFromPreviousPage?.productId ?? "미정")
+            UserDefaults.standard.setValue(false, forKey: key)
+            UserDefaultManager.keyHistoryArray.append(key)
+            let totalLikes = UserDefaultManager.shared.countLikedItems()
+            UserDefaultManager.totalLikeCount = totalLikes
+            UserDefaultManager.storedDataisChanged = true
             UserDefaultManager.storedDataisChanged = true
         }
     }

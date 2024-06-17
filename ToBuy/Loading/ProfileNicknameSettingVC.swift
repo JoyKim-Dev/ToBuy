@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class ProfileNicknameSettingVC: UIViewController {
-
+    
     lazy var mainImageView = ProfileImageView(profileImageNum: selectedProfileImageNum, imageBorderWidth: .isSelected, imageBorderColor: .isSelected, imageAlpha: .isSelected, cameraBtnMode: .isShowing)
     
     var selectedProfileImageNum = {
@@ -20,10 +20,10 @@ class ProfileNicknameSettingVC: UIViewController {
             UserDefaultManager.profileImage[0]
         }
     }()
-        
-        
     
-   lazy var nicknameTextField = NicknameTextField(placeholder: nicknameTextFieldPlaceholder)
+    
+    
+    lazy var nicknameTextField = NicknameTextField(placeholder: nicknameTextFieldPlaceholder)
     let lineView = LineView()
     let nicknameStatusLabel = UILabel()
     
@@ -32,10 +32,10 @@ class ProfileNicknameSettingVC: UIViewController {
     var nicknameTextFieldPlaceholder = "닉네임을 입력해주세요 :)"
     
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configHierarchy()
         configLayout()
         configUI()
@@ -46,7 +46,7 @@ class ProfileNicknameSettingVC: UIViewController {
         super.viewWillAppear(animated)
         
         mainImageView.profileImage.image = UIImage(named: "profile_\(UserDefaultManager.profileImage[0])")
- 
+        
     }
     
 }
@@ -98,6 +98,7 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         configureView("PROFILE SETTING")
         navigationItem.leftBarButtonItem = NavBackBtnChevron(currentVC: self)
         
+        hideKeyboardWhenTappedAround()
         mainImageView.profileDelegate = self
         nicknameTextField.delegate = self
         
@@ -118,9 +119,10 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
     @objc func submitBtnTapped() {
         if nicknameStatusLabel.text != "사용할 수 있는 닉네임이에요" {
             return
-    } else if UserDefaultManager.nickname.isEmpty {
+        } else if UserDefaultManager.nickname.isEmpty {
             UserDefaultManager.nickname = nicknameTextField.text ?? UserDefaultManager.nickname
             print("저장됨")
+            UserDefaultManager.joinedDate = Date()
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             let sceneDelegate = windowScene?.delegate as? SceneDelegate
             let rootViewController = UINavigationController(rootViewController: TabBarController())
@@ -148,7 +150,7 @@ extension ProfileNicknameSettingVC: UITextFieldDelegate {
             return false
         }
         
-         if text.count < 2 || text.count > 10 {
+        if text.count < 2 || text.count > 10 {
             nicknameStatusLabel.text = "2글자 이상 10글자 미만으로 설정해주세요"
         } else if forbiddenCharacter.contains(where: text.contains) {
             nicknameStatusLabel.text = "닉네임에 @, #, $, % 는 포함할 수 없어요"
@@ -157,7 +159,7 @@ extension ProfileNicknameSettingVC: UITextFieldDelegate {
         } else {
             nicknameStatusLabel.text = "사용할 수 있는 닉네임이에요"
         }
-                    
+        
         return true
     }
 }

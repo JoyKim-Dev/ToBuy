@@ -88,6 +88,7 @@ extension SearchMainVC: ConfigureBasicSettingProtocol {
     func configUI() {
         configureView("\(nickname)'s ToBuyBag")
         
+        hideKeyboardWhenTappedAround()
         
         listTableView.delegate = self
         listTableView.dataSource = self
@@ -106,8 +107,6 @@ extension SearchMainVC: ConfigureBasicSettingProtocol {
         headerDeleteAllBtn.titleLabel?.font = Font.semiBold14
         headerDeleteAllBtn.setTitleColor(Color.orange, for: .normal)
         headerDeleteAllBtn.addTarget(self, action: #selector(deleteAllTapped), for: .touchUpInside)
-        
-        
     }
     
    

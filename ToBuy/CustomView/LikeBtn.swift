@@ -18,7 +18,7 @@ class LikeBtn: UIButton {
         imageEdgeInsets = UIEdgeInsets(top: 1, left: 2, bottom: 1, right: 2)
         
         
-        backgroundColor = Color.lightGray
+        backgroundColor = Color.unselectedGray
         tintColor = Color.white
 
     }

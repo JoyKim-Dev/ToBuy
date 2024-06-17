@@ -80,7 +80,7 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         filterStackView.snp.makeConstraints { make in
             make.top.equalTo(numberOfResultLabel.snp.bottom).offset(10)
             make.leading.equalTo(view.safeAreaLayoutGuide).inset(10)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(95)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(85)
             make.height.equalTo(30)
         }
         

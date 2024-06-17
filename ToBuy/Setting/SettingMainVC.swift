@@ -146,7 +146,7 @@ extension SettingMainVC: UITableViewDelegate, UITableViewDataSource {
                 print("삭제완료")
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 let sceneDelegate = windowScene?.delegate as? SceneDelegate
-                let rootViewController = UINavigationController(rootViewController: OnboardingVC())
+                let rootViewController = OnboardingVC()
                 sceneDelegate?.window?.rootViewController = rootViewController
                 sceneDelegate?.window?.makeKeyAndVisible()
             }

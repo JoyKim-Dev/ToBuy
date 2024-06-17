@@ -39,16 +39,14 @@ class UserDefaultManager {
         }
     }
     
-//    
-//    static var likeStatusArray: [Bool] {
-//        get {
-//            
-//            return UserDefaults.standard.array(forKey: "likeStatusArray") as? [Bool] ?? []
-//        }
-//        set{
-//            UserDefaults.standard.set(newValue, forKey: "likeStatusArray")
-//        }
-//    }
+    static var storedDataisChanged: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "dataChanged")
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "dataChanged")
+        }
+    }
     
 }
 

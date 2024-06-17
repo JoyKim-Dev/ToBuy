@@ -45,6 +45,14 @@ class SearchItemDetailVC: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if UserDefaultManager.storedDataisChanged {
+            print("UserDefaults 변경 반영 필요")
+            callRequest(query: query ?? "미정")
+            print("변경 사항 반영 완료")
+        }
+    }
+    
     
 }
 
@@ -90,7 +98,7 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         
         configureView(searchWordFromPreviousPage ?? "")
         navigationItem.leftBarButtonItem = NavBackBtnChevron(currentVC: self)
-          
+        
         numberOfResultLabel.textColor = Color.orange
         numberOfResultLabel.font = Font.heavy15
         
@@ -108,7 +116,7 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         recentDateFilterBtn.addTarget(self, action: #selector(recentBtnTapped), for: .touchUpInside)
         priceTopDownFilterBtn.addTarget(self, action: #selector(priceTopDownTapped), for: .touchUpInside)
         priceDownTopFilterBtn.addTarget(self, action: #selector(priceDownTopTapped), for: .touchUpInside)
-    
+        
     }
     
     
@@ -147,42 +155,42 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         ]
         
         AF.request(url, method: .get, parameters: param, headers: header)
-             .validate(statusCode: 200..<300)
-             .responseDecodable(of: Product.self) { response in
-                 print("STATUS: \(response.response?.statusCode ?? 0)")
-                 switch response.result {
-                 case .success(let value):
-                     print("SUCCESS")
-                     
-                     self.numberOfResultLabel.text = "\(value.total.formatted())개의 검색 결과"
-                     
-                     if self.start == 1 {
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: Product.self) { response in
+                print("STATUS: \(response.response?.statusCode ?? 0)")
+                switch response.result {
+                case .success(let value):
+                    print("SUCCESS")
+                    
+                    self.numberOfResultLabel.text = "\(value.total.formatted())개의 검색 결과"
+                    
+                    if self.start == 1 {
                         
-                         self.list = value
-                         self.list.items.enumerated().forEach { index, item in
-                             SearchItemDetailVC.productKey = item.productId
-                             let liked = UserDefaults.standard.bool(forKey: SearchItemDetailVC.productKey)
-                             self.list.items[index].likes = [LikesResult(like: liked)]
-                         }
-                         self.searchResultCollectionView.scrollToItem(at: IndexPath(item: -1, section: 0), at: .top, animated: false)
-                     } else {
-                         let startIndex = self.list.items.count
-                         self.list.items.append(contentsOf: value.items)
-                         value.items.enumerated().forEach { index, item in
-   
-                             SearchItemDetailVC.productKey = item.productId
-                             let liked = UserDefaults.standard.bool(forKey: SearchItemDetailVC.productKey)
-                             self.list.items[startIndex + index].likes = [LikesResult(like: liked)]
-                         }
-                     }
-                     self.searchResultCollectionView.reloadData()
-                     
-                 case .failure(let error):
-                     print(error)
-                 }
-             }
-     }
-
+                        self.list = value
+                        self.list.items.enumerated().forEach { index, item in
+                            SearchItemDetailVC.productKey = item.productId
+                            let liked = UserDefaults.standard.bool(forKey: SearchItemDetailVC.productKey)
+                            self.list.items[index].likes = [LikesResult(like: liked)]
+                        }
+                        self.searchResultCollectionView.scrollToItem(at: IndexPath(item: -1, section: 0), at: .top, animated: false)
+                    } else {
+                        let startIndex = self.list.items.count
+                        self.list.items.append(contentsOf: value.items)
+                        value.items.enumerated().forEach { index, item in
+                            
+                            SearchItemDetailVC.productKey = item.productId
+                            let liked = UserDefaults.standard.bool(forKey: SearchItemDetailVC.productKey)
+                            self.list.items[startIndex + index].likes = [LikesResult(like: liked)]
+                        }
+                    }
+                    self.searchResultCollectionView.reloadData()
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
     
     @objc func likeBtnTapped(sender: UIButton) {
         let index = sender.tag

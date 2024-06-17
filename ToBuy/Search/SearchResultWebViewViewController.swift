@@ -13,6 +13,8 @@ import WebKit
 class SearchResultWebViewViewController: UIViewController {
     
     var searchDataFromPreviousPage:ItemResult?
+    var userDefaultsDidChange: Bool = false
+    
     let webView = WKWebView()
     lazy var navLikeBtn = UIBarButtonItem(image: .likeSelected, style: .plain, target: self, action: #selector(navLikeBtnTapped))
     
@@ -39,6 +41,7 @@ extension SearchResultWebViewViewController:ConfigureBasicSettingProtocol {
     
     func configUI() {
         navigationItem.leftBarButtonItem = NavBackBtnChevron(currentVC: self)
+        
         configureView(searchDataFromPreviousPage?.title.replacingOccurrences(of: "[<b></b>]", with: "", options: .regularExpression) ?? "")
         
         if UserDefaults.standard.bool(forKey: searchDataFromPreviousPage?.productId ?? "") == true {
@@ -61,13 +64,18 @@ extension SearchResultWebViewViewController:ConfigureBasicSettingProtocol {
         webView.load(request)
         
     }
+
     
     @objc func navLikeBtnTapped() {
         
         if navLikeBtn.image == Icon.likeUnSelected {
             navLikeBtn.image = Icon.likeSelected.withRenderingMode(.alwaysOriginal)
+            UserDefaults.standard.setValue(true, forKey: searchDataFromPreviousPage?.productId ?? "미정")
+            UserDefaultManager.storedDataisChanged = true
         } else {
             navLikeBtn.image = Icon.likeUnSelected.withRenderingMode(.alwaysOriginal)
+            UserDefaults.standard.setValue(false, forKey: searchDataFromPreviousPage?.productId ?? "미정")
+            UserDefaultManager.storedDataisChanged = true
         }
     }
     

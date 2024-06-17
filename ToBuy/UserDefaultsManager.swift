@@ -7,9 +7,6 @@
 
 import UIKit
 
-
-
-
 class UserDefaultManager {
     
     static var nickname: String {
@@ -41,5 +38,17 @@ class UserDefaultManager {
             UserDefaults.standard.set(newValue, forKey: "searchKeyword")
         }
     }
+    
+//    
+//    static var likeStatusArray: [Bool] {
+//        get {
+//            
+//            return UserDefaults.standard.array(forKey: "likeStatusArray") as? [Bool] ?? []
+//        }
+//        set{
+//            UserDefaults.standard.set(newValue, forKey: "likeStatusArray")
+//        }
+//    }
+    
 }
 

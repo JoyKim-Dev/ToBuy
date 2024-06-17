@@ -35,16 +35,26 @@ class FilterBtn:UIButton{
     }
     
     @objc func toggleFilterBtn() {
-        
-        if backgroundColor == Color.white {
+        guard !isSelected else { return }
+               
+            print("눌림")
             backgroundColor = Color.darkGray
             setTitleColor(Color.white, for: .normal)
-        } else {
-            backgroundColor = Color.white
-            setTitleColor(Color.darkGray, for: .normal)
-        }
-       
-        
+
+        deselectOtherButtons()
     }
+    
+    func deselectOtherButtons() {
+        guard let superView = superview else { return }
+        
+        for case let button as FilterBtn in superView.subviews {
+            if button != self {
+                button.isSelected = false
+                button.backgroundColor = Color.white
+                               button.setTitleColor(Color.darkGray, for: .normal)
+            }
+        }
+    }
+
     
 }

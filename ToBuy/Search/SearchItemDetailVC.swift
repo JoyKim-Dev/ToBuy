@@ -6,8 +6,16 @@
 //
 
 import UIKit
-import SnapKit
+
 import Alamofire
+import SnapKit
+
+enum SearchResultSortType:String {
+    case accuracy = "sim"
+    case recentDate = "date"
+    case priceTopDown = "dsc"
+    case priceDownTop = "asc"
+}
 
 class SearchItemDetailVC: UIViewController {
     
@@ -21,10 +29,12 @@ class SearchItemDetailVC: UIViewController {
     lazy var searchResultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: searchCollectionViewLayout())
     
     var searchWordFromPreviousPage: String?
+    lazy var query = searchWordFromPreviousPage
     
     var list = Product(lastBuildDate: "", total: 1, start: 1 , display: 1, items: [])
     var start = 1
-    var apiSortType = "sim"
+    var apiSortType = SearchResultSortType.accuracy.rawValue
+    var productKey:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,13 +86,11 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
     
     func configUI() {
         
-        callRequest(query: String(searchWordFromPreviousPage!))
-        print(searchWordFromPreviousPage!)
+        callRequest(query: String(query ?? ""))
         
-        configureView(searchWordFromPreviousPage!)
+        configureView(searchWordFromPreviousPage ?? "")
         navigationItem.leftBarButtonItem = NavBackBtnChevron(currentVC: self)
-        
-        
+          
         numberOfResultLabel.textColor = Color.orange
         numberOfResultLabel.font = Font.heavy15
         
@@ -95,15 +103,21 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         searchResultCollectionView.dataSource = self
         searchResultCollectionView.register(SearchItemDetailCollectionViewCell.self, forCellWithReuseIdentifier: SearchItemDetailCollectionViewCell.identifier)
         searchResultCollectionView.prefetchDataSource = self
+        
+        accuracyFilterBtn.addTarget(self, action: #selector(accuracyBtnTapped), for: .touchUpInside)
+        recentDateFilterBtn.addTarget(self, action: #selector(recentBtnTapped), for: .touchUpInside)
+        priceTopDownFilterBtn.addTarget(self, action: #selector(priceTopDownTapped), for: .touchUpInside)
+        priceDownTopFilterBtn.addTarget(self, action: #selector(priceDownTopTapped), for: .touchUpInside)
+    
     }
     
     
     func searchCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
-    
+        
         let sectionSpacing:CGFloat = 10
         let cellSpacing:CGFloat = 12
-       
+        
         let width = UIScreen.main.bounds.width - (sectionSpacing * 2) - (cellSpacing * 3)
         layout.itemSize = CGSize(width: width/2, height: width/1.2)
         layout.scrollDirection = .vertical
@@ -128,37 +142,90 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         let param: Parameters = [
             "query": query,
             "display": 30,
-            "start": 1,
+            "start": start,
             "sort": apiSortType
         ]
         
         AF.request(url, method: .get, parameters: param, headers: header)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of: Product.self) { response in
-                print("STATUS: \(response.response?.statusCode ?? 0)")
-                switch response.result {
-                case .success(let value):
-                    print("SUCCESS")
-                    
-                    self.numberOfResultLabel.text = "\(value.total.formatted())개의 검색 결과"
-                   
-                    if self.start == 1 {
-                        self.list = value
-                        self.searchResultCollectionView.scrollToItem(at: IndexPath(item: -1, section: 0), at: .top, animated: false)
-                    } else {
+             .validate(statusCode: 200..<300)
+             .responseDecodable(of: Product.self) { response in
+                 print("STATUS: \(response.response?.statusCode ?? 0)")
+                 switch response.result {
+                 case .success(let value):
+                     print("SUCCESS")
+                     
+                     self.numberOfResultLabel.text = "\(value.total.formatted())개의 검색 결과"
+                     
+                     if self.start == 1 {
                         
-                        self.list.items.append(contentsOf: value.items)
-                    }
-  
-                    self.searchResultCollectionView.reloadData()
-         
-                case .failure(let error):
-                    print(error)
-                    
-                }
-            }
+                         self.list = value
+                         self.list.items.enumerated().forEach { index, item in
+                             self.productKey = item.productId
+                             let liked = UserDefaults.standard.bool(forKey: self.productKey)
+                             self.list.items[index].likes = [LikesResult(like: liked)]
+                         }
+                         self.searchResultCollectionView.scrollToItem(at: IndexPath(item: -1, section: 0), at: .top, animated: false)
+                     } else {
+                         let startIndex = self.list.items.count
+                         self.list.items.append(contentsOf: value.items)
+                         value.items.enumerated().forEach { index, item in
+   
+                             self.productKey = item.productId
+                             let liked = UserDefaults.standard.bool(forKey: self.productKey)
+                             self.list.items[startIndex + index].likes = [LikesResult(like: liked)]
+                         }
+                     }
+                     self.searchResultCollectionView.reloadData()
+                     
+                 case .failure(let error):
+                     print(error)
+                 }
+             }
+     }
+
+    
+    @objc func likeBtnTapped(sender: UIButton) {
+        let index = sender.tag
+        print(index)
+        
+        guard index < list.items.count else { return }
+        
+        guard let likes = list.items[index].likes else { return }
+        let currentLikeStatus = likes[0].like
+        list.items[index].likes?[0].like = !currentLikeStatus
+        
+        productKey = list.items[index].productId
+        UserDefaults.standard.setValue(!currentLikeStatus, forKey: productKey)
+        
+        let storedLikeStatus = UserDefaults.standard.bool(forKey: productKey)
+        print("Stored like status for product \(productKey): \(storedLikeStatus)")
+        
+        searchResultCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
     }
- 
+    
+    @objc func accuracyBtnTapped() {
+        apiSortType = SearchResultSortType.accuracy.rawValue
+        callRequest(query: query ?? "미정")
+        accuracyFilterBtn.isSelected = true
+    }
+    
+    @objc func recentBtnTapped() {
+        apiSortType = SearchResultSortType.recentDate.rawValue
+        recentDateFilterBtn.isSelected = true
+        print("잉")
+        callRequest(query: query ?? "미정")
+    }
+    @objc func priceTopDownTapped() {
+        apiSortType = SearchResultSortType.priceTopDown.rawValue
+        priceDownTopFilterBtn.isSelected = true
+        callRequest(query: query ?? "미정")
+        
+    }
+    @objc func priceDownTopTapped() {
+        apiSortType = SearchResultSortType.priceDownTop.rawValue
+        priceDownTopFilterBtn.isSelected = true
+        callRequest(query: query ?? "미정")
+    }
 }
 
 extension SearchItemDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -170,8 +237,10 @@ extension SearchItemDetailVC: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = searchResultCollectionView.dequeueReusableCell(withReuseIdentifier: SearchItemDetailCollectionViewCell.identifier, for: indexPath) as! SearchItemDetailCollectionViewCell
         let data = list.items[indexPath.item]
-        cell.configUI(data: data)
-        
+        let likedata = data.likes?[0] ?? LikesResult(like: false)
+        cell.configUI(data: data, likedata: likedata, indexPath: indexPath)
+        cell.likeBtn.addTarget(self, action: #selector(likeBtnTapped), for: .touchUpInside)
+        cell.likeBtn.tag = indexPath.item
         return cell
     }
     
@@ -180,9 +249,6 @@ extension SearchItemDetailVC: UICollectionViewDelegate, UICollectionViewDataSour
         vc.searchWordFromPreviousPage = list.items[indexPath.item].title
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
-    
 }
 
 extension SearchItemDetailVC: UICollectionViewDataSourcePrefetching {
@@ -192,12 +258,8 @@ extension SearchItemDetailVC: UICollectionViewDataSourcePrefetching {
             if list.items.count - 3 == i.item {
                 start += 1
                 print("현재페이지 \(start)")
-                callRequest(query: searchWordFromPreviousPage!)
-                
+                callRequest(query: query ?? "미정")
             }
         }
-        
     }
-    
-    
 }

@@ -18,7 +18,7 @@ class SearchItemDetailCollectionViewCell: UICollectionViewCell {
     let storeNameLabel = UILabel()
     let productNameLabel = UILabel()
     let productPriceLabel = UILabel()
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -80,7 +80,7 @@ extension SearchItemDetailCollectionViewCell {
         
     }
     
-    func configUI(data: ItemResult) {
+    func configUI(data: ItemResult, likedata: LikesResult, indexPath: IndexPath) {
         
         //print(data)
         
@@ -102,10 +102,23 @@ extension SearchItemDetailCollectionViewCell {
         productNameLabel.font = Font.semiBold14
         productNameLabel.numberOfLines = 2
         
-       
+        
+        likeBtn.tag = indexPath.item
+        
+        if likedata.like == false {
+            likeBtn.backgroundColor = Color.lightGray
+            likeBtn.setImage(Icon.likeUnSelected, for: .normal)
+            likeBtn.tintColor = Color.white
+        } else {
+            likeBtn.backgroundColor = Color.white
+            likeBtn.setImage(Icon.likeSelected, for: .normal)
+            likeBtn.tintColor = Color.black
+        }
+        
+        
         let price = data.lprice
         let priceInt = Int(price)!.formatted()
-        productPriceLabel.text  = String(priceInt)
+        productPriceLabel.text  = "\(String(priceInt))원"
         productPriceLabel.font = Font.heavy15
     }
     

@@ -14,6 +14,7 @@ struct Product: Decodable {
     let start: Int
     let display: Int
     var items: [ItemResult]
+
 }
 
 struct ItemResult: Decodable {
@@ -23,4 +24,10 @@ struct ItemResult: Decodable {
     let image: String
     let lprice: String
     let mallName: String
+    let productId: String
+    var likes: [LikesResult]?
+}
+
+struct LikesResult: Decodable {
+    var like: Bool
 }

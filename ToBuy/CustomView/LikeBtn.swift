@@ -19,7 +19,6 @@ class LikeBtn: UIButton {
         
         
         backgroundColor = Color.lightGray
-        setImage(Icon.likeUnSelected, for: .normal)
         tintColor = Color.white
 
     }

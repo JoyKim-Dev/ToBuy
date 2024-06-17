@@ -7,9 +7,14 @@
 
 import UIKit
 
-class SearchResultWebViewViewController: UIViewController {
+import SnapKit
+import WebKit
 
-    var searchWordFromPreviousPage: String?
+class SearchResultWebViewViewController: UIViewController {
+    
+    var searchDataFromPreviousPage:ItemResult?
+    let webView = WKWebView()
+    lazy var navLikeBtn = UIBarButtonItem(image: .likeSelected, style: .plain, target: self, action: #selector(navLikeBtnTapped))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,27 +22,54 @@ class SearchResultWebViewViewController: UIViewController {
         configHierarchy()
         configLayout()
         configUI()
-
+        
     }
-    
-
 }
 
 extension SearchResultWebViewViewController:ConfigureBasicSettingProtocol {
     func configHierarchy() {
-        //
+        view.addSubview(webView)
     }
     
     func configLayout() {
-        //
+        webView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     func configUI() {
-        configureView(searchWordFromPreviousPage!.replacingOccurrences(of: "[<b></b>]", with: "", options: .regularExpression))
+        navigationItem.leftBarButtonItem = NavBackBtnChevron(currentVC: self)
+        configureView(searchDataFromPreviousPage?.title.replacingOccurrences(of: "[<b></b>]", with: "", options: .regularExpression) ?? "")
+        
+        if UserDefaults.standard.bool(forKey: searchDataFromPreviousPage?.productId ?? "") == true {
+            navLikeBtn.image = .likeSelected.withRenderingMode(.alwaysOriginal)
+        } else {
+            navLikeBtn.image = .likeUnselected.withRenderingMode(.alwaysOriginal)
+        }
+        navigationItem.rightBarButtonItem = navLikeBtn
+        
+        guard let url = searchDataFromPreviousPage?.link else {
+            print("nil")
+            return
+        }
+        
+        guard let validURL = URL(string: url) else {
+            print("유효하지 않은 url")
+            return
+        }
+        let request = URLRequest(url: validURL)
+        webView.load(request)
+        
     }
     
-    
-    
+    @objc func navLikeBtnTapped() {
+        
+        if navLikeBtn.image == Icon.likeUnSelected {
+            navLikeBtn.image = Icon.likeSelected.withRenderingMode(.alwaysOriginal)
+        } else {
+            navLikeBtn.image = Icon.likeUnSelected.withRenderingMode(.alwaysOriginal)
+        }
+    }
     
 }
 

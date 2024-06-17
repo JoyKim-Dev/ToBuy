@@ -36,11 +36,8 @@ class FilterBtn:UIButton{
     
     @objc func toggleFilterBtn() {
         guard !isSelected else { return }
-               
-            print("눌림")
             backgroundColor = Color.darkGray
             setTitleColor(Color.white, for: .normal)
-
         deselectOtherButtons()
     }
     

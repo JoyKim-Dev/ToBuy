@@ -34,7 +34,7 @@ class SearchItemDetailVC: UIViewController {
     var list = Product(lastBuildDate: "", total: 1, start: 1 , display: 1, items: [])
     var start = 1
     var apiSortType = SearchResultSortType.accuracy.rawValue
-    var productKey:String = ""
+    static var productKey: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,8 +160,8 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
                         
                          self.list = value
                          self.list.items.enumerated().forEach { index, item in
-                             self.productKey = item.productId
-                             let liked = UserDefaults.standard.bool(forKey: self.productKey)
+                             SearchItemDetailVC.productKey = item.productId
+                             let liked = UserDefaults.standard.bool(forKey: SearchItemDetailVC.productKey)
                              self.list.items[index].likes = [LikesResult(like: liked)]
                          }
                          self.searchResultCollectionView.scrollToItem(at: IndexPath(item: -1, section: 0), at: .top, animated: false)
@@ -170,8 +170,8 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
                          self.list.items.append(contentsOf: value.items)
                          value.items.enumerated().forEach { index, item in
    
-                             self.productKey = item.productId
-                             let liked = UserDefaults.standard.bool(forKey: self.productKey)
+                             SearchItemDetailVC.productKey = item.productId
+                             let liked = UserDefaults.standard.bool(forKey: SearchItemDetailVC.productKey)
                              self.list.items[startIndex + index].likes = [LikesResult(like: liked)]
                          }
                      }
@@ -194,11 +194,11 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         let currentLikeStatus = likes[0].like
         list.items[index].likes?[0].like = !currentLikeStatus
         
-        productKey = list.items[index].productId
-        UserDefaults.standard.setValue(!currentLikeStatus, forKey: productKey)
+        SearchItemDetailVC.productKey = list.items[index].productId
+        UserDefaults.standard.setValue(!currentLikeStatus, forKey: SearchItemDetailVC.productKey)
         
-        let storedLikeStatus = UserDefaults.standard.bool(forKey: productKey)
-        print("Stored like status for product \(productKey): \(storedLikeStatus)")
+        let storedLikeStatus = UserDefaults.standard.bool(forKey: SearchItemDetailVC.productKey)
+        print("Stored like status for product \(SearchItemDetailVC.productKey): \(storedLikeStatus)")
         
         searchResultCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
     }
@@ -246,7 +246,7 @@ extension SearchItemDetailVC: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = SearchResultWebViewViewController()
-        vc.searchWordFromPreviousPage = list.items[indexPath.item].title
+        vc.searchDataFromPreviousPage = list.items[indexPath.item]
         navigationController?.pushViewController(vc, animated: true)
     }
 }

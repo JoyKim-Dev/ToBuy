@@ -15,8 +15,8 @@ enum Icon {
     static let chevronLeft = UIImage(systemName: "chevron.left")
     static let xMark = UIImage(systemName: "xmark")
     static let cameraFill = UIImage(systemName: "camera.fill")
-    static let likeSelected = UIImage(named: "like_selected")
-    static let likeUnSelected = UIImage(named: "like_unselected")
+    static let likeSelected = UIImage(named: "like_selected")!.withRenderingMode(.alwaysOriginal)
+    static let likeUnSelected = UIImage(named: "like_unselected")!.withRenderingMode(.alwaysOriginal)
     
 }
 

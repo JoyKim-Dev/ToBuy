@@ -14,6 +14,7 @@ import SnapKit
 class OnboardingVC: UIViewController {
 
     let appTitleLabel = AppTitleLabel()
+    let nameLabel = UILabel()
     let appMainImage = UIImageView()
     let appStartBtn = OnboardingButton(btnTitle: "시작하기", target: self, action: #selector(startBtnTapped))
     
@@ -31,6 +32,7 @@ extension OnboardingVC:ConfigureBasicSettingProtocol {
         view.addSubview(appTitleLabel)
         view.addSubview(appMainImage)
         view.addSubview(appStartBtn)
+        view.addSubview(nameLabel)
     }
     
     func configLayout() {
@@ -42,7 +44,7 @@ extension OnboardingVC:ConfigureBasicSettingProtocol {
         appMainImage.snp.makeConstraints { make in
             make.centerY.equalTo(view)
             make.height.equalTo(view).multipliedBy(0.3)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.horizontalEdges.equalToSuperview().inset(10)
         }
    
         appStartBtn.snp.makeConstraints { make in
@@ -51,11 +53,17 @@ extension OnboardingVC:ConfigureBasicSettingProtocol {
             make.height.equalTo(40)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
+        nameLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(view)
+            make.top.equalTo(appMainImage.snp.bottom).offset(30)
+        }
     }
     
     func configUI() {
         view.backgroundColor = Color.white
         appMainImage.image = Image.mainImage
+        appMainImage.contentMode = .scaleAspectFill
+       
 
         
     }

@@ -165,7 +165,7 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
                     self.numberOfResultLabel.text = "\(value.total.formatted())개의 검색 결과"
                     
                     if self.start == 1 {
-                        
+                         
                         self.list = value
                         self.list.items.enumerated().forEach { index, item in
                             self.productKey = item.productId

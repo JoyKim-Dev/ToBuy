@@ -19,8 +19,7 @@ class SettingTableViewCell: UITableViewCell {
         
         configHierarchy()
         configLayout()
-      
-        
+
     }
     
     required init?(coder: NSCoder) {
@@ -55,9 +54,7 @@ extension SettingTableViewCell {
         label.font = Font.semiBold15
         
         var likes = UserDefaultManager.totalLikeCount
-//        if likes != UserDefaultManager.totalLikeCount {
-//            likes = UserDefaultManager.totalLikeCount
-//        }
+
         if indexPath == 0 {
             bagBtn.setTitleColor(Color.black, for: .normal) 
             bagBtn.setTitle("\(likes)개의 상품", for: .normal)

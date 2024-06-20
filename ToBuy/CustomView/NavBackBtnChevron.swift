@@ -17,10 +17,8 @@ class NavBackBtnChevron:UIBarButtonItem {
         style = .plain
         tintColor = .black
     }
-    
     init(currentVC: UIViewController) {
          super.init()
-        
          popVC = currentVC
          image = Icon.chevronLeft
          style = .plain
@@ -28,13 +26,10 @@ class NavBackBtnChevron:UIBarButtonItem {
          action = #selector(self.leftBarBtnTapped)
          tintColor = .black
      }
-
      required init?(coder: NSCoder) {
          fatalError("init(coder:) has not been implemented")
      }
-
      @objc private func leftBarBtnTapped() {
-         // 여기에 원하는 동작을 구현하세요.
          print("Back button tapped")
             popVC?.navigationController?.popViewController(animated: true)
      }

@@ -12,11 +12,10 @@ import UIKit
 import SnapKit
 
 class OnboardingVC: UIViewController {
-
     let appTitleLabel = AppTitleLabel()
     let nameLabel = UILabel()
     let appMainImage = UIImageView()
-    let appStartBtn = OnboardingButton(btnTitle: "시작하기", target: self, action: #selector(startBtnTapped))
+    lazy var appStartBtn = OnboardingButton(btnTitle: "시작하기")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,13 +62,11 @@ extension OnboardingVC:ConfigureBasicSettingProtocol {
         view.backgroundColor = Color.white
         appMainImage.image = Image.mainImage
         appMainImage.contentMode = .scaleAspectFill
-       
-
-        
+        appStartBtn.addTarget(self, action: #selector(startBtnTapped), for: .touchUpInside)
+ 
     }
-    
+
     @objc func startBtnTapped() {
-        
         let vc = ProfileNicknameSettingVC()
         navigationController?.pushViewController(vc, animated: true)
     }

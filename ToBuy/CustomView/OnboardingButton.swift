@@ -9,7 +9,7 @@ import UIKit
 
 class OnboardingButton:UIButton {
     
-    init(btnTitle: String, target: Any ,action: Selector) {
+    init(btnTitle: String) {
         super.init(frame: .zero)
         
         setTitle(btnTitle, for: .normal)
@@ -17,7 +17,7 @@ class OnboardingButton:UIButton {
         setTitleColor(Color.white, for: .normal)
         backgroundColor = Color.orange
         layer.cornerRadius = 20
-        self.addTarget(target, action: action, for: .touchUpInside)
+     //   self.addTarget(target, action: action, for: .touchUpInside)
         
     }
     
@@ -25,5 +25,18 @@ class OnboardingButton:UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 
+}
+
+extension OnboardingButton {
     
+    func toggleOnboardingBtn() {
+        
+        if isEnabled {
+            backgroundColor = Color.orange
+            setTitleColor(Color.white, for: .normal)
+        } else {
+            backgroundColor = Color.unselectedGray
+            setTitleColor(Color.darkGray, for: .normal)
+        }
+    }
 }

@@ -11,9 +11,8 @@ import SnapKit
 class SettingMainVC: UIViewController {
 
     let profileView = UIView()
-    lazy var profileImageView = ProfileImageView(profileImageNum: profileImageNumData, imageBorderWidth: .isSelected, imageBorderColor: .isSelected, imageAlpha: .isSelected, cameraBtnMode: .isHidden)
+    lazy var profileImageView = ProfileImageView(profileImageNum: profileImageNumData, imageBorderWidth: .isSelected, imageBorderColor: .isSelected, cameraBtnMode: .isHidden)
     
-    // 디자인 TODO: 스택뷰 넣어서 centerY잡기
     let profileNameLabel = UILabel()
     let joinedDateLabel = UILabel()
 
@@ -34,11 +33,11 @@ class SettingMainVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
         
-            profileNameLabel.text = UserDefaultManager.nickname
+        profileNameLabel.text = UserDefaultManager.nickname
         profileImageView.profileImage.image = UIImage(named: "profile_\(UserDefaultManager.profileImage[0])")
+        tableView.reloadData()
         
         }
-   
 
 }
 
@@ -146,7 +145,7 @@ extension SettingMainVC: UITableViewDelegate, UITableViewDataSource {
                 print("삭제완료")
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 let sceneDelegate = windowScene?.delegate as? SceneDelegate
-                let rootViewController = OnboardingVC()
+                let rootViewController = UINavigationController(rootViewController: OnboardingVC())
                 sceneDelegate?.window?.rootViewController = rootViewController
                 sceneDelegate?.window?.makeKeyAndVisible()
             }

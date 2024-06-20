@@ -9,12 +9,9 @@ import UIKit
 import SnapKit
 
 class ProfileImageCollectionViewCell: UICollectionViewCell {
-    
-    
-    var imageView = ProfileImageView(profileImageNum: 2, imageBorderWidth: .unSelected, imageBorderColor: .unSelected, imageAlpha: .unSelected, cameraBtnMode: .isHidden)
-  
-   
-    
+
+    var imageView = ProfileImageView(profileImageNum: 2, imageBorderWidth: .unSelected, imageBorderColor: .unSelected, cameraBtnMode: .isHidden)
+
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
@@ -47,16 +44,16 @@ extension ProfileImageCollectionViewCell: ConfigureBasicSettingProtocol {
     }
 
     func configUI() {
-        
-      
+    
+        imageView.alpha = ImageAlpha.unSelected.rawValue
         
     }
     
     func configImageUI(data: Int, isSeleced: Bool) {
+        print(isSeleced)
         imageView.profileImage.image = UIImage(named: "profile_\(data)")
-        
+   
     }
-  
     }
 
 

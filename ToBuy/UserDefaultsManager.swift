@@ -22,7 +22,7 @@ class UserDefaultManager {
     
     static var profileImage: [Int] {
         get{
-            return UserDefaults.standard.array(forKey: "profileImage") as? [Int] ?? [0]
+            return UserDefaults.standard.array(forKey: "profileImage") as? [Int] ?? [Int.random(in: 0...11)]
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: "profileImage")
@@ -74,9 +74,7 @@ class UserDefaultManager {
             UserDefaults.standard.setValue(newValue, forKey: "totalKey")
         }
     }
-    
-    
-    
+  
 }
 
 extension UserDefaultManager {
@@ -97,15 +95,12 @@ extension UserDefaultManager {
      }
     
    func clearUserDefaults() {
-        
-       
         var keys = ["nickname", "profileImage", "searchKeyword", "totalLike", "joinedDate"]
         keys.append(contentsOf: UserDefaultManager.keyHistoryArray)
        
         for i in keys {
             UserDefaults.standard.removeObject(forKey: i)
         }
-
            UserDefaults.standard.synchronize()
        }
 }

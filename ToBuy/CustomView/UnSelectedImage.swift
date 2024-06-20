@@ -1,4 +1,11 @@
 //
+//  unSelectedImage.swift
+//  ToBuy
+//
+//  Created by Joy Kim on 6/18/24.
+//
+
+//
 //  ProfileImageView.swift
 //  ToBuy
 //
@@ -8,21 +15,8 @@
 import UIKit
 import SnapKit
 
-enum ButtonHidden: String {
-    case isHidden
-    case isShowing
-    
-    var value: Bool {
-        switch self {
-        case .isHidden: 
-            return true
-        case.isShowing:
-            return false
-        }
-    }
-}
-   
-class ProfileImageView: UIView {
+
+class UnSelectedImage: UIView {
     
     var profileImage = UIImageView()
     let profileButton = UIButton()
@@ -68,6 +62,7 @@ class ProfileImageView: UIView {
         profileImage.image = UIImage(named: "profile_\(profileImageNum)")
         profileImage.layer.borderWidth = imageBorderWidth.rawValue
         profileImage.layer.borderColor = imageBorderColor.value
+        profileImage.alpha = ImageAlpha.unSelected.rawValue
     
         profileButton.setImage(Icon.cameraFill, for: .normal)
         profileButton.tintColor = Color.white

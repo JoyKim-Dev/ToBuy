@@ -8,24 +8,31 @@
 import UIKit
 import SnapKit
 
+protocol ImageDelegate : AnyObject {
+    func imageDataFromImageSettingpage(int:Int)
+}
+
 class ProfileImageSettingVC: UIViewController {
     
-    lazy var selectedImageView = ProfileImageView(profileImageNum: imageDataFromPreviousPage , imageBorderWidth: .isSelected, imageBorderColor: .isSelected, imageAlpha: .isSelected, cameraBtnMode: .isShowing)
+    lazy var selectedImageView = ProfileImageView(profileImageNum: imageDataFromPreviousPage , imageBorderWidth: .isSelected, imageBorderColor: .isSelected, cameraBtnMode: .isShowing)
     lazy var profileCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
- 
+    lazy var selectedImage = UIImage(named: "profile_\(selectedIndexPathRow)")
+    
     var imageDataFromPreviousPage:Int = 0
+    var selectedIndexPathRow = 2
     var selectedIndexPath: IndexPath?
+    //closure로. nicknamesetting vc에 selectedIndexPathRow(Int) 전달
+ //   var imageDataFromImageSettingpage:((Int) -> (Void))?
+    
+    weak var imageForDelegate: ImageDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+ 
         configHierarchy()
         configLayout()
         configUI()
-        
     }
-    
 }
 
 extension ProfileImageSettingVC: ConfigureBasicSettingProtocol {
@@ -33,14 +40,12 @@ extension ProfileImageSettingVC: ConfigureBasicSettingProtocol {
         view.addSubview(selectedImageView)
         view.addSubview(profileCollectionView)
     }
-    
     func configLayout() {
         selectedImageView.snp.makeConstraints { make in
             make.centerX.equalTo(view)
             make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.width.equalTo(125)
         }
-        
         profileCollectionView.snp.makeConstraints { make in
             make.top.equalTo(selectedImageView.snp.bottom).offset(20)
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
@@ -49,17 +54,15 @@ extension ProfileImageSettingVC: ConfigureBasicSettingProtocol {
     
     func configUI() {
         
-        
         configureView("PROFILE SETTING")
         profileCollectionView.delegate = self
         profileCollectionView.dataSource = self
         profileCollectionView.register(ProfileImageCollectionViewCell.self, forCellWithReuseIdentifier: ProfileImageCollectionViewCell.identifier)
-        navigationItem.leftBarButtonItem = NavBackBtnChevron(currentVC: self)
-        
+        let navBackBtn = UIBarButtonItem(image: Icon.chevronLeft, style: .plain, target: self, action: #selector(navBackBtnTapped))
+        navigationItem.leftBarButtonItem = navBackBtn
         
     }
-    
-    
+
     func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
 
@@ -75,7 +78,12 @@ extension ProfileImageSettingVC: ConfigureBasicSettingProtocol {
         layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
         print(#function)
         return layout
-        
+    }
+    
+    @objc func navBackBtnTapped(data: Int) {
+      //  imageDataFromImageSettingpage?(selectedIndexPathRow)
+      //  print("\(selectedIndexPathRow)전달")
+        navigationController?.popViewController(animated: true)
     }
     
 }
@@ -89,33 +97,41 @@ extension ProfileImageSettingVC: UICollectionViewDelegate, UICollectionViewDataS
         let cell = profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.identifier, for: indexPath) as! ProfileImageCollectionViewCell
         let data = indexPath.item
         let cellIsSelected = indexPath == selectedIndexPath
-        cell.configImageUI(data: data, isSeleced: cellIsSelected)
+    
+     cell.configImageUI(data: data, isSeleced: cellIsSelected)
         
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         
+        let cell = collectionView.cellForItem(at: indexPath) as! ProfileImageCollectionViewCell
+
         if let previousIndexPath = selectedIndexPath {
-            
             let previousCell = collectionView.cellForItem(at: previousIndexPath) as? ProfileImageCollectionViewCell
-            previousCell?.imageView.layer.borderColor = ImageBorderColor.unSelected.value
-            previousCell?.imageView.alpha = ImageAlpha.isSelected.rawValue
-            previousCell?.imageView.layer.borderWidth = ImageBorderWidth.unSelected.rawValue
+                        previousCell?.imageView.layer.borderColor = ImageBorderColor.unSelected.value
+                        previousCell?.imageView.layer.borderWidth = ImageBorderWidth.unSelected.rawValue
+            previousCell?.imageView.alpha = ImageAlpha.unSelected.rawValue
         }
         
-       
-        selectedIndexPath = indexPath
-        let cell = collectionView.cellForItem(at: indexPath) as! ProfileImageCollectionViewCell
+       selectedIndexPath = indexPath
+        imageForDelegate?.imageDataFromImageSettingpage(int: indexPath.row)
+       // imageDataFromImageSettingpage?(selectedIndexPath?.row ?? 0)
+        print("\(indexPath.row)클로저전달")
+        selectedIndexPathRow = indexPath.row
+        let cell2 = collectionView.cellForItem(at: indexPath) as! ProfileImageCollectionViewCell
         UserDefaultManager.profileImage.removeAll()
         UserDefaultManager.profileImage.insert(indexPath.item, at: 0)
         print(UserDefaultManager.profileImage[0])
-        cell.imageView.layer.borderColor = ImageBorderColor.isSelected.value
-        cell.imageView.profileImage.alpha = ImageAlpha.isSelected.rawValue
-        cell.imageView.layer.borderWidth = ImageBorderWidth.isSelected.rawValue
-        cell.imageView.layer.cornerRadius = cell.imageView.frame.width / 2
-        cell.imageView.clipsToBounds = true
+        cell2.imageView.layer.borderColor = ImageBorderColor.isSelected.value
+        cell2.imageView.alpha = ImageAlpha.isSelected.rawValue
+        cell2.imageView.layer.borderWidth = ImageBorderWidth.isSelected.rawValue
+        cell2.imageView.layer.cornerRadius = cell.imageView.frame.width / 2
+        cell2.imageView.clipsToBounds = true
         selectedImageView.profileImage.image = UIImage(named: "profile_\(indexPath.item)")
+        
+        
     }
     
 }

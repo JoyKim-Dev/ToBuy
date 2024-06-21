@@ -80,7 +80,7 @@ extension SearchItemDetailCollectionViewCell {
         
     }
     
-    func configUI(data: ItemResult, likedata: LikesResult, indexPath: IndexPath) {
+    func configUI(data: ItemResult, indexPath: IndexPath) {
         
         //print(data)
         
@@ -103,17 +103,27 @@ extension SearchItemDetailCollectionViewCell {
         productNameLabel.numberOfLines = 2
         
         
-        likeBtn.tag = indexPath.item
-        
-        if likedata.like == false {
-            likeBtn.backgroundColor = Color.lightGray
-            likeBtn.setImage(Icon.likeUnSelected, for: .normal)
-            likeBtn.tintColor = Color.white
-        } else {
+        //likeBtn.tag = indexPath.item
+        if UserDefaultManager.likedItemID.contains(data.productId) {
             likeBtn.backgroundColor = Color.white
             likeBtn.setImage(Icon.likeSelected, for: .normal)
             likeBtn.tintColor = Color.black
+
+        } else {
+            likeBtn.backgroundColor = Color.lightGray
+            likeBtn.setImage(Icon.likeUnSelected, for: .normal)
+            likeBtn.tintColor = Color.white
         }
+        
+//        if likedata.like == false {
+//            likeBtn.backgroundColor = Color.lightGray
+//            likeBtn.setImage(Icon.likeUnSelected, for: .normal)
+//            likeBtn.tintColor = Color.white
+//        } else {
+//            likeBtn.backgroundColor = Color.white
+//            likeBtn.setImage(Icon.likeSelected, for: .normal)
+//            likeBtn.tintColor = Color.black
+//        }
         
         
         let price = data.lprice

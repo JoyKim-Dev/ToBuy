@@ -53,10 +53,13 @@ extension SettingTableViewCell {
         label.text = data
         label.font = Font.semiBold15
         
-        var likes = UserDefaultManager.totalLikeCount
+        var likes = UserDefaultManager.likedItemID.count
+        print(UserDefaultManager.likedItemID)
+        print(likes)
 
         if indexPath == 0 {
-            bagBtn.setTitleColor(Color.black, for: .normal) 
+            bagBtn.isHidden = false
+            bagBtn.setTitleColor(Color.black, for: .normal)
             bagBtn.setTitle("\(likes)개의 상품", for: .normal)
             bagBtn.titleLabel?.font = Font.semiBold15
             bagBtn.setImage(Icon.likeSelected, for: .normal)

@@ -44,10 +44,12 @@ class SearchMainVC: UIViewController {
         if UserDefaultManager.searchKeyword.count == 0 {
             listTableView.isHidden = true
             emptylistImageView.isHidden = false
+            noSearchWorldLabel.isHidden = false
             listTableView.reloadData()
         } else {
             listTableView.isHidden = false
             emptylistImageView.isHidden = true
+            noSearchWorldLabel.isHidden = true
             listTableView.reloadData()
         }
     }
@@ -81,19 +83,19 @@ extension SearchMainVC: ConfigureBasicSettingProtocol {
         }
         
         emptylistImageView.snp.makeConstraints { make in
-            make.top.equalTo(lineView.snp.bottom).offset(10)
-            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
         noSearchWorldLabel.snp.makeConstraints { make in
-            make.top.equalTo(emptylistImageView.snp.bottom).offset(10)
-            make.centerY.equalTo(view)
+            make.top.equalTo(emptylistImageView.snp.bottom).inset(100)
+            make.centerX.equalTo(view)
         }
         
     }
     
     func configUI() {
         configureView("\(nickname)'s ToBuyBag")
+        emptylistImageView.contentMode = .scaleAspectFill
         
         hideKeyboardWhenTappedAround()
         
@@ -103,11 +105,15 @@ extension SearchMainVC: ConfigureBasicSettingProtocol {
         
         searchBar.delegate = self
         
-        noSearchWorldLabel.text = "최근 검색어가 없어요"
-        noSearchWorldLabel.font = Font.heavy15
+        noSearchWorldLabel.text = "최근 검색어가 없어요 🥹 \n원하시는 상품을 검색해보세요"
+        noSearchWorldLabel.font = Font.heavy20
+        noSearchWorldLabel.textColor = Color.black
+        noSearchWorldLabel.numberOfLines = 0
+        noSearchWorldLabel.textAlignment = .center
         
         emptylistImageView.image = Image.emptyImage
         emptylistImageView.contentMode = .scaleAspectFit
+        
         
         headerLabel.text = "최근 검색"
         headerLabel.font = Font.semiBold15

@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toBuyMainIcon" translatesAutoresizingMaskIntoConstraints="NO" id="XAo-Z4-hjO">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toBuyMainIcon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAo-Z4-hjO">
                                 <rect key="frame" x="10" y="298.33333333333331" width="373" height="255.33333333333331"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TobuyBag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YN4-CC-aNY">
@@ -52,6 +52,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="toBuyMainIcon" width="512" height="512"/>
+        <image name="toBuyMainIcon" width="1024" height="1024"/>
     </resources>
 </document>

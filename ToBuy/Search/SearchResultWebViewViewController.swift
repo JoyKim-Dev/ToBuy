@@ -13,7 +13,7 @@ import WebKit
 class SearchResultWebViewViewController: UIViewController {
     
     var searchDataFromPreviousPage:ItemResult?
-    var userDefaultsDidChange: Bool = false
+ //   var userDefaultsDidChange: Bool = false
     
     let webView = WKWebView()
     lazy var navLikeBtn = UIBarButtonItem(image: .likeSelected, style: .plain, target: self, action: #selector(navLikeBtnTapped))
@@ -44,11 +44,16 @@ extension SearchResultWebViewViewController:ConfigureBasicSettingProtocol {
         
         configureView(searchDataFromPreviousPage?.title.replacingOccurrences(of: "[<b></b>]", with: "", options: .regularExpression) ?? "")
         
-        if UserDefaults.standard.bool(forKey: searchDataFromPreviousPage?.productId ?? "") == true {
+        if UserDefaultManager.likedItemID.contains(searchDataFromPreviousPage?.productId ?? "nil") {
             navLikeBtn.image = .likeSelected.withRenderingMode(.alwaysOriginal)
         } else {
             navLikeBtn.image = .likeUnselected.withRenderingMode(.alwaysOriginal)
         }
+//        if UserDefaults.standard.bool(forKey: searchDataFromPreviousPage?.productId ?? "") == true {
+//            navLikeBtn.image = .likeSelected.withRenderingMode(.alwaysOriginal)
+//        } else {
+//            navLikeBtn.image = .likeUnselected.withRenderingMode(.alwaysOriginal)
+//        }
         navigationItem.rightBarButtonItem = navLikeBtn
         
         guard let url = searchDataFromPreviousPage?.link else {
@@ -64,31 +69,46 @@ extension SearchResultWebViewViewController:ConfigureBasicSettingProtocol {
         webView.load(request)
         
     }
-
+    
     
     @objc func navLikeBtnTapped() {
         
-        guard let key = searchDataFromPreviousPage?.productId else {
-            print("키없음")
+        guard let id = searchDataFromPreviousPage?.productId else {
+            print("no product id")
             return
         }
-        if navLikeBtn.image == Icon.likeUnSelected {
-            navLikeBtn.image = Icon.likeSelected.withRenderingMode(.alwaysOriginal)
-            UserDefaults.standard.setValue(true, forKey: key)
-            UserDefaultManager.keyHistoryArray.append(key)
-            let totalLikes = UserDefaultManager.shared.countLikedItems()
-            UserDefaultManager.totalLikeCount = totalLikes
-            UserDefaultManager.storedDataisChanged = true
+        
+        if UserDefaultManager.likedItemID.contains(id) {
+    print(UserDefaultManager.likedItemID)
+            UserDefaultManager.likedItemID.removeAll {$0 == id}
+            print(UserDefaultManager.likedItemID)
         } else {
-            navLikeBtn.image = Icon.likeUnSelected.withRenderingMode(.alwaysOriginal)
-            UserDefaults.standard.setValue(false, forKey: key)
-            UserDefaultManager.keyHistoryArray.append(key)
-            let totalLikes = UserDefaultManager.shared.countLikedItems()
-            UserDefaultManager.totalLikeCount = totalLikes
-            UserDefaultManager.storedDataisChanged = true
-            UserDefaultManager.storedDataisChanged = true
+            UserDefaultManager.likedItemID.append(id)
         }
+        configUI()
+        
+        //        guard let key = searchDataFromPreviousPage?.productId else {
+        //            print("키없음")
+        //            return
+        //        }
+        //        if navLikeBtn.image == Icon.likeUnSelected {
+        //            navLikeBtn.image = Icon.likeSelected.withRenderingMode(.alwaysOriginal)
+        //            UserDefaults.standard.setValue(true, forKey: key)
+        //            UserDefaultManager.keyHistoryArray.append(key)
+        //            let totalLikes = UserDefaultManager.shared.countLikedItems()
+        //            UserDefaultManager.totalLikeCount = totalLikes
+        //            UserDefaultManager.storedDataisChanged = true
+        //        } else {
+        //            navLikeBtn.image = Icon.likeUnSelected.withRenderingMode(.alwaysOriginal)
+        //            UserDefaults.standard.setValue(false, forKey: key)
+        //            UserDefaultManager.keyHistoryArray.append(key)
+        //            let totalLikes = UserDefaultManager.shared.countLikedItems()
+        //            UserDefaultManager.totalLikeCount = totalLikes
+        //            UserDefaultManager.storedDataisChanged = true
+        //            UserDefaultManager.storedDataisChanged = true
+        //        }
+        //    }
+        
     }
-    
 }
 

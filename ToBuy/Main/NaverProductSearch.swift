@@ -52,9 +52,9 @@ struct ItemResult: Decodable {
     let lprice: String
     let mallName: String
     let productId: String
-    var likes: [LikesResult]?
+   // var likes: [LikesResult]?
 }
 
-struct LikesResult: Decodable {
-    var like: Bool
-}
+//struct LikesResult: Decodable {
+//    var like: Bool
+//}

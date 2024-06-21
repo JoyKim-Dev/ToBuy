@@ -22,7 +22,7 @@ class ProfileNicknameSettingVC: UIViewController {
     let lineView = LineView()
     let nicknameStatusLabel = NicknameStatusLabel()
     let submitBtn = OnboardingButton(btnTitle: "완료")
-    var selectedProfileImageNum = UserDefaultManager.profileImage
+    lazy var selectedProfileImageNum = UserDefaultManager.profileImage
     let textIsValid = "사용할 수 있는 닉네임이에요"
 
        
@@ -35,6 +35,7 @@ class ProfileNicknameSettingVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         mainImageView.profileImage.image = UIImage(named: "catProfile_\(selectedProfileImageNum)")
+        textFieldDidChange(nicknameTextField)
     }
 
 }
@@ -101,14 +102,12 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         
         nicknameTextField.delegate = self
         nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        
-        if UserDefaults.standard.object(forKey: "profileImage") == nil {
-            selectedProfileImageNum = Int.random(in: 0...11)
-            UserDefaultManager.profileImage = selectedProfileImageNum
-        }
-        
+   // 디폴트: 멤버라면 UD값으로 프로필 보여주기 / 멤버가 아니라면(UD값이 nil이라면) 랜덤이미지로 프로필 & 해당값 UD저장(저장 버튼 누를 때 말고도 이미지 고르는 다음 화면에서도 같은 이미지 보여줘야하니..)
+            if UserDefaults.standard.object(forKey: "profileImage") == nil {
+                selectedProfileImageNum = Int.random(in: 0...11)
+                UserDefaultManager.profileImage = selectedProfileImageNum
+            }
         submitBtn.addTarget(self, action: #selector(submitBtnTapped), for: .touchUpInside)
-
     }
     
     //이미지 눌리면 다음 뷰로 이동
@@ -150,6 +149,7 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         return true
     }
     // 입력되는 글자마다 조건 확인하여 에러 발라내고 do-try / catch 활용하여 enum case로 에러 분기처리
+    // 그냥 화면 뜰 때도 입력되어 있는 값의 유효성 검사 필요함(setting 화면에서 닉네임 변경화면 접근시) -> view will appear에서 함수 호출
     @objc func textFieldDidChange(_ sender: Any?) {
         if let text = nicknameTextField.text{
             do{
@@ -175,6 +175,7 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         if nicknameStatusLabel.text != textIsValid {
             return
         } else if UserDefaultManager.nickname.isEmpty {
+            // 멤버가 아니라면(UD값이 없다면) 현재 입력된 텍스트 UD에 저장. 
             UserDefaultManager.nickname = nicknameTextField.text ?? UserDefaultManager.nickname
             UserDefaultManager.joinedDate = Date()
             UserDefaultManager.profileImage = selectedProfileImageNum

@@ -114,10 +114,8 @@ extension ProfileImageSettingVC: UICollectionViewDelegate, UICollectionViewDataS
         
        selectedIndexPath = indexPath
         imageForDelegate?.imageDataFromImageSettingpage(int: indexPath.row)
-       // UserDefaultManager.profileImage = indexPath.row
         print("\(indexPath.row)클로저전달")
         let cell2 = collectionView.cellForItem(at: indexPath) as! ProfileImageCollectionViewCell
-        UserDefaults.standard.removeObject(forKey: "profileImage")
         cell2.imageView.layer.borderColor = ImageBorderColor.isSelected.value
         cell2.imageView.alpha = ImageAlpha.isSelected.rawValue
         cell2.imageView.layer.borderWidth = ImageBorderWidth.isSelected.rawValue

@@ -36,6 +36,7 @@ class SettingMainVC: UIViewController {
         profileNameLabel.text = UserDefaultManager.nickname
         profileImageNumData = UserDefaultManager.profileImage
         print("새로이미지넘버저장됨")
+        profileImageView.profileImage.image = UIImage(named: "catProfile_\(profileImageNumData)")
         tableView.reloadData()
         
         }

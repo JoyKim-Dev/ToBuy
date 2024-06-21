@@ -20,9 +20,9 @@ class UserDefaultManager {
         }
     }
     
-    static var profileImage: [Int] {
+    static var profileImage: Int {
         get{
-            return UserDefaults.standard.array(forKey: "profileImage") as? [Int] ?? [Int.random(in: 0...11)]
+            return UserDefaults.standard.integer(forKey: "profileImage") 
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: "profileImage")

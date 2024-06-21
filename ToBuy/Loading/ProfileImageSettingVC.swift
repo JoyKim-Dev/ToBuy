@@ -16,13 +16,9 @@ class ProfileImageSettingVC: UIViewController {
     
     lazy var selectedImageView = ProfileImageView(profileImageNum: imageDataFromPreviousPage , imageBorderWidth: .isSelected, imageBorderColor: .isSelected, cameraBtnMode: .isShowing)
     lazy var profileCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-    lazy var selectedImage = UIImage(named: "profile_\(selectedIndexPathRow)")
-    
+    lazy var selectedImage = UIImage()
     var imageDataFromPreviousPage:Int = 0
-    var selectedIndexPathRow = 2
     var selectedIndexPath: IndexPath?
-    //closure로. nicknamesetting vc에 selectedIndexPathRow(Int) 전달
- //   var imageDataFromImageSettingpage:((Int) -> (Void))?
     
     weak var imageForDelegate: ImageDelegate?
     
@@ -55,6 +51,9 @@ extension ProfileImageSettingVC: ConfigureBasicSettingProtocol {
     func configUI() {
         
         configureView("PROFILE SETTING")
+        if UserDefaultManager.nickname.isEmpty == false {
+            navigationItem.title = "EDIT PROFILE"
+        }
         profileCollectionView.delegate = self
         profileCollectionView.dataSource = self
         profileCollectionView.register(ProfileImageCollectionViewCell.self, forCellWithReuseIdentifier: ProfileImageCollectionViewCell.identifier)
@@ -81,8 +80,6 @@ extension ProfileImageSettingVC: ConfigureBasicSettingProtocol {
     }
     
     @objc func navBackBtnTapped(data: Int) {
-      //  imageDataFromImageSettingpage?(selectedIndexPathRow)
-      //  print("\(selectedIndexPathRow)전달")
         navigationController?.popViewController(animated: true)
     }
     
@@ -117,19 +114,16 @@ extension ProfileImageSettingVC: UICollectionViewDelegate, UICollectionViewDataS
         
        selectedIndexPath = indexPath
         imageForDelegate?.imageDataFromImageSettingpage(int: indexPath.row)
-       // imageDataFromImageSettingpage?(selectedIndexPath?.row ?? 0)
+       // UserDefaultManager.profileImage = indexPath.row
         print("\(indexPath.row)클로저전달")
-        selectedIndexPathRow = indexPath.row
         let cell2 = collectionView.cellForItem(at: indexPath) as! ProfileImageCollectionViewCell
-        UserDefaultManager.profileImage.removeAll()
-        UserDefaultManager.profileImage.insert(indexPath.item, at: 0)
-        print(UserDefaultManager.profileImage[0])
+        UserDefaults.standard.removeObject(forKey: "profileImage")
         cell2.imageView.layer.borderColor = ImageBorderColor.isSelected.value
         cell2.imageView.alpha = ImageAlpha.isSelected.rawValue
         cell2.imageView.layer.borderWidth = ImageBorderWidth.isSelected.rawValue
         cell2.imageView.layer.cornerRadius = cell.imageView.frame.width / 2
         cell2.imageView.clipsToBounds = true
-        selectedImageView.profileImage.image = UIImage(named: "profile_\(indexPath.item)")
+        selectedImageView.profileImage.image = UIImage(named: "catProfile_\(indexPath.item)")
         
         
     }

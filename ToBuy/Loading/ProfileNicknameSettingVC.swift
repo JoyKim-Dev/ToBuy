@@ -22,14 +22,19 @@ class ProfileNicknameSettingVC: UIViewController {
     let lineView = LineView()
     let nicknameStatusLabel = NicknameStatusLabel()
     let submitBtn = OnboardingButton(btnTitle: "완료")
-    var selectedProfileImageNum = Int.random(in: 1...11)
+    var selectedProfileImageNum = UserDefaultManager.profileImage
     let textIsValid = "사용할 수 있는 닉네임이에요"
+
        
     override func viewDidLoad() {
         super.viewDidLoad()
         configHierarchy()
         configLayout()
         configUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        mainImageView.profileImage.image = UIImage(named: "catProfile_\(selectedProfileImageNum)")
     }
 
 }
@@ -74,10 +79,14 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
     func configUI() {
         // 뷰컨 익스텐션 - 아무데나 탭 했을 때 키보드 내리기
         hideKeyboardWhenTappedAround()
-        // 뷰컨 익스텐션 - 흰 배경, 네비바 타이틀
+        // 뷰컨 익스텐션 - 흰 배경, 네비바 타이틀 (nickname 저장값 있으면 EDIT PROFILE, 없으면 PROFILE SETTING
         configureView("PROFILE SETTING")
+        if UserDefaultManager.nickname.isEmpty == false {
+            navigationItem.title = "EDIT PROFILE"
+        }
         // 커스텀뷰 - 네비바 왼쪽버튼
-        navigationItem.leftBarButtonItem = NavBackBtnChevron(currentVC: self)
+        let backbtn = NavBackBtnChevron(image: Icon.chevronLeft, style: .plain, target: self, action: #selector(backBtnTapped))
+        navigationItem.leftBarButtonItem = backbtn
         // 이미지 - 액션 추가
         let imageTapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
         mainImageView.addGestureRecognizer(imageTapGesture)
@@ -93,7 +102,13 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         nicknameTextField.delegate = self
         nicknameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         
+        if UserDefaults.standard.object(forKey: "profileImage") == nil {
+            selectedProfileImageNum = Int.random(in: 0...11)
+            UserDefaultManager.profileImage = selectedProfileImageNum
+        }
+        
         submitBtn.addTarget(self, action: #selector(submitBtnTapped), for: .touchUpInside)
+
     }
     
     //이미지 눌리면 다음 뷰로 이동
@@ -154,7 +169,7 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         }
     }
     
-    // 완료 시 동작 trigger : 1. 버튼 addtarget 2. 텍스트필드 return (버튼 함수 실행 - 재활용)
+    // 완료 시 동작 trigger : 1. 버튼 addtarget 2. 텍스트필드 return (버튼 함수 실행 - 재활용) 3. UserDefault 저장(닉네임. 가입일.이미지)
     @objc func submitBtnTapped() {
         //유효하지 않으면 버튼 비활성화
         if nicknameStatusLabel.text != textIsValid {
@@ -162,6 +177,7 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         } else if UserDefaultManager.nickname.isEmpty {
             UserDefaultManager.nickname = nicknameTextField.text ?? UserDefaultManager.nickname
             UserDefaultManager.joinedDate = Date()
+            UserDefaultManager.profileImage = selectedProfileImageNum
             print("저장됨")
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             let sceneDelegate = windowScene?.delegate as? SceneDelegate
@@ -171,8 +187,16 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
             print("루트뷰 바뀜")
         } else {
             UserDefaultManager.nickname = nicknameTextField.text ?? UserDefaultManager.nickname
-            print("저장됨")
+            print("닉네임저장됨")
+            UserDefaultManager.profileImage = selectedProfileImageNum
             navigationController?.popViewController(animated: true)
+        }
+    }
+    @objc func backBtnTapped() {
+        navigationController?.popViewController(animated: true)
+        print(#function)
+        if navigationItem.title == "PROFILE SETTING" {
+            UserDefaults.standard.removeObject(forKey: "profileImage")
         }
     }
 }
@@ -191,7 +215,8 @@ extension ProfileNicknameSettingVC: UITextFieldDelegate {
 
 extension ProfileNicknameSettingVC: ImageDelegate {
     func imageDataFromImageSettingpage(int: Int) {
-        mainImageView.profileImage.image = UIImage(named: "profile_\(int)")
+//        mainImageView.profileImage.image = UIImage(named: "catProfile_\(int)")
+        selectedProfileImageNum = int
         print("\(int) 전달 받음")
     }
     

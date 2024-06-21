@@ -17,7 +17,7 @@ class SettingMainVC: UIViewController {
     let joinedDateLabel = UILabel()
 
     let toEditProfileBtn = UIButton()
-    var profileImageNumData = UserDefaultManager.profileImage[0] 
+    var profileImageNumData = UserDefaultManager.profileImage
     
     let tableView = UITableView()
     let settingMenu = ["나의 장바구니 목록", "자주 묻는 질문", "1:1문의", "알림 설정", "탈퇴하기"]
@@ -34,7 +34,8 @@ class SettingMainVC: UIViewController {
             super.viewWillAppear(animated)
         
         profileNameLabel.text = UserDefaultManager.nickname
-        profileImageView.profileImage.image = UIImage(named: "profile_\(UserDefaultManager.profileImage[0])")
+        profileImageNumData = UserDefaultManager.profileImage
+        print("새로이미지넘버저장됨")
         tableView.reloadData()
         
         }

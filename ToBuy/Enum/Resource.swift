@@ -99,7 +99,7 @@ enum Font {
 }
 
 enum Image {
-    static let mainImage = UIImage(named: "launch")
+    static let mainImage = UIImage(named: "toBuyMainIcon")
     static let emptyImage = UIImage(named: "empty")
 }
 

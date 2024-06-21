@@ -51,7 +51,7 @@ extension ProfileImageCollectionViewCell: ConfigureBasicSettingProtocol {
     
     func configImageUI(data: Int, isSeleced: Bool) {
         print(isSeleced)
-        imageView.profileImage.image = UIImage(named: "profile_\(data)")
+        imageView.profileImage.image = UIImage(named: "catProfile_\(data)")
    
     }
     }

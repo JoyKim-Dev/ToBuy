@@ -65,7 +65,7 @@ class ProfileImageView: UIView {
     }
     
     func configUI(profileImageNum: Int, imageBorderWidth: ImageBorderWidth, imageBorderColor: ImageBorderColor, cameraBtnMode: ButtonHidden) {
-        profileImage.image = UIImage(named: "profile_\(profileImageNum)")
+        profileImage.image = UIImage(named: "catProfile_\(profileImageNum)")
         profileImage.layer.borderWidth = imageBorderWidth.rawValue
         profileImage.layer.borderColor = imageBorderColor.value
     

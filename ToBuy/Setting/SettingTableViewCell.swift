@@ -53,7 +53,7 @@ extension SettingTableViewCell {
         label.text = data
         label.font = Font.semiBold15
         
-        var likes = UserDefaultManager.likedItemID.count
+        let likes = UserDefaultManager.likedItemID.count
         print(UserDefaultManager.likedItemID)
         print(likes)
 

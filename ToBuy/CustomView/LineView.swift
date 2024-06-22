@@ -13,7 +13,6 @@ class LineView:UIView {
         super.init(frame: .zero)
         
         backgroundColor = Color.lightGray
-
     }
  
     required init?(coder: NSCoder) {

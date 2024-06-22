@@ -15,7 +15,6 @@ class NicknameStatusLabel:UILabel {
         textColor = Color.orange
         font = Font.semiBold13
         text = "닉네임에 @는 포함할 수 없어요"
-
     }
  
     required init?(coder: NSCoder) {

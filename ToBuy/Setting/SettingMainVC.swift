@@ -11,7 +11,7 @@ import SnapKit
 class SettingMainVC: UIViewController {
 
     let profileView = UIView()
-    lazy var profileImageView = ProfileImageView(profileImageNum: profileImageNumData, imageBorderWidth: .isSelected, imageBorderColor: .isSelected, cameraBtnMode: .isHidden)
+    lazy var profileImageView = ProfileImageView(profileImageNum: profileImageNumData, cameraBtnMode: .isHidden, isSelected: true)
     
     let profileNameLabel = UILabel()
     let joinedDateLabel = UILabel()
@@ -85,9 +85,6 @@ extension SettingMainVC:ConfigureBasicSettingProtocol {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        
-        
-
     }
     
     func configUI() {
@@ -155,8 +152,7 @@ extension SettingMainVC: UITableViewDelegate, UITableViewDataSource {
 
             alert.addAction(ok)
             alert.addAction(cancel)
-            
-            
+      
             present(alert, animated: true)
             
         } else {

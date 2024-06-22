@@ -15,7 +15,7 @@ class OnboardingVC: UIViewController {
     let appTitleLabel = AppTitleLabel()
     let nameLabel = UILabel()
     let appMainImage = UIImageView()
-    lazy var appStartBtn = OnboardingButton(btnTitle: "시작하기")
+    var appStartBtn = OnboardingButton(btnTitle: "시작하기")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +63,7 @@ extension OnboardingVC:ConfigureBasicSettingProtocol {
         appMainImage.image = Image.mainImage
         appMainImage.contentMode = .scaleAspectFill
         appStartBtn.addTarget(self, action: #selector(startBtnTapped), for: .touchUpInside)
- 
+    
     }
 
     @objc func startBtnTapped() {

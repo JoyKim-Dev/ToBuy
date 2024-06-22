@@ -30,7 +30,6 @@ class NavBackBtnChevron:UIBarButtonItem {
          fatalError("init(coder:) has not been implemented")
      }
      @objc private func leftBarBtnTapped() {
-         print("Back button tapped")
             popVC?.navigationController?.popViewController(animated: true)
      }
  }

@@ -14,7 +14,7 @@ protocol ImageDelegate : AnyObject {
 
 class ProfileImageSettingVC: UIViewController {
     
-    lazy var selectedImageView = ProfileImageView(profileImageNum: imageDataFromPreviousPage , imageBorderWidth: .isSelected, imageBorderColor: .isSelected, cameraBtnMode: .isShowing)
+    lazy var selectedImageView = ProfileImageView(profileImageNum: imageDataFromPreviousPage , cameraBtnMode: .isShowing, isSelected: true)
     lazy var profileCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     lazy var selectedImage = UIImage()
     var imageDataFromPreviousPage:Int = 0
@@ -59,7 +59,6 @@ extension ProfileImageSettingVC: ConfigureBasicSettingProtocol {
         profileCollectionView.register(ProfileImageCollectionViewCell.self, forCellWithReuseIdentifier: ProfileImageCollectionViewCell.identifier)
         let navBackBtn = UIBarButtonItem(image: Icon.chevronLeft, style: .plain, target: self, action: #selector(navBackBtnTapped))
         navigationItem.leftBarButtonItem = navBackBtn
-        
     }
 
     func collectionViewLayout() -> UICollectionViewLayout {
@@ -78,11 +77,9 @@ extension ProfileImageSettingVC: ConfigureBasicSettingProtocol {
         print(#function)
         return layout
     }
-    
     @objc func navBackBtnTapped(data: Int) {
         navigationController?.popViewController(animated: true)
     }
-    
 }
 
 extension ProfileImageSettingVC: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -93,37 +90,22 @@ extension ProfileImageSettingVC: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = profileCollectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.identifier, for: indexPath) as! ProfileImageCollectionViewCell
         let data = indexPath.item
-        let cellIsSelected = indexPath == selectedIndexPath
-    
-     cell.configImageUI(data: data, isSeleced: cellIsSelected)
-        
-        
+        cell.configUI(data: data)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-         
-        let cell = collectionView.cellForItem(at: indexPath) as! ProfileImageCollectionViewCell
-
-        if let previousIndexPath = selectedIndexPath {
-            let previousCell = collectionView.cellForItem(at: previousIndexPath) as? ProfileImageCollectionViewCell
-                        previousCell?.imageView.layer.borderColor = ImageBorderColor.unSelected.value
-                        previousCell?.imageView.layer.borderWidth = ImageBorderWidth.unSelected.rawValue
-            previousCell?.imageView.alpha = ImageAlpha.unSelected.rawValue
+        selectedImageView.changeImage(profileNum: indexPath.item)
+        imageForDelegate?.imageDataFromImageSettingpage(int: indexPath.item)
+        
+        for i in 0..<collectionView.numberOfItems(inSection: 0) {
+            if let cell = collectionView.cellForItem(at: IndexPath(item: i, section: 0)) as? ProfileImageCollectionViewCell {
+                ProfileImageStyle.unSelected.configProfileImageUI(to: cell.imageView.profileImage)
+             
+            }
         }
-        
-       selectedIndexPath = indexPath
-        imageForDelegate?.imageDataFromImageSettingpage(int: indexPath.row)
-        print("\(indexPath.row)클로저전달")
-        let cell2 = collectionView.cellForItem(at: indexPath) as! ProfileImageCollectionViewCell
-        cell2.imageView.layer.borderColor = ImageBorderColor.isSelected.value
-        cell2.imageView.alpha = ImageAlpha.isSelected.rawValue
-        cell2.imageView.layer.borderWidth = ImageBorderWidth.isSelected.rawValue
-        cell2.imageView.layer.cornerRadius = cell.imageView.frame.width / 2
-        cell2.imageView.clipsToBounds = true
-        selectedImageView.profileImage.image = UIImage(named: "catProfile_\(indexPath.item)")
-        
-        
+        if let cell = collectionView.cellForItem(at: indexPath) as? ProfileImageCollectionViewCell {
+            ProfileImageStyle.isSelected.configProfileImageUI(to: cell.imageView.profileImage)
+        }
     }
-    
 }

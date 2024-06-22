@@ -16,12 +16,12 @@ enum ValidationError: Error {
 }
 
 class ProfileNicknameSettingVC: UIViewController {
-    lazy var mainImageView = ProfileImageView(profileImageNum: selectedProfileImageNum, imageBorderWidth: .isSelected, imageBorderColor: .isSelected, cameraBtnMode: .isShowing)
+    lazy var mainImageView = ProfileImageView(profileImageNum: selectedProfileImageNum, cameraBtnMode: .isShowing, isSelected: true)
     lazy var nicknameTextField = NicknameTextField(placeholder: nicknameTextFieldPlaceholder)
     var nicknameTextFieldPlaceholder = "닉네임을 입력해주세요 :)"
     let lineView = LineView()
     let nicknameStatusLabel = NicknameStatusLabel()
-    let submitBtn = OnboardingButton(btnTitle: "완료")
+   let submitBtn = OnboardingButton(btnTitle: "완료")
     lazy var selectedProfileImageNum = UserDefaultManager.profileImage
     let textIsValid = "사용할 수 있는 닉네임이에요"
 
@@ -128,7 +128,7 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         guard text.count > 1 && text.count < 10 else {
             nicknameStatusLabel.text = "2글자 이상 10글자 미만으로 설정해주세요"
             submitBtn.isEnabled = false
-            submitBtn.toggleOnboardingBtn()
+           submitBtn.toggleOnboardingBtn()
             throw ValidationError.tooShortOrTooLong
         }
         guard text.containsNumber() == false else {
@@ -168,7 +168,6 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
             }
         }
     }
-    
     // 완료 시 동작 trigger : 1. 버튼 addtarget 2. 텍스트필드 return (버튼 함수 실행 - 재활용) 3. UserDefault 저장(닉네임. 가입일.이미지)
     @objc func submitBtnTapped() {
         //유효하지 않으면 버튼 비활성화
@@ -201,7 +200,6 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         }
     }
 }
-
 extension ProfileNicknameSettingVC: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -213,12 +211,9 @@ extension ProfileNicknameSettingVC: UITextFieldDelegate {
         }
     }
 }
-
 extension ProfileNicknameSettingVC: ImageDelegate {
     func imageDataFromImageSettingpage(int: Int) {
-//        mainImageView.profileImage.image = UIImage(named: "catProfile_\(int)")
         selectedProfileImageNum = int
-        print("\(int) 전달 받음")
     }
     
 }

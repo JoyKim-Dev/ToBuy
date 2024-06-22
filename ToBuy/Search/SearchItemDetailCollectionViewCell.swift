@@ -75,14 +75,9 @@ extension SearchItemDetailCollectionViewCell {
             make.top.equalTo(productNameLabel.snp.bottom).offset(3)
             make.leading.equalTo(contentView)
         }
-        
-        
-        
     }
     
     func configUI(data: ItemResult, indexPath: IndexPath) {
-        
-        //print(data)
         
         contentView.backgroundColor = Color.white
         productImageView.layer.cornerRadius = 10
@@ -102,8 +97,6 @@ extension SearchItemDetailCollectionViewCell {
         productNameLabel.font = Font.semiBold14
         productNameLabel.numberOfLines = 2
         
-        
-        //likeBtn.tag = indexPath.item
         if UserDefaultManager.likedItemID.contains(data.productId) {
             likeBtn.backgroundColor = Color.white
             likeBtn.setImage(Icon.likeSelected, for: .normal)
@@ -114,17 +107,6 @@ extension SearchItemDetailCollectionViewCell {
             likeBtn.setImage(Icon.likeUnSelected, for: .normal)
             likeBtn.tintColor = Color.white
         }
-        
-//        if likedata.like == false {
-//            likeBtn.backgroundColor = Color.lightGray
-//            likeBtn.setImage(Icon.likeUnSelected, for: .normal)
-//            likeBtn.tintColor = Color.white
-//        } else {
-//            likeBtn.backgroundColor = Color.white
-//            likeBtn.setImage(Icon.likeSelected, for: .normal)
-//            likeBtn.tintColor = Color.black
-//        }
-        
         
         let price = data.lprice
         let priceInt = Int(price)!.formatted()

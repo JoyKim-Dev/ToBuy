@@ -9,25 +9,20 @@ import UIKit
 import SnapKit
 
 class SearchListTableViewCell: UITableViewCell {
-
-   
-    
+ 
     let leftIconImageView = UIImageView()
     let searchWordLabel = UILabel()
     let deleteBtn = LikeBtn()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         configHierarchy()
         configLayout()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 extension SearchListTableViewCell {
@@ -60,8 +55,6 @@ extension SearchListTableViewCell {
     }
     
     func configUI(searchKeywordRow: Int) {
-        
-
         leftIconImageView.image = Icon.clock
         leftIconImageView.tintColor = Color.black
         
@@ -71,15 +64,7 @@ extension SearchListTableViewCell {
         deleteBtn.setImage(Icon.xMark, for: .normal)
         deleteBtn.tintColor = Color.black
         deleteBtn.backgroundColor = .white
-       
-        
-        
+  
     }
-    
-   
-    
-    
-    
-    
-    
+
 }

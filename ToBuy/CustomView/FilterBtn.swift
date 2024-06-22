@@ -5,7 +5,6 @@
 //  Created by Joy Kim on 6/16/24.
 //
 
-
 import UIKit
 
 class FilterBtn:UIButton{
@@ -52,6 +51,4 @@ class FilterBtn:UIButton{
             }
         }
     }
-
-    
 }

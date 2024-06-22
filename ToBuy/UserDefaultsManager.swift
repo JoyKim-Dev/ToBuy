@@ -48,35 +48,6 @@ class UserDefaultManager {
         }
     }
     
-//    static var storedDataisChanged: Bool {
-//        get {
-//            return UserDefaults.standard.bool(forKey: "dataChanged")
-//        }
-//        set {
-//            UserDefaults.standard.setValue(newValue, forKey: "dataChanged")
-//        }
-//    }
-//    
-//    static var totalLikeCount: Int {
-//        get {
-//            return UserDefaults.standard.integer(forKey: "totalLike")
-//        }
-//        set {
-//            UserDefaults.standard.setValue(newValue, forKey: "totalLike")
-//        }
-//    }
-//    
-//
-//    
-//    static var keyHistoryArray: [String] {
-//        get {
-//            return UserDefaults.standard.array(forKey: "totalKey") as? [String] ?? []
-//        }
-//        set {
-//            UserDefaults.standard.setValue(newValue, forKey: "totalKey")
-//        }
-//    }
-    
     static var likedItemID: [String] {
         get{
             return UserDefaults.standard.array(forKey: "likedItemId") as? [String] ?? []
@@ -89,7 +60,7 @@ class UserDefaultManager {
  extension UserDefaultManager {
 
    func clearUserDefaults() {
-        var keys = ["nickname", "profileImage", "searchKeyword", "joinedDate", "likedItemId"]
+       let keys = ["nickname", "profileImage", "searchKeyword", "joinedDate", "likedItemId"]
 
         for i in keys {
             UserDefaults.standard.removeObject(forKey: i)
@@ -97,31 +68,3 @@ class UserDefaultManager {
            UserDefaults.standard.synchronize()
        }
 }
-
-// extension UserDefaultManager {
-//    
-//    func countLikedItems() -> Int {
-//         var likedCount = 0
-//         
-//          //   let keyArray = UserDefaultManager.keyHistoryArray
-//        
-//        for key in keyArray{
-//             let liked = UserDefaults.standard.bool(forKey: key)
-//             if liked {
-//                 likedCount += 1
-//             }
-//         }
-//         print(likedCount)
-//         return likedCount
-//     }
-//    
-//   func clearUserDefaults() {
-//        var keys = ["nickname", "profileImage", "searchKeyword", "totalLike", "joinedDate"]
-//     //   keys.append(contentsOf: UserDefaultManager.keyHistoryArray)
-//       
-//        for i in keys {
-//            UserDefaults.standard.removeObject(forKey: i)
-//        }
-//           UserDefaults.standard.synchronize()
-//       }
-//}

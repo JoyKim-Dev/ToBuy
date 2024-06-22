@@ -13,7 +13,6 @@ import WebKit
 class SearchResultWebViewViewController: UIViewController {
     
     var searchDataFromPreviousPage:ItemResult?
- //   var userDefaultsDidChange: Bool = false
     
     let webView = WKWebView()
     lazy var navLikeBtn = UIBarButtonItem(image: .likeSelected, style: .plain, target: self, action: #selector(navLikeBtnTapped))
@@ -49,11 +48,7 @@ extension SearchResultWebViewViewController:ConfigureBasicSettingProtocol {
         } else {
             navLikeBtn.image = .likeUnselected.withRenderingMode(.alwaysOriginal)
         }
-//        if UserDefaults.standard.bool(forKey: searchDataFromPreviousPage?.productId ?? "") == true {
-//            navLikeBtn.image = .likeSelected.withRenderingMode(.alwaysOriginal)
-//        } else {
-//            navLikeBtn.image = .likeUnselected.withRenderingMode(.alwaysOriginal)
-//        }
+
         navigationItem.rightBarButtonItem = navLikeBtn
         
         guard let url = searchDataFromPreviousPage?.link else {
@@ -86,28 +81,6 @@ extension SearchResultWebViewViewController:ConfigureBasicSettingProtocol {
             UserDefaultManager.likedItemID.append(id)
         }
         configUI()
-        
-        //        guard let key = searchDataFromPreviousPage?.productId else {
-        //            print("키없음")
-        //            return
-        //        }
-        //        if navLikeBtn.image == Icon.likeUnSelected {
-        //            navLikeBtn.image = Icon.likeSelected.withRenderingMode(.alwaysOriginal)
-        //            UserDefaults.standard.setValue(true, forKey: key)
-        //            UserDefaultManager.keyHistoryArray.append(key)
-        //            let totalLikes = UserDefaultManager.shared.countLikedItems()
-        //            UserDefaultManager.totalLikeCount = totalLikes
-        //            UserDefaultManager.storedDataisChanged = true
-        //        } else {
-        //            navLikeBtn.image = Icon.likeUnSelected.withRenderingMode(.alwaysOriginal)
-        //            UserDefaults.standard.setValue(false, forKey: key)
-        //            UserDefaultManager.keyHistoryArray.append(key)
-        //            let totalLikes = UserDefaultManager.shared.countLikedItems()
-        //            UserDefaultManager.totalLikeCount = totalLikes
-        //            UserDefaultManager.storedDataisChanged = true
-        //            UserDefaultManager.storedDataisChanged = true
-        //        }
-        //    }
         
     }
 }

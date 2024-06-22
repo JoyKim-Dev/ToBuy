@@ -34,7 +34,6 @@ class SearchItemDetailVC: UIViewController {
     var list = Product(lastBuildDate: "", total: 1, start: 1 , display: 1, items: [])
     var start = 1
     var apiSortType = SearchResultSortType.accuracy.rawValue
-  //  var productKey: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,19 +41,12 @@ class SearchItemDetailVC: UIViewController {
         configHierarchy()
         configLayout()
         configUI()
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         searchResultCollectionView.reloadData()
-//        if UserDefaultManager.storedDataisChanged {
-//            print("UserDefaults 변경 반영 필요")
-//            callRequest(query: query ?? "미정")
-//            print("변경 사항 반영 완료")
-//        }
     }
-    
-    
 }
 
 extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
@@ -63,7 +55,6 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         view.addSubview(numberOfResultLabel)
         view.addSubview(filterStackView)
         view.addSubview(searchResultCollectionView)
-        
         
         let btns = [accuracyFilterBtn, recentDateFilterBtn, priceDownTopFilterBtn, priceTopDownFilterBtn]
         for i in btns {
@@ -117,9 +108,7 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         recentDateFilterBtn.addTarget(self, action: #selector(recentBtnTapped), for: .touchUpInside)
         priceTopDownFilterBtn.addTarget(self, action: #selector(priceTopDownTapped), for: .touchUpInside)
         priceDownTopFilterBtn.addTarget(self, action: #selector(priceDownTopTapped), for: .touchUpInside)
-        
     }
-    
     
     func searchCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
@@ -168,21 +157,11 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
                     if self.start == 1 {
                          
                         self.list = value
-//                        self.list.items.enumerated().forEach { index, item in
-//                            self.productKey = item.productId
-//                            let liked = UserDefaults.standard.bool(forKey: self.productKey)
-//                            self.list.items[index].likes = [LikesResult(like: liked)]
-//                        }
+
                         self.searchResultCollectionView.scrollToItem(at: IndexPath(item: -1, section: 0), at: .top, animated: false)
                     } else {
-                        let startIndex = self.list.items.count
+                   
                         self.list.items.append(contentsOf: value.items)
- //                       value.items.enumerated().forEach { index, item in
-                            
-//                            self.productKey = item.productId
-//                            let liked = UserDefaults.standard.bool(forKey: self.productKey)
-//                            self.list.items[startIndex + index].likes = [LikesResult(like: liked)]
-//                        }
                     }
                     self.searchResultCollectionView.reloadData()
                     
@@ -191,21 +170,6 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
                 }
             }
     }
-    
-//   func countLikedItems() -> Int {
-//        var likedCount = 0
-//        
-//            let keyArray = UserDefaultManager.keyHistoryArray
-//       
-//       for key in keyArray{
-//            let liked = UserDefaults.standard.bool(forKey: key)
-//            if liked {
-//                likedCount += 1
-//            }
-//        }
-//        print(likedCount)
-//        return likedCount
-//    }
     
     @objc func likeBtnTapped(sender: UIButton) {
         let index = sender.tag
@@ -220,25 +184,6 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
             UserDefaultManager.likedItemID.append(id)
         }
         searchResultCollectionView.reloadData()
-
-//        
-//        guard index < list.items.count else { return }
-//        
-//        guard let likes = list.items[index].likes else { return }
-//        let currentLikeStatus = likes[0].like
-//        list.items[index].likes?[0].like = !currentLikeStatus
-//        
-//       productKey = list.items[index].productId
-//        UserDefaults.standard.setValue(!currentLikeStatus, forKey: productKey)
-//        UserDefaultManager.keyHistoryArray.append(productKey)
-//        let totalLikes = UserDefaultManager.shared.countLikedItems()
-//        UserDefaultManager.totalLikeCount = totalLikes
-//        
-//        
-//        let storedLikeStatus = UserDefaults.standard.bool(forKey: productKey)
-//        print("Stored like status for product \(productKey): \(storedLikeStatus)")
-//        
-//        searchResultCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
     }
     
     @objc func accuracyBtnTapped() {
@@ -275,7 +220,6 @@ extension SearchItemDetailVC: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = searchResultCollectionView.dequeueReusableCell(withReuseIdentifier: SearchItemDetailCollectionViewCell.identifier, for: indexPath) as! SearchItemDetailCollectionViewCell
         let data = list.items[indexPath.item]
-     //   let likedata = data.likes?[0] ?? LikesResult(like: false)
         cell.configUI(data: data, indexPath: indexPath)
         cell.likeBtn.addTarget(self, action: #selector(likeBtnTapped), for: .touchUpInside)
         cell.likeBtn.tag = indexPath.item

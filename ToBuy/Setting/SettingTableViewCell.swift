@@ -54,8 +54,6 @@ extension SettingTableViewCell {
         label.font = Font.semiBold15
         
         let likes = UserDefaultManager.likedItemID.count
-        print(UserDefaultManager.likedItemID)
-        print(likes)
 
         if indexPath == 0 {
             bagBtn.isHidden = false

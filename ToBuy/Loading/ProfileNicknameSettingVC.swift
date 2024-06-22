@@ -154,7 +154,6 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
         if let text = nicknameTextField.text{
             do{
                 let result = try validateUserInput(text: text)
-                print(result)
             } catch ValidationError.emptyString {
                 
             } catch ValidationError.tooShortOrTooLong {
@@ -178,23 +177,19 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
             UserDefaultManager.nickname = nicknameTextField.text ?? UserDefaultManager.nickname
             UserDefaultManager.joinedDate = Date()
             UserDefaultManager.profileImage = selectedProfileImageNum
-            print("저장됨")
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             let sceneDelegate = windowScene?.delegate as? SceneDelegate
             let rootViewController = TabBarController()
             sceneDelegate?.window?.rootViewController = rootViewController
             sceneDelegate?.window?.makeKeyAndVisible()
-            print("루트뷰 바뀜")
         } else {
             UserDefaultManager.nickname = nicknameTextField.text ?? UserDefaultManager.nickname
-            print("닉네임저장됨")
             UserDefaultManager.profileImage = selectedProfileImageNum
             navigationController?.popViewController(animated: true)
         }
     }
     @objc func backBtnTapped() {
         navigationController?.popViewController(animated: true)
-        print(#function)
         if navigationItem.title == "PROFILE SETTING" {
             UserDefaults.standard.removeObject(forKey: "profileImage")
         }

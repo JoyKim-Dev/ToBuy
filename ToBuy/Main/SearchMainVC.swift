@@ -164,7 +164,6 @@ extension SearchMainVC: UITableViewDelegate, UITableViewDataSource {
         return headerView
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(UserDefaultManager.searchKeyword)
         return UserDefaultManager.searchKeyword.count
     }
     
@@ -176,8 +175,7 @@ extension SearchMainVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("검색 결과 vc로 이동")
-        
+
         let vc = SearchItemDetailVC()
         vc.searchWordFromPreviousPage = UserDefaultManager.searchKeyword[indexPath.item]
         navigationController?.pushViewController(vc, animated: true)
@@ -196,7 +194,6 @@ extension SearchMainVC: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("검색 결과 \(searchBar.text!) vc로 이동")
         UserDefaultManager.searchKeyword.insert(searchBar.text!, at: 0)
         searchBar.text = ""
         

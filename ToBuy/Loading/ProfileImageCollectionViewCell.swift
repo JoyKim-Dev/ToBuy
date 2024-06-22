@@ -39,7 +39,6 @@ extension ProfileImageCollectionViewCell {
     func configUI(data: Int) {
         imageView.tag = data
         imageView.changeImage(profileNum: data)
-        print("tag = \(data)")
 
     }
 }

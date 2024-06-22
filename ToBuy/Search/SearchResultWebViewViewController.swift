@@ -74,9 +74,7 @@ extension SearchResultWebViewViewController:ConfigureBasicSettingProtocol {
         }
         
         if UserDefaultManager.likedItemID.contains(id) {
-    print(UserDefaultManager.likedItemID)
             UserDefaultManager.likedItemID.removeAll {$0 == id}
-            print(UserDefaultManager.likedItemID)
         } else {
             UserDefaultManager.likedItemID.append(id)
         }

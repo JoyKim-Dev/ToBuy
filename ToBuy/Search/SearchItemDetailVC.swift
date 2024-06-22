@@ -123,7 +123,6 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         layout.minimumInteritemSpacing = cellSpacing
         layout.minimumLineSpacing = cellSpacing
         layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: 100, right: sectionSpacing)
-        print(#function)
         return layout
         
     }
@@ -173,12 +172,9 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
     
     @objc func likeBtnTapped(sender: UIButton) {
         let index = sender.tag
-        print(index)
         let id = list.items[index].productId
         if UserDefaultManager.likedItemID.contains(id) {
-    print(UserDefaultManager.likedItemID)
             UserDefaultManager.likedItemID.removeAll {$0 == id}
-            print(UserDefaultManager.likedItemID)
             
         } else {
             UserDefaultManager.likedItemID.append(id)
@@ -195,7 +191,6 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
     @objc func recentBtnTapped() {
         apiSortType = SearchResultSortType.recentDate.rawValue
         recentDateFilterBtn.isSelected = true
-        print("잉")
         callRequest(query: query ?? "미정")
     }
     @objc func priceTopDownTapped() {
@@ -213,7 +208,6 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
 
 extension SearchItemDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("셀갯수: \(list.items.count)")
         return list.items.count
     }
     
@@ -239,7 +233,6 @@ extension SearchItemDetailVC: UICollectionViewDataSourcePrefetching {
         for i in indexPaths {
             if list.items.count - 3 == i.item {
                 start += 1
-                print("현재페이지 \(start)")
                 callRequest(query: query ?? "미정")
             }
         }

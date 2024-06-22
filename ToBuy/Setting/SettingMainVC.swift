@@ -35,7 +35,6 @@ class SettingMainVC: UIViewController {
         
         profileNameLabel.text = UserDefaultManager.nickname
         profileImageNumData = UserDefaultManager.profileImage
-        print("새로이미지넘버저장됨")
         profileImageView.profileImage.image = UIImage(named: "catProfile_\(profileImageNumData)")
         tableView.reloadData()
         
@@ -98,7 +97,6 @@ extension SettingMainVC:ConfigureBasicSettingProtocol {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.string(from: UserDefaultManager.joinedDate)
-        print(date)
         
         joinedDateLabel.text = "\(date)가입"
         toEditProfileBtn.setImage(Icon.chevronRight, for: .normal)
@@ -141,7 +139,6 @@ extension SettingMainVC: UITableViewDelegate, UITableViewDataSource {
            
             let ok = UIAlertAction(title: "확인", style: .default) {_ in
                 UserDefaultManager.shared.clearUserDefaults()
-                print("삭제완료")
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 let sceneDelegate = windowScene?.delegate as? SceneDelegate
                 let rootViewController = UINavigationController(rootViewController: OnboardingVC())

@@ -74,7 +74,6 @@ extension ProfileImageSettingVC: ConfigureBasicSettingProtocol {
         layout.minimumInteritemSpacing = cellSpacing
         layout.minimumLineSpacing = cellSpacing
         layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
-        print(#function)
         return layout
     }
     @objc func navBackBtnTapped(data: Int) {

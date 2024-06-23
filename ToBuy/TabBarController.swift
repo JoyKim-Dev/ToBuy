@@ -8,9 +8,7 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-
-    
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,11 +23,5 @@ class TabBarController: UITabBarController {
         settingVC.tabBarItem = UITabBarItem(title: "설정", image: Icon.person, tag: 1)
 
         setViewControllers([searchVC, settingVC], animated: true)
-        
-        
     }
-    
-
-   
-
 }

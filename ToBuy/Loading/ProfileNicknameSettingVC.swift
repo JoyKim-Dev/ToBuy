@@ -25,7 +25,6 @@ class ProfileNicknameSettingVC: UIViewController {
     lazy var selectedProfileImageNum = UserDefaultManager.profileImage
     let textIsValid = "사용할 수 있는 닉네임이에요"
 
-       
     override func viewDidLoad() {
         super.viewDidLoad()
         configHierarchy()
@@ -153,7 +152,7 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
     @objc func textFieldDidChange(_ sender: Any?) {
         if let text = nicknameTextField.text{
             do{
-                let result = try validateUserInput(text: text)
+                _ = try validateUserInput(text: text)
             } catch ValidationError.emptyString {
                 
             } catch ValidationError.tooShortOrTooLong {

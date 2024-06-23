@@ -20,11 +20,11 @@ enum SearchResultSortType:String {
 class SearchItemDetailVC: UIViewController {
     
     lazy var numberOfResultLabel = UILabel()
-    let accuracyFilterBtn = FilterBtn(btnTitle: "정확도")
-    let recentDateFilterBtn = FilterBtn(btnTitle: "날짜순")
-    let priceTopDownFilterBtn = FilterBtn(btnTitle: "가격높은순")
-    let priceDownTopFilterBtn = FilterBtn(btnTitle: "가격낮은순")
-    
+    let accuracyFilterBtn = UIButton.Configuration.filteredButton(title: "정확도")
+    let recentDateFilterBtn = UIButton.Configuration.filteredButton(title: "날짜순")
+    let priceTopDownFilterBtn = UIButton.Configuration.filteredButton(title: "가격높은순")
+    let priceDownTopFilterBtn = UIButton.Configuration.filteredButton(title: "가격낮은순")
+    lazy var btns = [accuracyFilterBtn, recentDateFilterBtn, priceDownTopFilterBtn, priceTopDownFilterBtn]
     lazy var filterStackView = UIStackView()
     lazy var searchResultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: searchCollectionViewLayout())
     
@@ -56,7 +56,6 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         view.addSubview(filterStackView)
         view.addSubview(searchResultCollectionView)
         
-        let btns = [accuracyFilterBtn, recentDateFilterBtn, priceDownTopFilterBtn, priceTopDownFilterBtn]
         for i in btns {
             
             filterStackView.addArrangedSubview(i)
@@ -72,7 +71,7 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         filterStackView.snp.makeConstraints { make in
             make.top.equalTo(numberOfResultLabel.snp.bottom).offset(10)
             make.leading.equalTo(view.safeAreaLayoutGuide).inset(10)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(85)
+          //  make.trailing.equalTo(view.safeAreaLayoutGuide).inset(85)
             make.height.equalTo(30)
         }
         
@@ -103,11 +102,13 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         searchResultCollectionView.dataSource = self
         searchResultCollectionView.register(SearchItemDetailCollectionViewCell.self, forCellWithReuseIdentifier: SearchItemDetailCollectionViewCell.identifier)
         searchResultCollectionView.prefetchDataSource = self
+       
         
         accuracyFilterBtn.addTarget(self, action: #selector(accuracyBtnTapped), for: .touchUpInside)
         recentDateFilterBtn.addTarget(self, action: #selector(recentBtnTapped), for: .touchUpInside)
         priceTopDownFilterBtn.addTarget(self, action: #selector(priceTopDownTapped), for: .touchUpInside)
         priceDownTopFilterBtn.addTarget(self, action: #selector(priceDownTopTapped), for: .touchUpInside)
+        
     }
     
     func searchCollectionViewLayout() -> UICollectionViewLayout {
@@ -184,24 +185,30 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
     
     @objc func accuracyBtnTapped() {
         apiSortType = SearchResultSortType.accuracy.rawValue
+        
         callRequest(query: query ?? "미정")
+        print(accuracyFilterBtn.isFocused)
+        btns.forEach { $0.isSelected = false }
         accuracyFilterBtn.isSelected = true
     }
     
     @objc func recentBtnTapped() {
         apiSortType = SearchResultSortType.recentDate.rawValue
-        recentDateFilterBtn.isSelected = true
         callRequest(query: query ?? "미정")
+        btns.forEach { $0.isSelected = false }
+        recentDateFilterBtn.isSelected = true
     }
     @objc func priceTopDownTapped() {
         apiSortType = SearchResultSortType.priceTopDown.rawValue
-        priceDownTopFilterBtn.isSelected = true
+        btns.forEach { $0.isSelected = false }
+        priceTopDownFilterBtn.isSelected = true
         callRequest(query: query ?? "미정")
         
     }
     @objc func priceDownTopTapped() {
         apiSortType = SearchResultSortType.priceDownTop.rawValue
-        priceDownTopFilterBtn.isSelected = true
+        btns.forEach { $0.isSelected = false }
+       priceDownTopFilterBtn.isSelected = true
         callRequest(query: query ?? "미정")
     }
 }

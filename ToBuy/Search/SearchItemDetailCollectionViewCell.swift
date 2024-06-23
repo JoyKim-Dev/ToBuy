@@ -112,9 +112,5 @@ extension SearchItemDetailCollectionViewCell {
         let priceInt = Int(price)!.formatted()
         productPriceLabel.text  = "\(String(priceInt))원"
         productPriceLabel.font = Font.heavy15
-    }
-    
-    
-    
-    
+    } 
 }

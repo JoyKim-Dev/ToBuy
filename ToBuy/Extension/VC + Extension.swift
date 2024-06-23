@@ -4,8 +4,6 @@
 //
 //  Created by Joy Kim on 6/13/24.
 //
-
-
 import UIKit
 
 extension UIViewController {
@@ -14,7 +12,6 @@ extension UIViewController {
         view.backgroundColor = .white
         navigationItem.title = navTitle
     }
-    
     func hideKeyboardWhenTappedAround() {
             let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
             tap.cancelsTouchesInView = false
@@ -25,8 +22,3 @@ extension UIViewController {
             view.endEditing(true)
         }
 }
-
-
-
-
-

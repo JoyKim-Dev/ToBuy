@@ -112,8 +112,6 @@ extension SettingMainVC:ConfigureBasicSettingProtocol {
         let vc = ProfileNicknameSettingVC()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
 }
 
 extension SettingMainVC: UITableViewDelegate, UITableViewDataSource {

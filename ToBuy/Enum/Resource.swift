@@ -100,36 +100,3 @@ enum ProfileImageStyle {
     }
 }
 
-enum OnboardingBtnStyle {
-    case enabled
-    case disabled
-    
-    var btnColor: UIColor {
-        switch self {
-        case .enabled:
-            return Color.orange
-        case .disabled:
-            return Color.unselectedGray
-        }
-    }
-    
-    var titleColor: UIColor {
-        switch self {
-        case .enabled:
-            return Color.white
-        case .disabled:
-            return Color.darkGray
-        }
-    }
-    
-//    func toggleOnboardingBtn(to btn: UIButton) {
-//        btn.backgroundColor = self.btnColor
-//        btn.setTitleColor(self.titleColor, for: .normal)
-//    }
-}
-
-
-
-
-
-    

@@ -17,8 +17,6 @@ class OnboardingButton:UIButton {
         setTitleColor(Color.white, for: .normal)
         backgroundColor = Color.orange
         layer.cornerRadius = 20
-     //   self.addTarget(target, action: action, for: .touchUpInside)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -28,9 +26,7 @@ class OnboardingButton:UIButton {
 }
 
 extension OnboardingButton {
-    
     func toggleOnboardingBtn() {
-        
         if isEnabled {
             backgroundColor = Color.orange
             setTitleColor(Color.white, for: .normal)

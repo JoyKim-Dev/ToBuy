@@ -5,7 +5,6 @@
 //  Created by Joy Kim on 6/13/24.
 //
 
-
 // 프로필 없는 사용자 & 설정화면(탈퇴)버튼 클릭 시 뜨는 화면 
 import UIKit
 
@@ -63,12 +62,10 @@ extension OnboardingVC:ConfigureBasicSettingProtocol {
         appMainImage.image = Image.mainImage
         appMainImage.contentMode = .scaleAspectFill
         appStartBtn.addTarget(self, action: #selector(startBtnTapped), for: .touchUpInside)
-    
     }
 
     @objc func startBtnTapped() {
         let vc = ProfileNicknameSettingVC()
         navigationController?.pushViewController(vc, animated: true)
-    }
-    
+    }    
 }

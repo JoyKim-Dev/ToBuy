@@ -23,7 +23,6 @@ class SearchResultWebViewViewController: UIViewController {
         configHierarchy()
         configLayout()
         configUI()
-        
     }
 }
 
@@ -62,7 +61,6 @@ extension SearchResultWebViewViewController:ConfigureBasicSettingProtocol {
         }
         let request = URLRequest(url: validURL)
         webView.load(request)
-        
     }
     
     
@@ -79,7 +77,6 @@ extension SearchResultWebViewViewController:ConfigureBasicSettingProtocol {
             UserDefaultManager.likedItemID.append(id)
         }
         configUI()
-        
     }
 }
 

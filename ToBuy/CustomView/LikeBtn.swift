@@ -16,11 +16,8 @@ class LikeBtn: UIButton {
         layer.cornerRadius = 3
         clipsToBounds = true
         imageEdgeInsets = UIEdgeInsets(top: 1, left: 2, bottom: 1, right: 2)
-        
-        
         backgroundColor = Color.unselectedGray
         tintColor = Color.white
-
     }
  
     required init?(coder: NSCoder) {

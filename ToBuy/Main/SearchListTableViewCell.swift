@@ -35,7 +35,6 @@ extension SearchListTableViewCell {
     
     func configLayout() {
 
-        
         leftIconImageView.snp.makeConstraints { make in
             make.top.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(5)
             make.leading.equalTo(contentView.safeAreaLayoutGuide).inset(10)
@@ -66,5 +65,4 @@ extension SearchListTableViewCell {
         deleteBtn.backgroundColor = .white
   
     }
-
 }

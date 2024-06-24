@@ -108,6 +108,17 @@ extension SettingMainVC:ConfigureBasicSettingProtocol {
         tableView.rowHeight = 40
     }
     
+    func showAlert(title: String, message: String, ok: String, completionHandler: @escaping () -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let ok = UIAlertAction(title: ok, style: .default) { _ in
+                completionHandler()
+            }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            present(alert, animated: true)
+    }
+    
     @objc func rightBarBtnTapped() {
         let vc = ProfileNicknameSettingVC()
         navigationController?.pushViewController(vc, animated: true)
@@ -123,19 +134,12 @@ extension SettingMainVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier, for: indexPath) as! SettingTableViewCell
         let data = settingMenu[indexPath.row]
         cell.configUI(data: data, indexPath: indexPath.row)
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 4 {
-            
-        let alert = UIAlertController(
-                title: "탈퇴하기",
-                message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?",
-                preferredStyle: .alert)
-           
-            let ok = UIAlertAction(title: "확인", style: .default) {_ in
+            showAlert(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?", ok: "확인") {
                 UserDefaultManager.shared.clearUserDefaults()
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 let sceneDelegate = windowScene?.delegate as? SceneDelegate
@@ -143,16 +147,9 @@ extension SettingMainVC: UITableViewDelegate, UITableViewDataSource {
                 sceneDelegate?.window?.rootViewController = rootViewController
                 sceneDelegate?.window?.makeKeyAndVisible()
             }
-            let cancel = UIAlertAction(title: "취소", style: .cancel)
 
-            alert.addAction(ok)
-            alert.addAction(cancel)
-      
-            present(alert, animated: true)
-            
         } else {
             return
         }
     }
-
 }

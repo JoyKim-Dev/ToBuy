@@ -26,13 +26,7 @@ class SearchItemDetailCollectionViewCell: UICollectionViewCell {
         configHierarchy()
         configLayout()
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.layer.cornerRadius = 10
-        contentView.layer.masksToBounds = true
-    }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -18,6 +18,12 @@ class SearchListTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configHierarchy()
         configLayout()
+        
+        leftIconImageView.image = Icon.clock
+        leftIconImageView.tintColor = Color.black
+        deleteBtn.setImage(Icon.xMark, for: .normal)
+        deleteBtn.tintColor = Color.black
+        deleteBtn.backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {
@@ -54,15 +60,10 @@ extension SearchListTableViewCell {
     }
     
     func configUI(searchKeywordRow: Int) {
-        leftIconImageView.image = Icon.clock
-        leftIconImageView.tintColor = Color.black
+        
         
         searchWordLabel.text = UserDefaultManager.searchKeyword[searchKeywordRow]
         searchWordLabel.font = Font.semiBold14
-        
-        deleteBtn.setImage(Icon.xMark, for: .normal)
-        deleteBtn.tintColor = Color.black
-        deleteBtn.backgroundColor = .white
   
     }
 }

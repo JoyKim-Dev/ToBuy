@@ -8,6 +8,46 @@
 import UIKit
 import SnapKit
 
+enum ProfileImageStyle {
+    case isSelected
+    case unSelected
+
+    var borderColor: CGColor {
+        switch self {
+        case .isSelected:
+            return Color.orange.cgColor
+        case .unSelected:
+            return Color.unselectedGray.cgColor
+        }
+    }
+    var alpha: CGFloat {
+        switch self {
+        case .isSelected:
+            return 1.0
+        case .unSelected:
+            return 0.5
+        }
+    }
+    
+    var borderWidth: CGFloat {
+        switch self {
+        case .isSelected:
+            return 3.0
+        case .unSelected:
+            return 1.0
+        }
+    }
+    
+    func configProfileImageUI(to imageView: UIImageView) {
+        imageView.layer.borderColor = self.borderColor
+        imageView.alpha = self.alpha
+        imageView.layer.borderWidth = self.borderWidth
+        imageView.layer.cornerRadius = imageView.frame.width / 2
+        imageView.clipsToBounds = true
+    }
+}
+
+
 class ProfileImageView: UIView {
     
     var profileImage = UIImageView()

@@ -157,8 +157,8 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
     }
     // 입력되는 글자마다 조건 확인하여 에러 발라내고 do-try / catch 활용하여 enum case로 에러 분기처리
     // 그냥 화면 뜰 때도 입력되어 있는 값의 유효성 검사 필요함(setting 화면에서 닉네임 변경화면 접근시) -> view will appear에서 함수 호출
-    @objc func textFieldDidChange(_ sender: Any?) {
-        if let text = nicknameTextField.text{
+    @objc func textFieldDidChange(_ sender: UITextField) {
+        if let text = sender.text{
             do{
                 _ = try validateUserInput(text: text)
             } catch ValidationError.emptyString {
@@ -219,5 +219,4 @@ extension ProfileNicknameSettingVC: ImageDelegate {
     func imageDataFromImageSettingpage(int: Int) {
         selectedProfileImageNum = int
     }
-    
 }

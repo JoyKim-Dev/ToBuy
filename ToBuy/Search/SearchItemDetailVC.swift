@@ -51,8 +51,15 @@ class SearchItemDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem = NavBackBtnChevron(currentVC: self)
+        searchResultCollectionView.delegate = self
+        searchResultCollectionView.dataSource = self
+        searchResultCollectionView.register(SearchItemDetailCollectionViewCell.self, forCellWithReuseIdentifier: SearchItemDetailCollectionViewCell.identifier)
+        searchResultCollectionView.prefetchDataSource = self
+        
         configHierarchy()
         configLayout()
+        callRequest(query: String(query ?? ""))
         configUI()
         
     }
@@ -99,10 +106,7 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
     
     func configUI() {
         
-        callRequest(query: String(query ?? ""))
-        
         configureView(searchWordFromPreviousPage ?? "")
-        navigationItem.leftBarButtonItem = NavBackBtnChevron(currentVC: self)
         
         numberOfResultLabel.textColor = Color.orange
         numberOfResultLabel.font = Font.heavy15
@@ -112,11 +116,6 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         filterStackView.distribution = .fillProportionally
         
         searchResultCollectionView.backgroundColor = Color.white
-        searchResultCollectionView.delegate = self
-        searchResultCollectionView.dataSource = self
-        searchResultCollectionView.register(SearchItemDetailCollectionViewCell.self, forCellWithReuseIdentifier: SearchItemDetailCollectionViewCell.identifier)
-        searchResultCollectionView.prefetchDataSource = self
-        
         
         accuracyFilterBtn.addTarget(self, action: #selector(accuracyBtnTapped), for: .touchUpInside)
         recentDateFilterBtn.addTarget(self, action: #selector(recentBtnTapped), for: .touchUpInside)
@@ -181,6 +180,13 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
                     
                 case .failure(let error):
                     print(error)
+                    let alert = UIAlertController(
+                        title: "네트워크 에러",
+                        message: "인터넷 통신에 실패했습니다. 인터넷 연결을 확인한 후 다시 시도해주세요.",
+                        preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "확인", style: .default)
+                    alert.addAction(ok)
+                    self.present(alert, animated: true)
                 }
             }
     }

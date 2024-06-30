@@ -15,7 +15,7 @@ protocol ImageDelegate : AnyObject {
 class ProfileImageSettingVC: UIViewController {
     
     lazy var selectedImageView = ProfileImageView(profileImageNum: imageDataFromPreviousPage , cameraBtnMode: .isShowing, isSelected: true)
-    lazy var profileCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    lazy var profileCollectionView = UICollectionView(frame: .zero, collectionViewLayout: ProfileImageSettingVC.collectionViewLayout())
     lazy var selectedImage = UIImage()
     var imageDataFromPreviousPage:Int = 0
     var selectedIndexPath: IndexPath?
@@ -61,7 +61,7 @@ extension ProfileImageSettingVC: ConfigureBasicSettingProtocol {
         navigationItem.leftBarButtonItem = navBackBtn
     }
 
-    func collectionViewLayout() -> UICollectionViewLayout {
+   static func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
 
         let sectionSpacing:CGFloat = 2

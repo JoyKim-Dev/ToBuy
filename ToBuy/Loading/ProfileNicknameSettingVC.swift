@@ -13,6 +13,7 @@ enum ValidationError: Error {
     case tooShortOrTooLong
     case isInt
     case containsSymbol
+    case containsBlank
 }
 
 class ProfileNicknameSettingVC: UIViewController {
@@ -33,6 +34,7 @@ class ProfileNicknameSettingVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         mainImageView.profileImage.image = UIImage(named: "catProfile_\(selectedProfileImageNum)")
         textFieldDidChange(nicknameTextField)
     }
@@ -142,6 +144,12 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
             submitBtn.toggleOnboardingBtn()
             throw ValidationError.containsSymbol
         }
+        guard !text.contains(" ") else {
+            nicknameStatusLabel.text = "문자 사이 공백을 포함할 수 없어요"
+            submitBtn.isEnabled = false
+            submitBtn.toggleOnboardingBtn()
+            throw ValidationError.containsBlank
+        }
         nicknameStatusLabel.text = textIsValid
         submitBtn.isEnabled = true
         submitBtn.toggleOnboardingBtn()
@@ -160,6 +168,8 @@ extension ProfileNicknameSettingVC:ConfigureBasicSettingProtocol  {
             } catch ValidationError.isInt {
                 
             } catch ValidationError.containsSymbol {
+                
+            } catch ValidationError.containsBlank {
                 
             } catch {
                 print("그 외")

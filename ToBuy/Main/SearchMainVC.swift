@@ -194,15 +194,25 @@ extension SearchMainVC: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        UserDefaultManager.searchKeyword.insert(searchBar.text!, at: 0)
-        searchBar.text = ""
-        
-        let vc = SearchItemDetailVC()
-        vc.searchWordFromPreviousPage = UserDefaultManager.searchKeyword[0]
-        
-        navigationController?.pushViewController(vc, animated: true)
+     
+        let trimmedText = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            
+            if !trimmedText.isEmpty {
+                UserDefaultManager.searchKeyword.insert(searchBar.text!, at: 0)
+                searchBar.text = ""
+                
+                let vc = SearchItemDetailVC()
+                vc.searchWordFromPreviousPage = UserDefaultManager.searchKeyword[0]
+                
+                navigationController?.pushViewController(vc, animated: true)
+            } else {
+                let alert = UIAlertController(title: "검색어 오류", message: "검색어를 입력해 주세요.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true, completion: nil)
+            }
+
     }
-    
+
 }
 
 

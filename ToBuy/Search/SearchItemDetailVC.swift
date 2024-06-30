@@ -15,15 +15,28 @@ enum SearchResultSortType:String {
     case recentDate = "date"
     case priceTopDown = "dsc"
     case priceDownTop = "asc"
+    
+    var btnTitle: String {
+        switch self {
+        case .accuracy:
+            return "정확도"
+        case .recentDate:
+            return "날짜순"
+        case .priceTopDown:
+            return "가격높은순"
+        case .priceDownTop:
+            return "가격낮은순"
+        }
+    }
 }
 
 class SearchItemDetailVC: UIViewController {
     
     lazy var numberOfResultLabel = UILabel()
-    let accuracyFilterBtn = UIButton.Configuration.filteredButton(title: "정확도")
-    let recentDateFilterBtn = UIButton.Configuration.filteredButton(title: "날짜순")
-    let priceTopDownFilterBtn = UIButton.Configuration.filteredButton(title: "가격높은순")
-    let priceDownTopFilterBtn = UIButton.Configuration.filteredButton(title: "가격낮은순")
+    let accuracyFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.accuracy.btnTitle)
+    let recentDateFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.recentDate.btnTitle)
+    let priceTopDownFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.priceTopDown.btnTitle)
+    let priceDownTopFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.priceDownTop.btnTitle)
     lazy var btns = [accuracyFilterBtn, recentDateFilterBtn, priceDownTopFilterBtn, priceTopDownFilterBtn]
     lazy var filterStackView = UIStackView()
     lazy var searchResultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: searchCollectionViewLayout())
@@ -41,10 +54,11 @@ class SearchItemDetailVC: UIViewController {
         configHierarchy()
         configLayout()
         configUI()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         searchResultCollectionView.reloadData()
     }
 }
@@ -71,7 +85,7 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         filterStackView.snp.makeConstraints { make in
             make.top.equalTo(numberOfResultLabel.snp.bottom).offset(10)
             make.leading.equalTo(view.safeAreaLayoutGuide).inset(10)
-          //  make.trailing.equalTo(view.safeAreaLayoutGuide).inset(85)
+            //  make.trailing.equalTo(view.safeAreaLayoutGuide).inset(85)
             make.height.equalTo(30)
         }
         
@@ -102,7 +116,7 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         searchResultCollectionView.dataSource = self
         searchResultCollectionView.register(SearchItemDetailCollectionViewCell.self, forCellWithReuseIdentifier: SearchItemDetailCollectionViewCell.identifier)
         searchResultCollectionView.prefetchDataSource = self
-       
+        
         
         accuracyFilterBtn.addTarget(self, action: #selector(accuracyBtnTapped), for: .touchUpInside)
         recentDateFilterBtn.addTarget(self, action: #selector(recentBtnTapped), for: .touchUpInside)
@@ -155,12 +169,12 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
                     self.numberOfResultLabel.text = "\(value.total.formatted())개의 검색 결과"
                     
                     if self.start == 1 {
-                         
+                        
                         self.list = value
-
+                        
                         self.searchResultCollectionView.scrollToItem(at: IndexPath(item: -1, section: 0), at: .top, animated: false)
                     } else {
-                   
+                        
                         self.list.items.append(contentsOf: value.items)
                     }
                     self.searchResultCollectionView.reloadData()
@@ -208,7 +222,7 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
     @objc func priceDownTopTapped() {
         apiSortType = SearchResultSortType.priceDownTop.rawValue
         btns.forEach { $0.isSelected = false }
-       priceDownTopFilterBtn.isSelected = true
+        priceDownTopFilterBtn.isSelected = true
         callRequest(query: query ?? "미정")
     }
 }

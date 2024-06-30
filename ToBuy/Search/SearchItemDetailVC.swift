@@ -59,7 +59,7 @@ class SearchItemDetailVC: UIViewController {
         
         configHierarchy()
         configLayout()
-        callRequest(query: String(query ?? ""))
+        callRequest(searchQuery: String(query ?? ""))
         configUI()
         
     }
@@ -141,45 +141,13 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         
     }
     
-    func callRequest(query:String) {
-        
-        let url = APIURL.naverShoppingURL
-        
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id": APIKey.naverID,
-            "X-Naver-Client-Secret": APIKey.naverKey
-        ]
-        
-        let param: Parameters = [
-            "query": query,
-            "display": 30,
-            "start": start,
-            "sort": apiSortType
-        ]
-        
-        AF.request(url, method: .get, parameters: param, headers: header)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of: Product.self) { response in
-                print("STATUS: \(response.response?.statusCode ?? 0)")
-                switch response.result {
-                case .success(let value):
-                    print("SUCCESS")
-                    
-                    self.numberOfResultLabel.text = "\(value.total.formatted())개의 검색 결과"
-                    
-                    if self.start == 1 {
-                        
-                        self.list = value
-                        
-                        self.searchResultCollectionView.scrollToItem(at: IndexPath(item: -1, section: 0), at: .top, animated: false)
-                    } else {
-                        
-                        self.list.items.append(contentsOf: value.items)
-                    }
-                    self.searchResultCollectionView.reloadData()
-                    
-                case .failure(let error):
-                    print(error)
+    func callRequest(searchQuery: String) {
+        guard !searchQuery.isEmpty else { return }
+        ShoppingNaverManager.shared.callRequest(query: searchQuery, start: start, apiSortType: apiSortType) { product, error in
+            
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error: \(error.localizedDescription)")
                     let alert = UIAlertController(
                         title: "네트워크 에러",
                         message: "인터넷 통신에 실패했습니다. 인터넷 연결을 확인한 후 다시 시도해주세요.",
@@ -187,10 +155,31 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
                     let ok = UIAlertAction(title: "확인", style: .default)
                     alert.addAction(ok)
                     self.present(alert, animated: true)
+                    return
+                }
+                
+                guard let product = product else { return }
+                
+                self.numberOfResultLabel.text = "\(product.total.formatted())개의 검색 결과"
+                
+                if self.start == 1 {
+                    self.list = product
+                    self.searchResultCollectionView.reloadData()
+                    if !self.list.items.isEmpty {
+                        self.searchResultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                    }
+                } else {
+                    let oldItemCount = self.list.items.count
+                    self.list.items.append(contentsOf: product.items)
+                    var indexPaths = [IndexPath]()
+                    for i in oldItemCount..<self.list.items.count {
+                        indexPaths.append(IndexPath(item: i, section: 0))
+                    }
+                    self.searchResultCollectionView.insertItems(at: indexPaths)
                 }
             }
+        }
     }
-    
     @objc func likeBtnTapped(sender: UIButton) {
         let index = sender.tag
         let id = list.items[index].productId
@@ -205,8 +194,8 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
     
     @objc func accuracyBtnTapped() {
         apiSortType = SearchResultSortType.accuracy.rawValue
-        
-        callRequest(query: query ?? "미정")
+        start = 1
+        callRequest(searchQuery: query ?? "미정")
         print(accuracyFilterBtn.isFocused)
         btns.forEach { $0.isSelected = false }
         accuracyFilterBtn.isSelected = true
@@ -214,22 +203,25 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
     
     @objc func recentBtnTapped() {
         apiSortType = SearchResultSortType.recentDate.rawValue
-        callRequest(query: query ?? "미정")
+        start = 1
+        callRequest(searchQuery: query ?? "미정")
         btns.forEach { $0.isSelected = false }
         recentDateFilterBtn.isSelected = true
     }
     @objc func priceTopDownTapped() {
         apiSortType = SearchResultSortType.priceTopDown.rawValue
+        start = 1
         btns.forEach { $0.isSelected = false }
         priceTopDownFilterBtn.isSelected = true
-        callRequest(query: query ?? "미정")
+        callRequest(searchQuery: query ?? "미정")
         
     }
     @objc func priceDownTopTapped() {
         apiSortType = SearchResultSortType.priceDownTop.rawValue
+        start = 1
         btns.forEach { $0.isSelected = false }
         priceDownTopFilterBtn.isSelected = true
-        callRequest(query: query ?? "미정")
+        callRequest(searchQuery: query ?? "미정")
     }
 }
 
@@ -260,7 +252,7 @@ extension SearchItemDetailVC: UICollectionViewDataSourcePrefetching {
         for i in indexPaths {
             if list.items.count - 3 == i.item {
                 start += 1
-                callRequest(query: query ?? "미정")
+                callRequest(searchQuery: query ?? "미정")
             }
         }
     }

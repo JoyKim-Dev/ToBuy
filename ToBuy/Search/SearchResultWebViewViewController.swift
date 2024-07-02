@@ -10,12 +10,12 @@ import UIKit
 import SnapKit
 import WebKit
 
-class SearchResultWebViewViewController: UIViewController {
+final class SearchResultWebViewViewController: UIViewController {
     
-    var searchDataFromPreviousPage:ItemResult?
+     var searchDataFromPreviousPage:ItemResult?
     
-    let webView = WKWebView()
-    lazy var navLikeBtn = UIBarButtonItem(image: .likeSelected, style: .plain, target: self, action: #selector(navLikeBtnTapped))
+    private let webView = WKWebView()
+    private lazy var navLikeBtn = UIBarButtonItem(image: .likeSelected, style: .plain, target: self, action: #selector(navLikeBtnTapped))
     
     override func viewDidLoad() {
         super.viewDidLoad()

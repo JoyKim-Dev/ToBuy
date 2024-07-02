@@ -10,11 +10,11 @@ import UIKit
 
 import SnapKit
 
-class OnboardingVC: UIViewController {
-    let appTitleLabel = AppTitleLabel()
-    let nameLabel = UILabel()
-    let appMainImage = UIImageView()
-    var appStartBtn = OnboardingButton(btnTitle: "시작하기")
+final class OnboardingVC: UIViewController {
+   private let appTitleLabel = AppTitleLabel()
+    private let nameLabel = UILabel()
+    private let appMainImage = UIImageView()
+    private var appStartBtn = OnboardingButton(btnTitle: "시작하기")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +26,14 @@ class OnboardingVC: UIViewController {
 }
 
 extension OnboardingVC:ConfigureBasicSettingProtocol {
-    func configHierarchy() {
+     func configHierarchy() {
         view.addSubview(appTitleLabel)
         view.addSubview(appMainImage)
         view.addSubview(appStartBtn)
         view.addSubview(nameLabel)
     }
     
-    func configLayout() {
+     func configLayout() {
         appTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(50)
             make.centerX.equalTo(view)
@@ -57,14 +57,14 @@ extension OnboardingVC:ConfigureBasicSettingProtocol {
         }
     }
     
-    func configUI() {
+     func configUI() {
         view.backgroundColor = UIColor.appTitle
         appMainImage.image = Image.mainImage
         appMainImage.contentMode = .scaleAspectFill
         appStartBtn.addTarget(self, action: #selector(startBtnTapped), for: .touchUpInside)
     }
 
-    @objc func startBtnTapped() {
+     @objc func startBtnTapped() {
         let vc = ProfileNicknameSettingVC()
         navigationController?.pushViewController(vc, animated: true)
     }    

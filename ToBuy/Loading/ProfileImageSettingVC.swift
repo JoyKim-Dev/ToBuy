@@ -12,13 +12,13 @@ protocol ImageDelegate : AnyObject {
     func imageDataFromImageSettingpage(int:Int)
 }
 
-class ProfileImageSettingVC: UIViewController {
+final class ProfileImageSettingVC: UIViewController {
     
-    lazy var selectedImageView = ProfileImageView(profileImageNum: imageDataFromPreviousPage , cameraBtnMode: .isShowing, isSelected: true)
-    lazy var profileCollectionView = UICollectionView(frame: .zero, collectionViewLayout: ProfileImageSettingVC.collectionViewLayout())
-    lazy var selectedImage = UIImage()
-    var imageDataFromPreviousPage:Int = 0
-    var selectedIndexPath: IndexPath?
+    private lazy var selectedImageView = ProfileImageView(profileImageNum: imageDataFromPreviousPage , cameraBtnMode: .isShowing, isSelected: true)
+    private lazy var profileCollectionView = UICollectionView(frame: .zero, collectionViewLayout: ProfileImageSettingVC.collectionViewLayout())
+    private lazy var selectedImage = UIImage()
+     var imageDataFromPreviousPage:Int = 0
+     var selectedIndexPath: IndexPath?
     
     weak var imageForDelegate: ImageDelegate?
     

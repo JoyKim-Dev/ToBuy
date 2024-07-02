@@ -8,19 +8,19 @@
 import UIKit
 import SnapKit
 
-class SettingMainVC: UIViewController {
+final class SettingMainVC: UIViewController {
 
-    let profileView = UIView()
-    lazy var profileImageView = ProfileImageView(profileImageNum: profileImageNumData, cameraBtnMode: .isHidden, isSelected: true)
+    private let profileView = UIView()
+    private lazy var profileImageView = ProfileImageView(profileImageNum: profileImageNumData, cameraBtnMode: .isHidden, isSelected: true)
     
-    let profileNameLabel = UILabel()
-    let joinedDateLabel = UILabel()
+    private let profileNameLabel = UILabel()
+    private let joinedDateLabel = UILabel()
 
-    let toEditProfileBtn = UIButton()
-    var profileImageNumData = UserDefaultManager.profileImage
+    private let toEditProfileBtn = UIButton()
+    private var profileImageNumData = UserDefaultManager.profileImage
     
-    let tableView = UITableView()
-    let settingMenu = ["나의 장바구니 목록", "자주 묻는 질문", "1:1문의", "알림 설정", "탈퇴하기"]
+    private let tableView = UITableView()
+    private let settingMenu = ["나의 장바구니 목록", "자주 묻는 질문", "1:1문의", "알림 설정", "탈퇴하기"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

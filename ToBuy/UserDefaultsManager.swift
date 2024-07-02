@@ -15,7 +15,7 @@ enum UserDefaultKey: String, CaseIterable {
     case likedItemId
 }
 
-class UserDefaultManager {
+final class UserDefaultManager {
     static let shared = UserDefaultManager()
     static var nickname: String {
         

@@ -30,23 +30,23 @@ enum SearchResultSortType:String {
     }
 }
 
-class SearchItemDetailVC: UIViewController {
+final class SearchItemDetailVC: UIViewController {
     
-    lazy var numberOfResultLabel = UILabel()
-    let accuracyFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.accuracy.btnTitle)
-    let recentDateFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.recentDate.btnTitle)
-    let priceTopDownFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.priceTopDown.btnTitle)
-    let priceDownTopFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.priceDownTop.btnTitle)
-    lazy var btns = [accuracyFilterBtn, recentDateFilterBtn, priceDownTopFilterBtn, priceTopDownFilterBtn]
-    lazy var filterStackView = UIStackView()
-    lazy var searchResultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: searchCollectionViewLayout())
+    private lazy var numberOfResultLabel = UILabel()
+    private let accuracyFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.accuracy.btnTitle)
+    private let recentDateFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.recentDate.btnTitle)
+    private let priceTopDownFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.priceTopDown.btnTitle)
+    private let priceDownTopFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.priceDownTop.btnTitle)
+    private lazy var btns = [accuracyFilterBtn, recentDateFilterBtn, priceDownTopFilterBtn, priceTopDownFilterBtn]
+    private lazy var filterStackView = UIStackView()
+    private lazy var searchResultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: searchCollectionViewLayout())
     
-    var searchWordFromPreviousPage: String?
-    lazy var query = searchWordFromPreviousPage
+     var searchWordFromPreviousPage: String?
+     lazy var query = searchWordFromPreviousPage
     
-    var list = Product(lastBuildDate: "", total: 1, start: 1 , display: 1, items: [])
-    var start = 1
-    var apiSortType = SearchResultSortType.accuracy.rawValue
+    private var list = Product(lastBuildDate: "", total: 1, start: 1 , display: 1, items: [])
+    private var start = 1
+    private var apiSortType = SearchResultSortType.accuracy.rawValue
     
     override func viewDidLoad() {
         super.viewDidLoad()

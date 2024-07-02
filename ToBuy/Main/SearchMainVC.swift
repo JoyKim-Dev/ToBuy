@@ -9,18 +9,18 @@ import UIKit
 import SnapKit
 
 
-class SearchMainVC: UIViewController {
+final class SearchMainVC: UIViewController {
     
-    let searchBar = SearchBar()
-    let lineView = LineView()
-    let listTableView = UITableView()
-    let emptylistImageView = UIImageView()
+    private let searchBar = SearchBar()
+    private let lineView = LineView()
+    private let listTableView = UITableView()
+    private let emptylistImageView = UIImageView()
     
-    let headerLabel = UILabel()
-    let noSearchWorldLabel = UILabel()
-    let headerDeleteAllBtn = UIButton()
+    private let headerLabel = UILabel()
+    private let noSearchWorldLabel = UILabel()
+    private let headerDeleteAllBtn = UIButton()
     
-    var nickname = UserDefaultManager.nickname
+    private var nickname = UserDefaultManager.nickname
    
     
     override func viewDidLoad() {
@@ -40,7 +40,7 @@ class SearchMainVC: UIViewController {
        
     }
     
-    func reloadSearchView() {
+    private func reloadSearchView() {
         if UserDefaultManager.searchKeyword.count == 0 {
             listTableView.isHidden = true
             emptylistImageView.isHidden = false

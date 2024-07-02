@@ -9,10 +9,10 @@ import UIKit
 
 import SnapKit
 
-class SettingTableViewCell: UITableViewCell {
+final class SettingTableViewCell: UITableViewCell {
 
-    let label = UILabel()
-    let bagBtn = UIButton()
+    private let label = UILabel()
+    private let bagBtn = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

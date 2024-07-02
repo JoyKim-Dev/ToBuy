@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ProfileImageCollectionViewCell: UICollectionViewCell {
+final class ProfileImageCollectionViewCell: UICollectionViewCell {
     
     var imageView = ProfileImageView(profileImageNum: 2, cameraBtnMode: .isHidden, isSelected: false)
     

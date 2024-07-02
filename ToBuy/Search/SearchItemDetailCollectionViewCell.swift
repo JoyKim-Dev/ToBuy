@@ -10,14 +10,14 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class SearchItemDetailCollectionViewCell: UICollectionViewCell {
+final class SearchItemDetailCollectionViewCell: UICollectionViewCell {
     
-    let productImageView = UIImageView()
-    let likeBtn = LikeBtn()
+    private let productImageView = UIImageView()
+     let likeBtn = LikeBtn()
     
-    let storeNameLabel = UILabel()
-    let productNameLabel = UILabel()
-    let productPriceLabel = UILabel()
+    private let storeNameLabel = UILabel()
+    private let productNameLabel = UILabel()
+    private let productPriceLabel = UILabel()
     
     
     override init(frame: CGRect) {

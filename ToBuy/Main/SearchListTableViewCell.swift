@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class SearchListTableViewCell: UITableViewCell {
+final class SearchListTableViewCell: UITableViewCell {
  
-    let leftIconImageView = UIImageView()
-    let searchWordLabel = UILabel()
-    let deleteBtn = LikeBtn()
+    private let leftIconImageView = UIImageView()
+    private let searchWordLabel = UILabel()
+     let deleteBtn = LikeBtn()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,14 +32,14 @@ class SearchListTableViewCell: UITableViewCell {
 }
 
 extension SearchListTableViewCell {
-    func configHierarchy() {
+     func configHierarchy() {
         
         contentView.addSubview(leftIconImageView)
         contentView.addSubview(searchWordLabel)
         contentView.addSubview(deleteBtn)
     }
     
-    func configLayout() {
+     func configLayout() {
 
         leftIconImageView.snp.makeConstraints { make in
             make.top.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(5)
@@ -59,7 +59,7 @@ extension SearchListTableViewCell {
         }
     }
     
-    func configUI(searchKeywordRow: Int) {
+     func configUI(searchKeywordRow: Int) {
         
         
         searchWordLabel.text = UserDefaultManager.searchKeyword[searchKeywordRow]

@@ -16,15 +16,15 @@ enum ValidationError: Error {
     case containsBlank
 }
 
-class ProfileNicknameSettingVC: UIViewController {
-    lazy var mainImageView = ProfileImageView(profileImageNum: selectedProfileImageNum, cameraBtnMode: .isShowing, isSelected: true)
-    lazy var nicknameTextField = NicknameTextField(placeholder: nicknameTextFieldPlaceholder)
-    var nicknameTextFieldPlaceholder = "닉네임을 입력해주세요 :)"
-    let lineView = LineView()
-    let nicknameStatusLabel = NicknameStatusLabel()
-   let submitBtn = OnboardingButton(btnTitle: "완료")
-    lazy var selectedProfileImageNum = UserDefaultManager.profileImage
-    let textIsValid = "사용할 수 있는 닉네임이에요"
+final class ProfileNicknameSettingVC: UIViewController {
+    private lazy var mainImageView = ProfileImageView(profileImageNum: selectedProfileImageNum, cameraBtnMode: .isShowing, isSelected: true)
+    private lazy var nicknameTextField = NicknameTextField(placeholder: nicknameTextFieldPlaceholder)
+    private var nicknameTextFieldPlaceholder = "닉네임을 입력해주세요 :)"
+    private let lineView = LineView()
+    private let nicknameStatusLabel = NicknameStatusLabel()
+    private let submitBtn = OnboardingButton(btnTitle: "완료")
+    private lazy var selectedProfileImageNum = UserDefaultManager.profileImage
+    private let textIsValid = "사용할 수 있는 닉네임이에요"
 
     override func viewDidLoad() {
         super.viewDidLoad()

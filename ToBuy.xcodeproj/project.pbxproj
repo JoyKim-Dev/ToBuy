@@ -13,6 +13,11 @@
 		35644BC42C1E05A20037F8B7 /* SearchListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35644BC32C1E05A20037F8B7 /* SearchListTableViewCell.swift */; };
 		356C8F802C216DAB00921F9E /* NicknameStatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C8F7F2C216DAB00921F9E /* NicknameStatusLabel.swift */; };
 		356C8F822C21750300921F9E /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356C8F812C21750300921F9E /* String + Extension.swift */; };
+		3570B6872C3A530700E3D8C7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3570B6862C3A530700E3D8C7 /* BaseViewController.swift */; };
+		3570B6892C3A532A00E3D8C7 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3570B6882C3A532A00E3D8C7 /* BaseCollectionViewCell.swift */; };
+		3570B68C2C3A53CE00E3D8C7 /* LikedItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3570B68B2C3A53CE00E3D8C7 /* LikedItemViewController.swift */; };
+		3570B68E2C3A53EB00E3D8C7 /* LikedItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3570B68D2C3A53EB00E3D8C7 /* LikedItemCollectionViewCell.swift */; };
+		3570B6912C3A547200E3D8C7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3570B6902C3A547200E3D8C7 /* RealmSwift */; };
 		3590F2352C3177F300652DBA /* ImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590F2342C3177F300652DBA /* ImageResource.swift */; };
 		3590F2372C318F2D00652DBA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590F2362C318F2D00652DBA /* NetworkManager.swift */; };
 		35B09C142C1C2B4400D0AF20 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B09C132C1C2B4400D0AF20 /* LineView.swift */; };
@@ -57,6 +62,10 @@
 		35644BC32C1E05A20037F8B7 /* SearchListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListTableViewCell.swift; sourceTree = "<group>"; };
 		356C8F7F2C216DAB00921F9E /* NicknameStatusLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameStatusLabel.swift; sourceTree = "<group>"; };
 		356C8F812C21750300921F9E /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
+		3570B6862C3A530700E3D8C7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		3570B6882C3A532A00E3D8C7 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		3570B68B2C3A53CE00E3D8C7 /* LikedItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedItemViewController.swift; sourceTree = "<group>"; };
+		3570B68D2C3A53EB00E3D8C7 /* LikedItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		3590F2342C3177F300652DBA /* ImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResource.swift; sourceTree = "<group>"; };
 		3590F2362C318F2D00652DBA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		35B09C132C1C2B4400D0AF20 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
@@ -100,6 +109,7 @@
 				35D6D66D2C1B0F54008207A4 /* Kingfisher in Frameworks */,
 				35D6D6702C1B0F60008207A4 /* SnapKit in Frameworks */,
 				35D6D6672C1B0F2F008207A4 /* IQKeyboardManagerSwift in Frameworks */,
+				3570B6912C3A547200E3D8C7 /* RealmSwift in Frameworks */,
 				35D6D66A2C1B0F37008207A4 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +117,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3570B6852C3A526100E3D8C7 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				3570B6862C3A530700E3D8C7 /* BaseViewController.swift */,
+				3570B6882C3A532A00E3D8C7 /* BaseCollectionViewCell.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		3570B68A2C3A536500E3D8C7 /* Liked */ = {
+			isa = PBXGroup;
+			children = (
+				3570B68B2C3A53CE00E3D8C7 /* LikedItemViewController.swift */,
+				3570B68D2C3A53EB00E3D8C7 /* LikedItemCollectionViewCell.swift */,
+			);
+			path = Liked;
+			sourceTree = "<group>";
+		};
 		3590F2382C318FA900652DBA /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +164,8 @@
 		35D6D61C2C1AD6AC008207A4 /* ToBuy */ = {
 			isa = PBXGroup;
 			children = (
+				3570B68A2C3A536500E3D8C7 /* Liked */,
+				3570B6852C3A526100E3D8C7 /* Base */,
 				3590F2382C318FA900652DBA /* Network */,
 				35D6D6622C1B026C008207A4 /* CustomView */,
 				35D6D6572C1AF6C0008207A4 /* Protocol */,
@@ -261,6 +291,7 @@
 				35D6D6692C1B0F37008207A4 /* Alamofire */,
 				35D6D66C2C1B0F54008207A4 /* Kingfisher */,
 				35D6D66F2C1B0F60008207A4 /* SnapKit */,
+				3570B6902C3A547200E3D8C7 /* RealmSwift */,
 			);
 			productName = ToBuy;
 			productReference = 35D6D61A2C1AD6AC008207A4 /* ToBuy.app */;
@@ -295,6 +326,7 @@
 				35D6D6682C1B0F37008207A4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				35D6D66B2C1B0F54008207A4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				35D6D66E2C1B0F60008207A4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3570B68F2C3A547100E3D8C7 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 35D6D61B2C1AD6AC008207A4 /* Products */;
 			projectDirPath = "";
@@ -326,8 +358,10 @@
 				35D011282C2082EB00CBDE5F /* SettingTableViewCell.swift in Sources */,
 				35D6D6762C1B1E4F008207A4 /* ConfigureBasicSettingProtocol.swift in Sources */,
 				356C8F822C21750300921F9E /* String + Extension.swift in Sources */,
+				3570B68C2C3A53CE00E3D8C7 /* LikedItemViewController.swift in Sources */,
 				35D6D6562C1AF6B1008207A4 /* VC + Extension.swift in Sources */,
 				35D6D6442C1ADB44008207A4 /* ProfileNicknameSettingVC.swift in Sources */,
+				3570B6872C3A530700E3D8C7 /* BaseViewController.swift in Sources */,
 				35EA4CD52C1EC30200248ECB /* Button + Extension.swift in Sources */,
 				35D6D6482C1ADBB8008207A4 /* SettingMainVC.swift in Sources */,
 				35D6D6422C1ADB00008207A4 /* OnboardingVC.swift in Sources */,
@@ -350,7 +384,9 @@
 				35644BBC2C1D5E5D0037F8B7 /* ProfileImageCollectionViewCell.swift in Sources */,
 				3590F2352C3177F300652DBA /* ImageResource.swift in Sources */,
 				35D6D6782C1B20AE008207A4 /* NicknameTextField.swift in Sources */,
+				3570B68E2C3A53EB00E3D8C7 /* LikedItemCollectionViewCell.swift in Sources */,
 				35D6D6392C1ADA2B008207A4 /* SearchMainVC.swift in Sources */,
+				3570B6892C3A532A00E3D8C7 /* BaseCollectionViewCell.swift in Sources */,
 				35644BC02C1DE1FA0037F8B7 /* UserDefaultsManager.swift in Sources */,
 				35D6D6742C1B19E6008207A4 /* OnboardingButton.swift in Sources */,
 				35D6D65B2C1AF76B008207A4 /* APIKey.swift in Sources */,
@@ -583,6 +619,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3570B68F2C3A547100E3D8C7 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.52.1;
+			};
+		};
 		35D6D6652C1B0F2F008207A4 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
@@ -618,6 +662,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3570B6902C3A547200E3D8C7 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3570B68F2C3A547100E3D8C7 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		35D6D6662C1B0F2F008207A4 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 35D6D6652C1B0F2F008207A4 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;

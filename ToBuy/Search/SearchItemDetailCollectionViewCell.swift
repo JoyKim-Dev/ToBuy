@@ -9,15 +9,17 @@ import UIKit
 
 import SnapKit
 import Kingfisher
+import RealmSwift
 
 final class SearchItemDetailCollectionViewCell: UICollectionViewCell {
-    
+    let realm = try! Realm()
     private let productImageView = UIImageView()
      let likeBtn = LikeBtn()
     
     private let storeNameLabel = UILabel()
     private let productNameLabel = UILabel()
     private let productPriceLabel = UILabel()
+    let repository = LikedItemTableRepository()
     
     
     override init(frame: CGRect) {
@@ -91,7 +93,8 @@ extension SearchItemDetailCollectionViewCell {
         productNameLabel.font = Font.semiBold14
         productNameLabel.numberOfLines = 2
         
-        if UserDefaultManager.likedItemID.contains(data.productId) {
+        
+        if let _ = realm.object(ofType: LikedItemTable.self, forPrimaryKey: data.productId) {
             likeBtn.backgroundColor = Color.white
             likeBtn.setImage(Icon.likeSelected, for: .normal)
             likeBtn.tintColor = Color.black

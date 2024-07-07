@@ -18,6 +18,9 @@
 		3570B68C2C3A53CE00E3D8C7 /* LikedItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3570B68B2C3A53CE00E3D8C7 /* LikedItemViewController.swift */; };
 		3570B68E2C3A53EB00E3D8C7 /* LikedItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3570B68D2C3A53EB00E3D8C7 /* LikedItemCollectionViewCell.swift */; };
 		3570B6912C3A547200E3D8C7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3570B6902C3A547200E3D8C7 /* RealmSwift */; };
+		3570B6942C3A986600E3D8C7 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3570B6932C3A986600E3D8C7 /* RealmModel.swift */; };
+		3570B6962C3A988500E3D8C7 /* LikedItemTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3570B6952C3A988500E3D8C7 /* LikedItemTableRepository.swift */; };
+		3570B6982C3A9C0200E3D8C7 /* FileManager + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3570B6972C3A9C0200E3D8C7 /* FileManager + Extension.swift */; };
 		3590F2352C3177F300652DBA /* ImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590F2342C3177F300652DBA /* ImageResource.swift */; };
 		3590F2372C318F2D00652DBA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590F2362C318F2D00652DBA /* NetworkManager.swift */; };
 		35B09C142C1C2B4400D0AF20 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B09C132C1C2B4400D0AF20 /* LineView.swift */; };
@@ -66,6 +69,9 @@
 		3570B6882C3A532A00E3D8C7 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		3570B68B2C3A53CE00E3D8C7 /* LikedItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedItemViewController.swift; sourceTree = "<group>"; };
 		3570B68D2C3A53EB00E3D8C7 /* LikedItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		3570B6932C3A986600E3D8C7 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		3570B6952C3A988500E3D8C7 /* LikedItemTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedItemTableRepository.swift; sourceTree = "<group>"; };
+		3570B6972C3A9C0200E3D8C7 /* FileManager + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager + Extension.swift"; sourceTree = "<group>"; };
 		3590F2342C3177F300652DBA /* ImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResource.swift; sourceTree = "<group>"; };
 		3590F2362C318F2D00652DBA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		35B09C132C1C2B4400D0AF20 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
@@ -122,6 +128,7 @@
 			children = (
 				3570B6862C3A530700E3D8C7 /* BaseViewController.swift */,
 				3570B6882C3A532A00E3D8C7 /* BaseCollectionViewCell.swift */,
+				3570B6972C3A9C0200E3D8C7 /* FileManager + Extension.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -133,6 +140,15 @@
 				3570B68D2C3A53EB00E3D8C7 /* LikedItemCollectionViewCell.swift */,
 			);
 			path = Liked;
+			sourceTree = "<group>";
+		};
+		3570B6922C3A985900E3D8C7 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				3570B6932C3A986600E3D8C7 /* RealmModel.swift */,
+				3570B6952C3A988500E3D8C7 /* LikedItemTableRepository.swift */,
+			);
+			path = DataBase;
 			sourceTree = "<group>";
 		};
 		3590F2382C318FA900652DBA /* Network */ = {
@@ -164,6 +180,7 @@
 		35D6D61C2C1AD6AC008207A4 /* ToBuy */ = {
 			isa = PBXGroup;
 			children = (
+				3570B6922C3A985900E3D8C7 /* DataBase */,
 				3570B68A2C3A536500E3D8C7 /* Liked */,
 				3570B6852C3A526100E3D8C7 /* Base */,
 				3590F2382C318FA900652DBA /* Network */,
@@ -373,6 +390,7 @@
 				35EA4CDB2C1F0B8B00248ECB /* ProductModel.swift in Sources */,
 				35EA4CD72C1EC9AC00248ECB /* SearchItemDetailCollectionViewCell.swift in Sources */,
 				35D6D63F2C1ADA9F008207A4 /* SearchItemDetailVC.swift in Sources */,
+				3570B6982C3A9C0200E3D8C7 /* FileManager + Extension.swift in Sources */,
 				35D6D61E2C1AD6AC008207A4 /* AppDelegate.swift in Sources */,
 				35EA4CDD2C1F333100248ECB /* SearchResultWebViewViewController.swift in Sources */,
 				35B09C142C1C2B4400D0AF20 /* LineView.swift in Sources */,
@@ -388,10 +406,12 @@
 				35D6D6392C1ADA2B008207A4 /* SearchMainVC.swift in Sources */,
 				3570B6892C3A532A00E3D8C7 /* BaseCollectionViewCell.swift in Sources */,
 				35644BC02C1DE1FA0037F8B7 /* UserDefaultsManager.swift in Sources */,
+				3570B6962C3A988500E3D8C7 /* LikedItemTableRepository.swift in Sources */,
 				35D6D6742C1B19E6008207A4 /* OnboardingButton.swift in Sources */,
 				35D6D65B2C1AF76B008207A4 /* APIKey.swift in Sources */,
 				356C8F802C216DAB00921F9E /* NicknameStatusLabel.swift in Sources */,
 				35D6D6722C1B1488008207A4 /* AppTitleLabel.swift in Sources */,
+				3570B6942C3A986600E3D8C7 /* RealmModel.swift in Sources */,
 				35D6D65F2C1B0042008207A4 /* DesignSystem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,7 +564,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -577,7 +597,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -6,12 +6,19 @@
 //
 import UIKit
 import SnapKit
+import RealmSwift
+import Kingfisher
+
 
 final class LikedItemCollectionViewCell: BaseCollectionViewCell {
     
+    let realm = try! Realm()
+    let repository = LikedItemTableRepository()
     let imageView = UIImageView()
-    let dateLabel = UILabel()
+    let titleLabel = UILabel()
+    let priceLabel = UILabel()
     let likeBtn = UIButton()
+    var id = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,8 +26,9 @@ final class LikedItemCollectionViewCell: BaseCollectionViewCell {
     
     override func configHierarchy() {
         contentView.addSubview(imageView)
-        contentView.addSubview(dateLabel)
+        contentView.addSubview(titleLabel)
         contentView.addSubview(likeBtn)
+        contentView.addSubview(priceLabel)
     }
     
     override func configLayout() {
@@ -29,28 +37,41 @@ final class LikedItemCollectionViewCell: BaseCollectionViewCell {
             make.height.equalTo(contentView).multipliedBy(0.7)
         }
         
-        dateLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(5)
-            make.horizontalEdges.bottom.equalTo(contentView.safeAreaLayoutGuide)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom)
+            make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(5)
+        }
+        
+        priceLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(2)
+            make.horizontalEdges.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(5)
         }
         
         likeBtn.snp.makeConstraints { make in
-            make.trailing.equalTo(dateLabel)
-            make.top.bottom.equalTo(dateLabel).inset(10)
-            make.width.equalTo(likeBtn.snp.height)
+            make.trailing.bottom.equalTo(imageView).inset(3)
+            make.width.height.equalTo(20)
         }
     }
     
-    override func configUI() {
-        likeBtn.setImage(Icon.likeUnSelected, for: .normal)
+    func configUI(data: LikedItemTable) {
+        super.configUI()
         
-        imageView.backgroundColor = .black
+        id = data.id
+        likeBtn.setImage(Icon.likeSelected, for: .normal)
+        likeBtn.backgroundColor = Color.white
+        
         imageView.layer.cornerRadius = 10
         imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         imageView.layer.masksToBounds = true
+        let url = URL(string: data.image)
+        imageView.kf.setImage(with: url)
         
-        dateLabel.text = "2024-05-07"
+        titleLabel.text = data.title.replacingOccurrences(of: "[<b></b>]", with: "", options: .regularExpression)
+        titleLabel.numberOfLines = 2
+        titleLabel.font = Font.semiBold13
+        
+        priceLabel.text = "\(data.price)원"
+        priceLabel.font = Font.semiBold14
     }
-    
     
 }

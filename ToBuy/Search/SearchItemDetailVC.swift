@@ -9,6 +9,7 @@ import UIKit
 
 import Alamofire
 import SnapKit
+import RealmSwift
 
 enum SearchResultSortType:String {
     case accuracy = "sim"
@@ -32,6 +33,7 @@ enum SearchResultSortType:String {
 
 final class SearchItemDetailVC: UIViewController {
     
+    
     private lazy var numberOfResultLabel = UILabel()
     private let accuracyFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.accuracy.btnTitle)
     private let recentDateFilterBtn = UIButton.Configuration.filteredButton(title: SearchResultSortType.recentDate.btnTitle)
@@ -40,6 +42,10 @@ final class SearchItemDetailVC: UIViewController {
     private lazy var btns = [accuracyFilterBtn, recentDateFilterBtn, priceDownTopFilterBtn, priceTopDownFilterBtn]
     private lazy var filterStackView = UIStackView()
     private lazy var searchResultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: searchCollectionViewLayout())
+    
+    let realm = try! Realm()
+    let realmRepository = LikedItemTableRepository()
+    var liked: LikedItemTable?
     
      var searchWordFromPreviousPage: String?
      lazy var query = searchWordFromPreviousPage
@@ -181,15 +187,32 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         }
     }
     @objc func likeBtnTapped(sender: UIButton) {
-        let index = sender.tag
-        let id = list.items[index].productId
-        if UserDefaultManager.likedItemID.contains(id) {
-            UserDefaultManager.likedItemID.removeAll {$0 == id}
-            
-        } else {
-            UserDefaultManager.likedItemID.append(id)
-        }
+      let index = sender.tag
+      let id = list.items[index].productId
+    
+        liked = LikedItemTable(id: id, title: list.items[index].title, price: list.items[index].lprice, webLink: list.items[index].link, image: list.items[index].image )
+        
+        guard let data = liked else {return}
+        
+        print(realm.configuration.fileURL)
+        
+        if let _ = realm.object(ofType: LikedItemTable.self, forPrimaryKey: id) {
+            realmRepository.deleteItem(id: data.id)
+             print("Product deleted")
+         } else {
+             realmRepository.createItem(data)
+             print("Product added")
+         }
         searchResultCollectionView.reloadData()
+        
+        
+//        if UserDefaultManager.likedItemID.contains(id) {
+//            UserDefaultManager.likedItemID.removeAll {$0 == id}
+//            
+//        } else {
+//            UserDefaultManager.likedItemID.append(id)
+//        }
+//        searchResultCollectionView.reloadData()
     }
     
     @objc func accuracyBtnTapped() {

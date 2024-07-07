@@ -8,11 +8,14 @@
 import UIKit
 
 import SnapKit
+import RealmSwift
 
 final class SettingTableViewCell: UITableViewCell {
 
     private let label = UILabel()
     private let bagBtn = UIButton()
+    let realm = try! Realm()
+    let repository = LikedItemTableRepository()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -52,12 +55,13 @@ extension SettingTableViewCell {
         label.text = data
         label.font = Font.semiBold15
         
-        let likes = UserDefaultManager.likedItemID.count
+      //  let likes = UserDefaultManager.likedItemID.count
+        let likes = repository.fetchAlls()
 
         if indexPath == 0 {
             bagBtn.isHidden = false
             bagBtn.setTitleColor(Color.black, for: .normal)
-            bagBtn.setTitle("\(likes)개의 상품", for: .normal)
+            bagBtn.setTitle("\(likes.count)개의 상품", for: .normal)
             bagBtn.titleLabel?.font = Font.semiBold15
             bagBtn.setImage(Icon.likeSelected, for: .normal)
             bagBtn.imageEdgeInsets = UIEdgeInsets(top: 2, left: 5, bottom: 2, right: 100)

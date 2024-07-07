@@ -8,8 +8,10 @@
 import UIKit
 import SnapKit
 
+
 final class SettingMainVC: UIViewController {
 
+   
     private let profileView = UIView()
     private lazy var profileImageView = ProfileImageView(profileImageNum: profileImageNumData, cameraBtnMode: .isHidden, isSelected: true)
     

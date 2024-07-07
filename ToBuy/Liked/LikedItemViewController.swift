@@ -25,6 +25,7 @@ final class LikedItemViewController: BaseViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(LikedItemCollectionViewCell.self, forCellWithReuseIdentifier:   LikedItemCollectionViewCell.identifier)
+        searchBar.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +51,7 @@ final class LikedItemViewController: BaseViewController {
     
     override func configView() {
         navigationItem.title = "찜 목록"
-        
+        hideKeyboardWhenTappedAround()
     }
 }
 
@@ -114,6 +115,13 @@ extension LikedItemViewController: UICollectionViewDelegate, UICollectionViewDat
 
 extension LikedItemViewController: UISearchBarDelegate {
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let filter = realm.objects(LikedItemTable.self).where { $0.title.contains(searchText, options: .caseInsensitive) }
+        
+        liked = filter
+        collectionView.reloadData()
+        
+    }
     
     
 }

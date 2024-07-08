@@ -35,7 +35,7 @@ final class LikedItemViewController: BaseViewController {
     let searchBar = UISearchBar()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
-    let tableView = UITableView() 
+    lazy var tableView = UITableView()
     
     
     override func viewDidLoad() {
@@ -63,15 +63,14 @@ final class LikedItemViewController: BaseViewController {
         collectionView.reloadData()
         tableView.reloadData()
         configView()
-        
-        
+    
     }
     override func configHierarchy() {
         view.addSubview(searchBar)
-        view.addSubview(collectionView)
         view.addSubview(tableView)
-        view.addSubview(segment)
+        view.addSubview(collectionView)
         view.addSubview(calendar)
+        view.addSubview(segment)
     }
     
     override func configLayout() {
@@ -101,7 +100,6 @@ final class LikedItemViewController: BaseViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(calendar.snp.width).multipliedBy(1.3)
         }
-  
     }
     
     override func configView() {
@@ -141,9 +139,9 @@ extension LikedItemViewController {
            case 1:
                segmentIndex = 1
                calendar.isHidden = true
-               collectionView.isHidden = false
+               collectionView.isHidden = true 
                tableView.isHidden = false
-            tableView.reloadData()
+           tableView.reloadData()
            case 2:
                segmentIndex = 2
                 collectionView.isHidden = true
@@ -170,7 +168,6 @@ extension LikedItemViewController {
             print("Product deleted")
         }
         viewWillAppear(true)
-        configView()
     }
 }
 
@@ -199,7 +196,7 @@ extension LikedItemViewController: UITableViewDelegate, UITableViewDataSource {
 extension LikedItemViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.collectionView {
+        if segmentIndex == 0 || collectionView == self.collectionView {
             return liked.count
         } else {
             return list[collectionView.tag].detail.count
@@ -213,7 +210,7 @@ extension LikedItemViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.likeBtn.addTarget(self, action: #selector(likedBtnTapped), for: .touchUpInside)
         cell.likeBtn.tag = indexPath.item
         
-        if collectionView == self.collectionView {
+        if segmentIndex == 0 || collectionView == self.collectionView {
             cell.configUI(data: liked[indexPath.item])
         
             return cell

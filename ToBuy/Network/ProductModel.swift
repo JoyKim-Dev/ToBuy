@@ -24,5 +24,6 @@ struct ItemResult: Decodable {
     let image: String
     let lprice: String
     let mallName: String
+    let brand: String
     let productId: String
 }

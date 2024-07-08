@@ -45,10 +45,13 @@ final class SearchItemDetailVC: UIViewController {
     
     let realm = try! Realm()
     let realmRepository = LikedItemTableRepository()
+    let folderRepository = FolderRepository()
     var liked: LikedItemTable?
+    var detail = List<LikedItemTable>()
     
-     var searchWordFromPreviousPage: String?
-     lazy var query = searchWordFromPreviousPage
+    
+    var searchWordFromPreviousPage: String?
+    lazy var query = searchWordFromPreviousPage
     
     private var list = Product(lastBuildDate: "", total: 1, start: 1 , display: 1, items: [])
     private var start = 1
@@ -187,32 +190,39 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
         }
     }
     @objc func likeBtnTapped(sender: UIButton) {
-      let index = sender.tag
-      let id = list.items[index].productId
-    
-        liked = LikedItemTable(id: id, title: list.items[index].title, price: list.items[index].lprice, webLink: list.items[index].link, image: list.items[index].image )
-        
-        guard let data = liked else {return}
-        
+        let index = sender.tag
+        let id = list.items[index].productId
         print(realm.configuration.fileURL)
+        liked = LikedItemTable(id: id, title: list.items[index].title, price: list.items[index].lprice, webLink: list.items[index].link, brand: list.items[index].brand, image: list.items[index].image )
+        
+        guard let data = liked else {
+            print("data nil")
+            return}
+        
+        let folderName = realm.objects(Folder.self).where {
+            $0.brandName == data.brand}
         
         if let _ = realm.object(ofType: LikedItemTable.self, forPrimaryKey: id) {
-            realmRepository.deleteItem(id: data.id)
-             print("Product deleted")
-         } else {
-             realmRepository.createItem(data)
-             print("Product added")
-         }
+            realmRepository.deleteItem(id: id)
+            print("Product deleted")
+        } else {
+                if let folder = folderName.first {
+                    realmRepository.createItem(data, folder: folder)
+                } else {
+                    detail.append(data)
+                    let folder = Folder(brandName: data.brand, detail: detail)
+                    folderRepository.createFolder(folder)
+                }
+        }
         searchResultCollectionView.reloadData()
         
-        
-//        if UserDefaultManager.likedItemID.contains(id) {
-//            UserDefaultManager.likedItemID.removeAll {$0 == id}
-//            
-//        } else {
-//            UserDefaultManager.likedItemID.append(id)
-//        }
-//        searchResultCollectionView.reloadData()
+        //        if UserDefaultManager.likedItemID.contains(id) {
+        //            UserDefaultManager.likedItemID.removeAll {$0 == id}
+        //
+        //        } else {
+        //            UserDefaultManager.likedItemID.append(id)
+        //        }
+        //        searchResultCollectionView.reloadData()
     }
     
     @objc func accuracyBtnTapped() {

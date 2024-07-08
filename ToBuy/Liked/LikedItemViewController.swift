@@ -9,12 +9,26 @@ import UIKit
 
 import RealmSwift
 import SnapKit
+import FSCalendar
 
 final class LikedItemViewController: BaseViewController {
     
     let realm = try! Realm()
     let repository = LikedItemTableRepository()
     lazy var liked = repository.fetchAlls()
+    var list: [Folder] = []
+    
+    let calendar = {
+        let view = FSCalendar()
+        view.isHidden = true
+        return view
+    }()
+
+    let segment = {
+        let control = UISegmentedControl(items: ["상품", "브랜드", "물욕달력"])
+        return control
+    }()
+    
     let searchBar = UISearchBar()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
@@ -26,15 +40,23 @@ final class LikedItemViewController: BaseViewController {
         collectionView.dataSource = self
         collectionView.register(LikedItemCollectionViewCell.self, forCellWithReuseIdentifier:   LikedItemCollectionViewCell.identifier)
         searchBar.delegate = self
+        
+        list = repository.fetchFolder()
+        print(repository.detectRealmURL())
+        print(list)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print(#function)
         liked  = repository.fetchAlls()
         collectionView.reloadData()
+        configView()
     }
     override func configHierarchy() {
         view.addSubview(searchBar)
         view.addSubview(collectionView)
+        view.addSubview(segment)
+        view.addSubview(calendar)
     }
     
     override func configLayout() {
@@ -43,15 +65,31 @@ final class LikedItemViewController: BaseViewController {
             make.height.equalTo(40)
         }
         
-        collectionView.snp.makeConstraints { make in
+        segment.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.height.equalTo(30)
+        }
+        
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(segment.snp.bottom).offset(10)
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+        
+        calendar.snp.makeConstraints { make in
+            make.top.equalTo(segment.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(calendar.snp.width).multipliedBy(1.3)
+        }
+  
     }
     
     override func configView() {
-        navigationItem.title = "찜 목록"
+        navigationItem.title = "찜 \(liked.count)개 목록"
         hideKeyboardWhenTappedAround()
+        segment.addTarget(self, action: #selector(segmentChanged(segment:)), for: .valueChanged)
+        
+        
     }
 }
 
@@ -71,6 +109,13 @@ extension LikedItemViewController {
         return layout
     }
     
+    @objc func segmentChanged(segment: UISegmentedControl) {
+        
+        let selectedIndex = segment.selectedSegmentIndex
+        calendar.isHidden = selectedIndex == 0 || selectedIndex == 1
+        collectionView.isHidden = selectedIndex == 2
+    }
+    
     @objc func likedBtnTapped(_ btn: UIButton){
         
         print(#function)
@@ -80,7 +125,8 @@ extension LikedItemViewController {
         repository.deleteItem(id: all[index].id)
         print("Product deleted")
         
-        collectionView.reloadData()
+        viewWillAppear(true)
+        configView()
     }
 }
 

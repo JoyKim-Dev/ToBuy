@@ -1,17 +1,18 @@
 //
-//  LikedItemTableRepository.swift
+//  FolderRepository.swift
 //  ToBuy
 //
-//  Created by Joy Kim on 7/7/24.
+//  Created by Joy Kim on 7/8/24.
 //
 
 import Foundation
 import RealmSwift
 
-final class LikedItemTableRepository {
+final class FolderRepository {
     
     let realm = try! Realm()
-    
+ 
+    // 특정 폴더의 디테일에 레코드(테이블) 추가
     func createItem(_ data: LikedItemTable, folder: Folder) {
         do {
             try realm.write {
@@ -21,8 +22,9 @@ final class LikedItemTableRepository {
         } catch {
             print("catch error")
         }
-    } 
+    }
     
+    // 폴더 레코드 생성
     func createFolder(_ data: Folder) {
         do {
             try realm.write {
@@ -43,24 +45,9 @@ final class LikedItemTableRepository {
         return Array(value)
     }
     
-    func fetchAlls() -> Results<LikedItemTable> {
-        return realm.objects(LikedItemTable.self).sorted(byKeyPath: "title", ascending: true)
+    func fetchAlls() -> Results<Folder> {
+        return realm.objects(Folder.self).sorted(byKeyPath: "brandName", ascending: true)
     }
-    
-    func deleteItem(id: String) {
-        do {
-                    if let item = realm.object(ofType: LikedItemTable.self, forPrimaryKey: id) {
-                        try realm.write {
-                            realm.delete(item)
-                            print("Realm delete succeed")
-                        }
-                    } else {
-                        print("Item not found in Realm")
-                    }
-                } catch {
-                    print("catch error: \(error.localizedDescription)")
-                }
-            }
     
     func removeFolder(_ folder: Folder) {
         do{
@@ -74,3 +61,4 @@ final class LikedItemTableRepository {
         }
     }
 }
+

@@ -15,7 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         sleep(2)
         
-        let config = Realm.Configuration(schemaVersion: 1) { migration, oldSchemaVersion in
+        let config = Realm.Configuration(schemaVersion: 3) { migration, oldSchemaVersion in
+            
+            if oldSchemaVersion < 1 {
+                // folder column add
+            }
+            if oldSchemaVersion < 2 {
+                // add Realm List, Folder 
+            }
+            if oldSchemaVersion < 3 {
+                // delete column init (ObjectId, regDate)
+            }
+            
         }
             Realm.Configuration.defaultConfiguration = config
         return true

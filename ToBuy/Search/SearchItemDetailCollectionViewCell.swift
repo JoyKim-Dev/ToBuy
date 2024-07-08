@@ -20,7 +20,7 @@ final class SearchItemDetailCollectionViewCell: UICollectionViewCell {
     private let productNameLabel = UILabel()
     private let productPriceLabel = UILabel()
     let repository = LikedItemTableRepository()
-    
+   
     
     override init(frame: CGRect) {
         super.init(frame: .zero)

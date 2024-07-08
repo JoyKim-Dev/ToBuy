@@ -40,9 +40,9 @@ final class FolderRepository {
         print(realm.configuration.fileURL ?? "")
     }
     
-    func fetchFolder() -> [Folder] {
+    func fetchFolder() -> Results<Folder> {
         let value = realm.objects(Folder.self)
-        return Array(value)
+        return value
     }
     
     func fetchAlls() -> Results<Folder> {

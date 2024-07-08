@@ -58,6 +58,8 @@
 		35EA4CDD2C1F333100248ECB /* SearchResultWebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EA4CDC2C1F333100248ECB /* SearchResultWebViewViewController.swift */; };
 		35F4317A2C3BDE1F00B03B90 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 35F431792C3BDE1F00B03B90 /* FSCalendar */; };
 		35F4317C2C3BF85D00B03B90 /* FolderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F4317B2C3BF85D00B03B90 /* FolderRepository.swift */; };
+		35F4317E2C3C0EF500B03B90 /* likedVCBrandTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F4317D2C3C0EF500B03B90 /* likedVCBrandTableViewCell.swift */; };
+		35F431802C3C116200B03B90 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F4317F2C3C116200B03B90 /* BaseTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +110,8 @@
 		35EA4CDA2C1F0B8B00248ECB /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		35EA4CDC2C1F333100248ECB /* SearchResultWebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultWebViewViewController.swift; sourceTree = "<group>"; };
 		35F4317B2C3BF85D00B03B90 /* FolderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderRepository.swift; sourceTree = "<group>"; };
+		35F4317D2C3C0EF500B03B90 /* likedVCBrandTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = likedVCBrandTableViewCell.swift; sourceTree = "<group>"; };
+		35F4317F2C3C116200B03B90 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,7 @@
 				3570B6862C3A530700E3D8C7 /* BaseViewController.swift */,
 				3570B6882C3A532A00E3D8C7 /* BaseCollectionViewCell.swift */,
 				3570B6972C3A9C0200E3D8C7 /* FileManager + Extension.swift */,
+				35F4317F2C3C116200B03B90 /* BaseTableViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 			children = (
 				3570B68B2C3A53CE00E3D8C7 /* LikedItemViewController.swift */,
 				3570B68D2C3A53EB00E3D8C7 /* LikedItemCollectionViewCell.swift */,
+				35F4317D2C3C0EF500B03B90 /* likedVCBrandTableViewCell.swift */,
 			);
 			path = Liked;
 			sourceTree = "<group>";
@@ -383,6 +389,7 @@
 				35D6D6762C1B1E4F008207A4 /* ConfigureBasicSettingProtocol.swift in Sources */,
 				356C8F822C21750300921F9E /* String + Extension.swift in Sources */,
 				3570B68C2C3A53CE00E3D8C7 /* LikedItemViewController.swift in Sources */,
+				35F4317E2C3C0EF500B03B90 /* likedVCBrandTableViewCell.swift in Sources */,
 				35D6D6562C1AF6B1008207A4 /* VC + Extension.swift in Sources */,
 				35D6D6442C1ADB44008207A4 /* ProfileNicknameSettingVC.swift in Sources */,
 				3570B6872C3A530700E3D8C7 /* BaseViewController.swift in Sources */,
@@ -394,6 +401,7 @@
 				3590F2372C318F2D00652DBA /* NetworkManager.swift in Sources */,
 				35EA4CD92C1ED06400248ECB /* LikeBtn.swift in Sources */,
 				35D6D67A2C1B2382008207A4 /* NavBackBtnChevron.swift in Sources */,
+				35F431802C3C116200B03B90 /* BaseTableViewCell.swift in Sources */,
 				35EA4CDB2C1F0B8B00248ECB /* ProductModel.swift in Sources */,
 				35EA4CD72C1EC9AC00248ECB /* SearchItemDetailCollectionViewCell.swift in Sources */,
 				35D6D63F2C1ADA9F008207A4 /* SearchItemDetailVC.swift in Sources */,

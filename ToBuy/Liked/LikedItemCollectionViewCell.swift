@@ -22,6 +22,18 @@ final class LikedItemCollectionViewCell: BaseCollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        likeBtn.setImage(Icon.likeSelected, for: .normal)
+        likeBtn.backgroundColor = Color.white
+        
+        imageView.layer.cornerRadius = 10
+        imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        imageView.layer.masksToBounds = true
+        
+        titleLabel.numberOfLines = 2
+        titleLabel.font = Font.semiBold13
+        
+        priceLabel.font = Font.semiBold14
     }
     
     override func configHierarchy() {
@@ -57,21 +69,20 @@ final class LikedItemCollectionViewCell: BaseCollectionViewCell {
         super.configUI()
         
         id = data.id
-        likeBtn.setImage(Icon.likeSelected, for: .normal)
-        likeBtn.backgroundColor = Color.white
         
-        imageView.layer.cornerRadius = 10
-        imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        imageView.layer.masksToBounds = true
         let url = URL(string: data.image)
         imageView.kf.setImage(with: url)
         
         titleLabel.text = data.title.replacingOccurrences(of: "[<b></b>]", with: "", options: .regularExpression)
-        titleLabel.numberOfLines = 2
-        titleLabel.font = Font.semiBold13
-        
-        priceLabel.text = "\(data.price)원"
-        priceLabel.font = Font.semiBold14
+
+        let priceInt = Int(data.price)?.formatted()
+        priceLabel.text = "\(priceInt ?? "0")원"
+ 
     }
     
+    func configBrandUI(data: Folder) {
+        super.configUI()
+        
+   
+    }
 }

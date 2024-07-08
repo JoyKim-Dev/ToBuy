@@ -191,6 +191,7 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
     }
     @objc func likeBtnTapped(sender: UIButton) {
         let index = sender.tag
+        print(index)
         let id = list.items[index].productId
         print(realm.configuration.fileURL)
         liked = LikedItemTable(id: id, title: list.items[index].title, price: list.items[index].lprice, webLink: list.items[index].link, brand: list.items[index].brand, image: list.items[index].image )
@@ -212,6 +213,7 @@ extension SearchItemDetailVC: ConfigureBasicSettingProtocol {
                     detail.append(data)
                     let folder = Folder(brandName: data.brand, detail: detail)
                     folderRepository.createFolder(folder)
+                    detail.removeAll()
                 }
         }
         searchResultCollectionView.reloadData()

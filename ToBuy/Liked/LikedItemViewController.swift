@@ -50,6 +50,8 @@ final class LikedItemViewController: BaseViewController {
         tableView.register(likedVCBrandTableViewCell.self, forCellReuseIdentifier: likedVCBrandTableViewCell.identifier)
         
         searchBar.delegate = self
+        calendar.delegate = self
+        calendar.dataSource = self
         
         list = folderRepository.fetchFolder()
         print(repository.detectRealmURL())
@@ -62,6 +64,7 @@ final class LikedItemViewController: BaseViewController {
         list = folderRepository.fetchFolder()
         collectionView.reloadData()
         tableView.reloadData()
+        calendar.reloadData()
         configView()
     
     }
@@ -69,8 +72,8 @@ final class LikedItemViewController: BaseViewController {
         view.addSubview(searchBar)
         view.addSubview(tableView)
         view.addSubview(collectionView)
-        view.addSubview(calendar)
         view.addSubview(segment)
+        view.addSubview(calendar)
     }
     
     override func configLayout() {
@@ -139,7 +142,7 @@ extension LikedItemViewController {
            case 1:
                segmentIndex = 1
                calendar.isHidden = true
-               collectionView.isHidden = true 
+               collectionView.isHidden = true
                tableView.isHidden = false
            tableView.reloadData()
            case 2:
@@ -245,4 +248,16 @@ extension LikedItemViewController: UISearchBarDelegate {
         
     }
 
+}
+
+extension LikedItemViewController: FSCalendarDelegate, FSCalendarDataSource {
+    
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        
+        let eventDay = liked.filter { likedItem in
+            return Calendar.current.isDate(likedItem.likedDate, inSameDayAs: date)
+        }
+        print(eventDay)
+        return eventDay.count
+    }
 }
